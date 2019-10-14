@@ -1,0 +1,36 @@
+package ftn.ac.rs.diplomski.demo.controller;
+
+import ftn.ac.rs.diplomski.demo.dto.ProductCardDTO;
+import ftn.ac.rs.diplomski.demo.entity.Product;
+import ftn.ac.rs.diplomski.demo.entity.ProductCard;
+import ftn.ac.rs.diplomski.demo.service.ProductCardService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping(value = "/api/productCard")
+public class ProductCardController {
+
+    @Autowired
+    private ProductCardService productCardService;
+
+    @GetMapping(value = {"", "/"}, params = {"page", "size"})
+    public ResponseEntity<Page<ProductCardDTO>> getAllPaged(@RequestParam("page") Integer page, @RequestParam("size") Integer size) {
+        Page<ProductCard> cards = (Page<ProductCard>) productCardService.findAllPaged(page, size);
+        Page<ProductCardDTO> companyDTOS = cards.map(ProductCardDTO::new);
+
+        return new ResponseEntity<Page<ProductCardDTO>>(companyDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<ProductCard> findAll(@PathVariable("id") Integer id){
+        ProductCard products = productCardService.findAllByPriceGreateThenZero();
+
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+}

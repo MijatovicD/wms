@@ -1,0 +1,76 @@
+<app-nav></app-nav>
+<h4 class="display-4 text-center" style="color: black">Bussines year</h4>
+<div class="row  mt-3 mb-3">
+  <form class="col-md-6 offset-md-3">
+    <div class="row no-gutters align-items-center">
+      <div class="col">
+        <input
+          class="form-control form-control-lg form-control-borderless"
+          type="search"
+          placeholder="Search"
+          #searchPartner
+        />
+      </div>
+      <div class="col-auto">
+        <button
+          class="btn btn-lg btn-primary"
+          type="submit"
+          (click)="search(searchPartner.value)"
+        >
+          <i class="fa fa-search"></i> Search
+        </button>
+      </div>
+    </div>
+  </form>
+  <button class="btn btn-success btn-lg ml-4" [routerLink]="['/partner/add']">
+    <i class="fa fa-plus"></i> Add bussines year
+  </button>
+</div>
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Year</th>
+      <th>Close</th>
+      <th>Edit</th>
+      <th>Remove</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let year of all">
+      <th scope="row">{{ year.id }}</th>
+      <td>{{ year.year }}</td>
+      <td>{{ year.closed }}</td>
+      <td class="h5">
+        <a
+          class="badge badge-primary"
+          [routerLink]="['/partner/edit', year.id]"
+          ><i class="fa fa-edit"></i> Edit</a
+        >
+      </td>
+      <td class="h5">
+        <a
+          class="badge badge-danger text-white"
+          (click)="delete(year.id)"
+          style="cursor: pointer"
+        >
+          <i class="fa fa-trash"></i>Remove</a
+        >
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="row d-flex justify-content-center">
+  <pagination
+    [boundaryLinks]="true"
+    [itemsPerPage]="itemPage.size"
+    [totalItems]="itemPage.totalElements"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;"
+  >
+  </pagination>
+</div>
