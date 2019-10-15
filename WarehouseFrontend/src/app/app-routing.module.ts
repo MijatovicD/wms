@@ -1,3 +1,4 @@
+import { UnitComponent } from './unit/unit.component';
 import { BussinesYearComponent } from './bussines-year/bussines-year.component';
 import { BussinesPartnerComponent } from './bussines-partner/bussines-partner.component';
 import { CompanyComponent } from './company/company.component';
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: "year",
     component: BussinesYearComponent,  
+  },
+  {
+    path: "unit",
+    component: UnitComponent,  
   }
 ];
 

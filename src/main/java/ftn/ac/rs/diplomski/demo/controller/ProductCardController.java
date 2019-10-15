@@ -27,10 +27,4 @@ public class ProductCardController {
         return new ResponseEntity<Page<ProductCardDTO>>(companyDTOS, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<ProductCard> findAll(@PathVariable("id") Integer id){
-        ProductCard products = productCardService.findAllByPriceGreateThenZero();
-
-        return new ResponseEntity<>(products, HttpStatus.OK);
-    }
 }

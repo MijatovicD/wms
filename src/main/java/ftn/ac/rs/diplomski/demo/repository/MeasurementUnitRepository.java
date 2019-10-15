@@ -1,14 +1,13 @@
 package ftn.ac.rs.diplomski.demo.repository;
 
-import ftn.ac.rs.diplomski.demo.entity.ProductCard;
+import ftn.ac.rs.diplomski.demo.entity.MeasurementUnit;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-
 @Repository
-public interface ProductCardRepository extends JpaRepository<ProductCard, Integer> {
+public interface MeasurementUnitRepository extends JpaRepository<MeasurementUnit, Integer> {
 
-    Page<ProductCard> findAllById(Integer id, Pageable pageable);
+    Page<MeasurementUnit> findAllById(Integer id, Pageable pageable);
 }

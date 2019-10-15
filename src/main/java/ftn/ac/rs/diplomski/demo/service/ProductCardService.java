@@ -24,8 +24,4 @@ public class ProductCardService{
         return cards;
     }
 
-    public ProductCard findAllByPriceGreateThenZero(){
-        ProductCard products = productCardRepository.findAllByPriceGreateThenZero();
-        return products;
-    }
 }

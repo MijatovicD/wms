@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BsDropdownModule, PaginationModule, BsDatepickerModule } from "ngx-bootstrap";
 import { BussinesPartnerComponent } from './bussines-partner/bussines-partner.component';
 import { BussinesYearComponent } from './bussines-year/bussines-year.component';
+import { UnitComponent } from './unit/unit.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { BussinesYearComponent } from './bussines-year/bussines-year.component';
     CompanyComponent,
     NavComponent,
     BussinesPartnerComponent,
-    BussinesYearComponent
+    BussinesYearComponent,
+    UnitComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +30,7 @@ import { BussinesYearComponent } from './bussines-year/bussines-year.component';
     BsDropdownModule.forRoot(),
     PaginationModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
