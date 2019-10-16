@@ -22,4 +22,8 @@ export class UnitService {
     return this.http.get<any>(this.baseUrl + queryString);
   }
 
+  add(unit): any{
+    return this.http.post<any>(this.baseUrl, "/add", unit);
+  }
+
 }

@@ -1,6 +1,7 @@
 import { ItemPage } from './../model/item.page.model';
 import { UnitService } from './../service/unit.service';
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-unit',
@@ -14,6 +15,9 @@ export class UnitComponent implements OnInit {
   currentPage: number;
   itemsPerPage: number;
   itemPage: ItemPage;
+  unit={
+    name: null
+  };
 
 
 
@@ -26,6 +30,13 @@ export class UnitComponent implements OnInit {
   }
 
 
+  addUnit(){
+    console.log(name);
+    this.unitService.add(name).subscribe(unit => {
+        this.unit.name = name;
+    });
+  }
+  
   getUnitPage(page: number, size:number) {
     this.unitService.getAllPaged(page, size)
       .subscribe(page => {

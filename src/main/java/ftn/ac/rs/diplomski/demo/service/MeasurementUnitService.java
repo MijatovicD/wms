@@ -19,4 +19,9 @@ public class MeasurementUnitService {
 
         return units;
     }
+
+    public MeasurementUnit save(MeasurementUnit measurementUnit){
+
+        return measurementUnitRepository.save(measurementUnit);
+    }
 }

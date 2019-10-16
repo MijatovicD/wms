@@ -10,8 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/unit")
-@CrossOrigin(value = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@RequestMapping(value = "/api/unit", produces = "application/json")
 public class MeasurementUnitController {
 
     @Autowired
@@ -23,5 +23,16 @@ public class MeasurementUnitController {
         Page<MeasurementUnitDTO> unitDTOS = units.map(MeasurementUnitDTO::new);
 
         return new ResponseEntity<Page<MeasurementUnitDTO>>(unitDTOS, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/add", consumes = "application/json")
+    public ResponseEntity<MeasurementUnitDTO> create(@RequestBody MeasurementUnitDTO measurementUnitDTO){
+        System.out.println("DOLAZI VAMO" + measurementUnitDTO);
+        MeasurementUnit unit = new MeasurementUnit();
+        unit.setName(measurementUnitDTO.getName());
+
+        unit = measurementUnitService.save(unit);
+
+        return new ResponseEntity<>(new MeasurementUnitDTO(unit), HttpStatus.CREATED);
     }
 }

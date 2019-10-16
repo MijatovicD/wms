@@ -8,7 +8,7 @@ public class MeasurementUnitDTO {
     private String name;
 
     public MeasurementUnitDTO(){
-        super();
+
     }
 
     public MeasurementUnitDTO(Integer id, String name) {
