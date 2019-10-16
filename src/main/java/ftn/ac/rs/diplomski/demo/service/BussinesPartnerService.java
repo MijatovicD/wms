@@ -25,4 +25,13 @@ public class BussinesPartnerService {
 
         return partners;
     }
+
+    public BussinessPartner save(BussinessPartner partner){
+
+        return bussinesPartnerRepository.save(partner);
+    }
+
+    public BussinessPartner findOne(Integer id){
+        return bussinesPartnerRepository.findById(id).get();
+    }
 }

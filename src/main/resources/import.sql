@@ -23,6 +23,7 @@ INSERT INTO product_group(name, group_product_company) VALUES ('memorije', 1);
 INSERT INTO product_group(name, group_product_company) VALUES ('hrana', 1);
 INSERT INTO product_group(name, group_product_company) VALUES ('telefoni', 1);
 INSERT INTO product_group(name, group_product_company) VALUES ('alat', 1);
+INSERT INTO product_group(name, group_product_company) VALUES ('jakne', 1);
 
 INSERT INTO product(name, product_group_id, unit_id) VALUES ('Intel i9-9900X', 1, 4);
 INSERT INTO product(name, product_group_id, unit_id) VALUES ('Dell 22" LED FullHD Monitor', 3, 4);
@@ -51,11 +52,11 @@ INSERT INTO warehouse(name, company_id) VALUES ('Magacin 2', 2);
 INSERT INTO warehouse(name, company_id) VALUES ('Magacin 3', 1);
 INSERT INTO warehouse(name, company_id) VALUES ('Magacin 4', 5);
 
-INSERT INTO product_card(price, init_state_of_quantity, init_state_of_value, traffic_exit_quantity, traffic_exit_value, traffic_entry_quantity, traffic_entry_value, total_amount, total_value, year_id, warehouse_id) VALUES (134990,1,134990, 0,0,0,0,1,134990,2,1);
-INSERT INTO product_card(price, init_state_of_quantity, init_state_of_value, traffic_exit_quantity, traffic_exit_value, traffic_entry_quantity, traffic_entry_value, total_amount, total_value, year_id, warehouse_id) VALUES (150000,2,150000, 0,0,0,0,2,150000,3,2);
-INSERT INTO product_card(price, init_state_of_quantity, init_state_of_value, traffic_exit_quantity, traffic_exit_value, traffic_entry_quantity, traffic_entry_value, total_amount, total_value, year_id, warehouse_id) VALUES (100,3,8000, 0,0,0,0,3,8000,5,3);
-INSERT INTO product_card(price, init_state_of_quantity, init_state_of_value, traffic_exit_quantity, traffic_exit_value, traffic_entry_quantity, traffic_entry_value, total_amount, total_value, year_id, warehouse_id) VALUES (50,5,100, 0,0,0,0,5,100, 1,4);
-INSERT INTO product_card(price, init_state_of_quantity, init_state_of_value, traffic_exit_quantity, traffic_exit_value, traffic_entry_quantity, traffic_entry_value, total_amount, total_value, year_id, warehouse_id) VALUES (80,10,35, 0,0,0,0,10,35, 2,2);
+INSERT INTO product_card(price, init_state_of_quantity, init_state_of_value, traffic_exit_quantity, traffic_exit_value, traffic_entry_quantity, traffic_entry_value, total_amount, total_value, year_id, warehouse_id, product_id) VALUES (134990,1,134990, 0,0,0,0,1,134990,2,1,1);
+INSERT INTO product_card(price, init_state_of_quantity, init_state_of_value, traffic_exit_quantity, traffic_exit_value, traffic_entry_quantity, traffic_entry_value, total_amount, total_value, year_id, warehouse_id, product_id) VALUES (150000,2,150000, 0,0,0,0,2,150000,3,2,2);
+INSERT INTO product_card(price, init_state_of_quantity, init_state_of_value, traffic_exit_quantity, traffic_exit_value, traffic_entry_quantity, traffic_entry_value, total_amount, total_value, year_id, warehouse_id, product_id) VALUES (100,3,8000, 0,0,0,0,3,8000,5,3,3);
+INSERT INTO product_card(price, init_state_of_quantity, init_state_of_value, traffic_exit_quantity, traffic_exit_value, traffic_entry_quantity, traffic_entry_value, total_amount, total_value, year_id, warehouse_id, product_id) VALUES (50,5,100, 0,0,0,0,5,100, 1,4,4);
+INSERT INTO product_card(price, init_state_of_quantity, init_state_of_value, traffic_exit_quantity, traffic_exit_value, traffic_entry_quantity, traffic_entry_value, total_amount, total_value, year_id, warehouse_id, product_id) VALUES (80,10,35, 0,0,0,0,10,35, 2,2,5);
 
 
 INSERT INTO partner(name, pib, address, company_id, place_id) VALUES ('Instagram', '123456789124', 'Tolstojeva 89', 1, 2);

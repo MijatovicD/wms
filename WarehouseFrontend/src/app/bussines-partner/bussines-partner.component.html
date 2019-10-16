@@ -22,7 +22,7 @@
       </div>
     </div>
   </form>
-  <button class="btn btn-success btn-lg ml-4" [routerLink]="['/partner/add']">
+  <button class="btn btn-success btn-lg ml-4" data-toggle="modal" data-target="#myModal">
     <i class="fa fa-plus"></i> Add partner
   </button>
 </div>
@@ -45,9 +45,69 @@
       <td>{{ partner.address }}</td>
       <td class="h5">
         <a
-          class="badge badge-primary"
-          [routerLink]="['/partner/edit', partner.id]"
-          ><i class="fa fa-edit"></i> Edit</a
+          class="badge badge-primary" data-toggle="modal" data-target="#editModal"
+          ><i class="fa fa-edit">
+
+
+<!-- The Modal -->
+<div class="modal fade" id="editModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Edit bussiness partner</h4>
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <label>Edit name of bussines partner</label>
+        <input
+          name="name"
+          id="inputName"
+          type="text"
+          class="form-control"
+          [(ngModel)] = "partner.name"
+        />
+
+        <label>Edit PIB</label>
+        <input
+          name="pib"
+          id="inputName"
+          type="text"
+          class="form-control"
+          value="{{partner.pib}}"
+        />
+        
+        <label>Edit address</label>
+        <input
+          name="address"
+          id="inputName"
+          type="text"
+          class="form-control"
+          [(ngModel)] = "partner.address"
+        />
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          style="margin: 10px"
+          data-dismiss="modal"
+          (click)="addPartner()"
+        >
+          Edit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+          </i> Edit</a
         >
       </td>
       <td class="h5">
@@ -75,4 +135,59 @@
     lastText="&raquo;"
   >
   </pagination>
+</div>
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Add bussiness partner</h4>
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <label>Type name of bussines partner</label>
+        <input
+          name="name"
+          id="inputName"
+          type="text"
+          class="form-control"
+          [(ngModel)] = "name"
+        />
+
+        <label>Type PIB</label>
+        <input
+          name="pib"
+          id="inputName"
+          type="text"
+          class="form-control"
+          [(ngModel)] = "pib"
+        />
+        
+        <label>Type address</label>
+        <input
+          name="address"
+          id="inputName"
+          type="text"
+          class="form-control"
+          [(ngModel)] = "address"
+        />
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          style="margin: 10px"
+          data-dismiss="modal"
+          (click)="addPartner()"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

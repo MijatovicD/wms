@@ -11,6 +11,7 @@ import { BsDropdownModule, PaginationModule, BsDatepickerModule } from "ngx-boot
 import { BussinesPartnerComponent } from './bussines-partner/bussines-partner.component';
 import { BussinesYearComponent } from './bussines-year/bussines-year.component';
 import { UnitComponent } from './unit/unit.component';
+import { ProductComponent } from './product/product.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { UnitComponent } from './unit/unit.component';
     NavComponent,
     BussinesPartnerComponent,
     BussinesYearComponent,
-    UnitComponent
+    UnitComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,

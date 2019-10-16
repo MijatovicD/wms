@@ -20,6 +20,7 @@ public class BussinesPartnerController {
     @Autowired
     private BussinesPartnerService partnerService;
 
+
     @GetMapping(value = "/")
     public ResponseEntity<List<BussinessPartnerDTO>> findAll(){
         List<BussinessPartner> partners = partnerService.findAll();
@@ -37,5 +38,30 @@ public class BussinesPartnerController {
         Page<BussinessPartnerDTO> partnerDTOS = partners.map(BussinessPartnerDTO::new);
 
         return new ResponseEntity<Page<BussinessPartnerDTO>>(partnerDTOS, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<BussinessPartnerDTO> create(@RequestBody BussinessPartnerDTO bussinessPartnerDTO){
+        System.out.println("dolazi " + bussinessPartnerDTO.toString());
+        BussinessPartner partner = new BussinessPartner();
+        partner.setName(bussinessPartnerDTO.getName());
+        partner.setPIB(bussinessPartnerDTO.getPIB());
+        partner.setAddress(bussinessPartnerDTO.getAddress());
+
+        partner = partnerService.save(partner);
+
+        return new ResponseEntity<>(new BussinessPartnerDTO(partner), HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "{/id}")
+    public ResponseEntity<BussinessPartnerDTO> update(@RequestBody BussinessPartnerDTO bussinessPartnerDTO, @PathVariable("id") Integer id){
+        BussinessPartner partner = partnerService.findOne(id);
+        partner.setName(bussinessPartnerDTO.getName());
+        partner.setPIB(bussinessPartnerDTO.getPIB());
+        partner.setAddress(bussinessPartnerDTO.getAddress());
+
+        partner = partnerService.save(partner);
+
+        return new ResponseEntity<>(new BussinessPartnerDTO(partner), HttpStatus.OK);
     }
 }

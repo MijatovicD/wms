@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class PartnerService {
+export class ProductService {
 
-  private baseUrl = "http://localhost:8080/api/partner";
+  private baseUrl = "http://localhost:8080/api/product";
 
   constructor(
     private http: HttpClient
@@ -22,8 +22,8 @@ export class PartnerService {
     return this.http.get<any>(this.baseUrl + queryString);
   }
 
-  add(partner): any{
-    return this.http.post<any>(this.baseUrl, partner);
+  add(product): any{
+    return this.http.post<any>(this.baseUrl, product);
   }
 
 }

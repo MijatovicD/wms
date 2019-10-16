@@ -16,6 +16,7 @@ public class ProductCardDTO {
     private double totalQuantity;
     private double totalValue;
     private BussinessYearDTO businessYear;
+    private ProductDTO product;
     private WarehouseDTO warehouse;
     private BigInteger price;
 
@@ -23,7 +24,7 @@ public class ProductCardDTO {
         super();
     }
 
-    public ProductCardDTO(Integer id, double initialStateQuantity, double initialStateValue, double trafficEntryQuantity, double trafficEntryValue, double trafficExitQuantity, double trafficExitValue, double totalQuantity, double totalValue, BussinessYearDTO businessYear, WarehouseDTO warehouse, BigInteger price) {
+    public ProductCardDTO(Integer id, double initialStateQuantity, double initialStateValue, double trafficEntryQuantity, double trafficEntryValue, double trafficExitQuantity, double trafficExitValue, double totalQuantity, double totalValue, BussinessYearDTO businessYear, ProductDTO product, WarehouseDTO warehouse, BigInteger price) {
         this.id = id;
         this.initialStateQuantity = initialStateQuantity;
         this.initialStateValue = initialStateValue;
@@ -34,6 +35,7 @@ public class ProductCardDTO {
         this.totalQuantity = totalQuantity;
         this.totalValue = totalValue;
         this.businessYear = businessYear;
+        this.product = product;
         this.warehouse = warehouse;
         this.price = price;
     }
@@ -49,6 +51,7 @@ public class ProductCardDTO {
                 productCard.getTotalAmount(),
                 productCard.getTotalValue(),
                 new BussinessYearDTO(productCard.getYear()),
+                new ProductDTO(productCard.getProduct()),
                 new WarehouseDTO(productCard.getWarehouse()),
                 productCard.getPrice());
     }
@@ -132,6 +135,14 @@ public class ProductCardDTO {
 
     public void setBusinessYear(BussinessYearDTO businessYear) {
         this.businessYear = businessYear;
+    }
+
+    public ProductDTO getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductDTO product) {
+        this.product = product;
     }
 
     public WarehouseDTO getWarehouse() {

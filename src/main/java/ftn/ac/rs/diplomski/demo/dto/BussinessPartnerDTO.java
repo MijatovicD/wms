@@ -14,16 +14,15 @@ public class BussinessPartnerDTO {
         super();
     }
 
-    public BussinessPartnerDTO(Integer id, String name, String PIB, String address, PlaceDTO placeDTO) {
+    public BussinessPartnerDTO(Integer id, String name, String PIB, String address) {
         this.id = id;
         this.name = name;
         this.PIB = PIB;
         this.address = address;
-        this.placeDTO = placeDTO;
     }
 
     public BussinessPartnerDTO(BussinessPartner partner){
-        this(partner.getId(), partner.getName(), partner.getPIB(), partner.getAddress(), new PlaceDTO(partner.getPlace()));
+        this(partner.getId(), partner.getName(), partner.getPIB(), partner.getAddress());
     }
 
     public Integer getId() {
@@ -64,5 +63,16 @@ public class BussinessPartnerDTO {
 
     public void setPlaceDTO(PlaceDTO placeDTO) {
         this.placeDTO = placeDTO;
+    }
+
+    @Override
+    public String toString() {
+        return "BussinessPartnerDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", PIB='" + PIB + '\'' +
+                ", address='" + address + '\'' +
+                ", placeDTO=" + placeDTO +
+                '}';
     }
 }
