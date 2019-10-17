@@ -13,13 +13,20 @@ export class ProductComponent implements OnInit {
   currentPage: number;
   itemsPerPage: number;
   itemPage: ItemPage;
+  productCard:any[];
 
   constructor(
     private productService: ProductService
   ) { }
 
   ngOnInit() {
-    this.getProductPage(0,8);
+    this.getProductPage(0,9);
+  }
+
+  search(name):any{
+    this.productService.search(name).subscribe(p =>{
+        this.all = p;
+    });
   }
   
   getProductPage(page: number, size:number) {

@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductService {
 
@@ -18,5 +20,9 @@ public class ProductService {
         Page<Product> products = productRepository.findAll(pageReq);
 
         return products;
+    }
+
+    public List<Product> findAllByName(String name){
+        return productRepository.findAllByNameContaining(name);
     }
 }

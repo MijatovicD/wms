@@ -22,4 +22,7 @@ export class YearService {
     return this.http.get<any>(this.baseUrl + queryString);
   }
 
+  add(year): any{
+    return this.http.post<any>(this.baseUrl, year);
+  }
 }

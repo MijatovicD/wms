@@ -1,3 +1,4 @@
+import { DocumentComponent } from './document/document.component';
 import { ProductComponent } from './product/product.component';
 import { UnitComponent } from './unit/unit.component';
 import { BussinesYearComponent } from './bussines-year/bussines-year.component';
@@ -26,7 +27,11 @@ const routes: Routes = [
   {
     path: "product",
     component: ProductComponent,  
-  }
+  },
+  {
+    path: "document",
+    component: DocumentComponent,  
+  },
 ];
 
 @NgModule({

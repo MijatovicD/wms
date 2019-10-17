@@ -8,14 +8,14 @@
           class="form-control form-control-lg form-control-borderless"
           type="search"
           placeholder="Search"
-          #searchPartner
+          #searchProduct
         />
       </div>
       <div class="col-auto">
         <button
           class="btn btn-lg btn-primary"
           type="submit"
-          (click)="search(searchPartner.value)"
+          (click)="search(searchProduct.value)"
         >
           <i class="fa fa-search"></i> Search
         </button>
@@ -34,14 +34,12 @@
     <div class="card-body">
       <p class="card-text">
         Product name: {{ product.name }}
-        <br />
-        <!-- Datum: {{ dokument.datumFormiranja }} -->
       </p>
     </div>
     <div class="card-footer text-muted">
-      <!-- <a [routerLink]="['/dokument', dokument.id]" class="btn btn-primary"
-        >Detaljnije</a
-      > -->
+     <button class="btn btn-primary">Buy</button>
+     <button class="btn btn-primary">Add to cart</button>
+     <button class="btn btn-primary">Details</button>
     </div>
   </div>
   <br />

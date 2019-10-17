@@ -24,4 +24,15 @@ public class BussinesYearController {
 
         return new ResponseEntity<Page<BussinessYearDTO>>(bussinessYearDTOS, HttpStatus.OK);
     }
+
+    @PostMapping
+    public ResponseEntity<BussinessYearDTO> create(@RequestBody BussinessYearDTO bussinessYearDTO){
+        BusinessYear year = new BusinessYear();
+        year.setYear(bussinessYearDTO.getYear());
+        year.setClose(false);
+
+        year = bussinesYearServise.save(year);
+
+        return new ResponseEntity<>(new BussinessYearDTO(year), HttpStatus.CREATED);
+    }
 }

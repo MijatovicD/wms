@@ -1,3 +1,4 @@
+import { BussinesYear } from './../model/bussinesYear';
 import { YearService } from './../service/year.service';
 import { ItemPage } from './../model/item.page.model';
 import { Component, OnInit } from '@angular/core';
@@ -13,6 +14,8 @@ export class BussinesYearComponent implements OnInit {
   currentPage: number;
   itemsPerPage: number;
   itemPage: ItemPage;
+  bussinessYear: BussinesYear;
+  year:string;
 
   constructor(
     private yearService: YearService
@@ -20,6 +23,14 @@ export class BussinesYearComponent implements OnInit {
 
   ngOnInit() {
     this.getYearPage(0,3);
+  }
+
+  addYear(){
+    this.bussinessYear = new BussinesYear(0, this.year);
+
+    this.yearService.add(this.bussinessYear).subscribe(y => {
+
+    });
   }
 
   getYearPage(page: number, size:number) {

@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class ProductCardService {
 
-  private baseUrl = "http://localhost:8080/api/product";
+  private baseUrl = "http://localhost:8080/api/productCard";
 
   constructor(
     private http: HttpClient
@@ -22,11 +22,7 @@ export class ProductService {
     return this.http.get<any>(this.baseUrl + queryString);
   }
 
-  add(product): any{
-    return this.http.post<any>(this.baseUrl, product);
-  }
-
-  search(name): any{
-    return this.http.get<any>(this.baseUrl + "/name/" + name);
+  findByProductId(id):any{
+    return this.http.get<any>(this.baseUrl + "/product/" + id);
   }
 }

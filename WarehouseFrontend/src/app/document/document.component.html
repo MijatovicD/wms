@@ -1,0 +1,43 @@
+<app-nav></app-nav>
+<button
+  class="btn btn-success btn-lg ml-4"
+  style="float: right"
+>
+  <i class="fa fa-plus"></i> Add document
+</button>
+<br />
+<br />
+<div class="container col-lg-8" *ngFor="let document of all">
+  <div class="card text-center">
+    <div class="card-header">
+      Dokument
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Dokument #{{ document.id }}</h5>
+      <p class="card-text">
+        Status: {{ document.status }}
+        <br />
+        Create date: {{ document.createDate }}
+      </p>
+    </div>
+    <div class="card-footer text-muted">
+      <button class="btn btn-primary"
+        >Details</button
+      >
+    </div>
+  </div>
+  <br />
+</div>
+<div class="row d-flex justify-content-center">
+  <pagination
+    [boundaryLinks]="true"
+    [itemsPerPage]="itemPage.size"
+    [totalItems]="itemPage.totalElements"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;"
+  >
+  </pagination>
+</div>

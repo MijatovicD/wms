@@ -24,4 +24,8 @@ public class ProductCardService{
         return cards;
     }
 
+    public List<ProductCard> findAllByProductId(Integer id){
+        return productCardRepository.findAllByProductId(id);
+    }
+
 }

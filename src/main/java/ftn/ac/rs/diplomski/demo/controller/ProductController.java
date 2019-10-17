@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/product")
 @CrossOrigin(value = "http://localhost:4200")
@@ -25,5 +28,15 @@ public class ProductController {
         Page<ProductDTO> productDTOS = products.map(ProductDTO::new);
 
         return new ResponseEntity<Page<ProductDTO>>(productDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/name/{name}")
+    public ResponseEntity<List<ProductDTO>> findByName(@PathVariable("name") String name){
+        List<Product> products = productService.findAllByName(name);
+        List<ProductDTO> productDTOS = new ArrayList<>();
+        for (Product p : products){
+            productDTOS.add(new ProductDTO(p));
+        }
+        return new ResponseEntity<>(productDTOS, HttpStatus.OK);
     }
 }

@@ -19,4 +19,8 @@ public class BussinesYearServise {
 
         return years;
     }
+
+    public BusinessYear save(BusinessYear year){
+        return bussinesYearRepository.save(year);
+    }
 }
