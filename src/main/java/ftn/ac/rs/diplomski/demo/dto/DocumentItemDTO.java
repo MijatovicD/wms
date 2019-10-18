@@ -10,13 +10,13 @@ public class DocumentItemDTO {
     private double price;
     private double value;
     private TrafficDocumentDTO document;
-    private Product product;
+    private ProductDTO product;
 
     public DocumentItemDTO(){
         super();
     }
 
-    public DocumentItemDTO(Integer id, double quantity, double price, double value, TrafficDocumentDTO document, Product product) {
+    public DocumentItemDTO(Integer id, double quantity, double price, double value, TrafficDocumentDTO document, ProductDTO product) {
         this.id = id;
         this.quantity = quantity;
         this.price = price;
@@ -26,7 +26,7 @@ public class DocumentItemDTO {
     }
 
     public DocumentItemDTO(DocumentItem documentItem){
-        this(documentItem.getId(), documentItem.getQuantity(), documentItem.getPrice(), documentItem.getValue(), new TrafficDocumentDTO(documentItem.getTrafficDocument()), documentItem.getProduct());
+        this(documentItem.getId(), documentItem.getQuantity(), documentItem.getPrice(), documentItem.getValue(), new TrafficDocumentDTO(documentItem.getTrafficDocument()), new ProductDTO(documentItem.getProduct()));
     }
 
     public Integer getId() {
@@ -69,11 +69,23 @@ public class DocumentItemDTO {
         this.document = document;
     }
 
-    public Product getProduct() {
+    public ProductDTO getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(ProductDTO product) {
         this.product = product;
+    }
+
+    @Override
+    public String toString() {
+        return "DocumentItemDTO{" +
+                "id=" + id +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", value=" + value +
+                ", document=" + document +
+                ", product=" + product +
+                '}';
     }
 }

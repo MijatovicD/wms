@@ -28,7 +28,7 @@ export class DocumentService {
   }
 
   getDokument(id): any {
-    return this.http.get("http://localhost:8080/api/document/dokument/" + id);
+    return this.http.get("http://localhost:8080/api/document/" + id);
   }
 
   addDokument(dokument): any {
@@ -37,7 +37,7 @@ export class DocumentService {
 
   proknjizi(dokument): any {
     return this.http
-      .post("http://localhost:8080/api/document/dokument/proknjizi", dokument)
+      .post("http://localhost:8080/api/document/proknjizi", dokument)
       .pipe(
         map((res: any) => {
           return res;

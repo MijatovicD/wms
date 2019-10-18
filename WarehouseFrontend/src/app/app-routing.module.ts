@@ -37,6 +37,10 @@ const routes: Routes = [
     path: "document/add",
     component: DocumentItemComponent,  
   },
+  {
+    path: "document/:id",
+    component: DocumentItemComponent,  
+  }
 ];
 
 @NgModule({

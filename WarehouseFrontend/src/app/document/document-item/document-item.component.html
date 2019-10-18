@@ -1,26 +1,26 @@
 <app-nav></app-nav>
 <div class="col-lg-6" style="margin: auto">
-  <h3 style="text-align: center">Dokument</h3>
+  <h3 style="text-align: center">Document</h3>
   <form>
     <div class="form-row">
       <div class="form-group col-md-4">
-        <label>Datum</label>
+        <label>Date</label>
         <input
           name="datum"
-          [(ngModel)]="dokument.formatDate"
+          [(ngModel)]="dokument.createDate"
           type="text"
           class="form-control"
           placeholder="Datum"
         />
       </div>
       <div class="form-group col-md-4">
-        <label for="inputPassword4">Poslovna godina</label>
+        <label for="inputPassword4">Bussiness year</label>
         <input
           name="businessYear"
-          [(ngModel)]="dokument.businessYear.godina"
+          [(ngModel)]="dokument.businessYear.year"
           type="text"
           class="form-control"
-          placeholder="Poslovna godina"
+          placeholder="Bussiness year"
         />
       </div>
       <div class="form-group col-md-4">
@@ -45,31 +45,31 @@
     </div>
 
     <div class="form-group">
-      <label>Magacin</label>
+      <label>Warehouse</label>
       <select *ngIf="dodavanje" #selectWarehouse class="form-control">
-        <option [ngValue]="null">Izaberite magacin</option>
+        <option [ngValue]="null">Select a warehouse</option>
         <option *ngFor="let w of warehouses" [ngValue]="w">{{
           w.name
         }}</option>
       </select>
       <input
         *ngIf="dodavanje == false"
-        name="magacin"
+        name="warehouse"
         [(ngModel)]="dokument.warehouse.name"
         type="text"
         class="form-control"
       />
     </div>
     <div class="form-group">
-      <label>Poslovni partner</label>
+      <label>Bussiness partner</label>
       <select *ngIf="dodavanje" #selectBusinessPartner class="form-control">
-        <option [ngValue]="null">Izaberite poslovnog partnera</option>
+        <option [ngValue]="null">Select a bussiness partner</option>
         <option *ngFor="let p of partners" [ngValue]="p">{{ p.name }}</option>
       </select>
       <input
         *ngIf="dodavanje == false"
-        name="poslovniPartner"
-        [(ngModel)]="dokument.bussinessPartner.name"
+        name="businessPartner"
+        [(ngModel)]="dokument.businessPartner.name"
         type="text"
         class="form-control"
       />
@@ -77,7 +77,7 @@
     </div>
 
     <div class="col-lg-4" style="margin: auto">
-      <h6>Roba</h6>
+      <h6>Product</h6>
       <button
         *ngIf="
           dodavanje &&
@@ -88,18 +88,18 @@
         data-target="#myModal"
         (click)="productListUcitavanje()"
       >
-        Dodaj robu
+        Add product
       </button>
       <br />
     </div>
     <table class="table" style="margin: 10px">
       <thead>
         <tr>
-          <th scope="col">Sifra</th>
-          <th scope="col">Naziv</th>
-          <th scope="col">Kolicina</th>
-          <th scope="col">Cena</th>
-          <th scope="col">Vrednost</th>
+          <th scope="col">Code</th>
+          <th scope="col">Name</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+          <th scope="col">Value</th>
         </tr>
       </thead>
       <tbody *ngFor="let r of privremenaListaRobe">
@@ -115,7 +115,7 @@
     <div class="col-lg-4" style="margin: 10px auto">
       <button
         *ngIf="!dodavanje"
-        (click)="promeniStatus()"
+        (click)="changeStatus()"
         class="btn btn-primary"
       >
         {{ status }}
@@ -128,7 +128,7 @@
         (click)="sacuvajDokument()"
         class="btn btn-success"
       >
-        Sacuvaj
+        Save
       </button>
     </div>
   </form>
@@ -150,13 +150,13 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        <label>Izaberite robu</label>
+        <label>Select a product</label>
         <select #selectRoba class="form-control">
           <option *ngFor="let r of productList" [ngValue]="r">{{
             r.name
           }}</option>
         </select>
-        <label>Unesite kolicinu</label>
+        <label>Enter a quantity</label>
         <input
           name="quantitya"
           [(ngModel)]="quantity"
@@ -164,7 +164,7 @@
           class="form-control"
         />
         <div *ngIf="primka">
-          <label>Unesite cenu </label>
+          <label>Enter a price </label>
           <input
             name="price"
             [(ngModel)]="price"
@@ -180,7 +180,7 @@
           style="margin: 10px"
           data-dismiss="modal"
         >
-          Dodaj na listu
+          Add
         </button>
       </div>
     </div>

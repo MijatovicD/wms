@@ -19,7 +19,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,8 +33,9 @@ public class TrafficDocumentService {
     @Autowired
     private ProductCardRepository cardRepository;
 
-    public Optional<TrafficDocument> getDocument(Integer id){
-        return documentRepository.findById(id);
+    public TrafficDocument getDocument(Integer id){
+
+        return documentRepository.findById(id).get();
     }
 
     public Page<TrafficDocument> findAllPaged(Integer page, Integer size){
@@ -46,13 +46,14 @@ public class TrafficDocumentService {
     }
 
     public List<DocumentItemDTO> getItem(Integer id){
-        List<DocumentItemDTO> allItems = documentItemRepository.findAll().stream().map(item -> new DocumentItemDTO(item))
-                .collect(Collectors.toList());
-        List<DocumentItemDTO> items = new ArrayList<>();
-        for (DocumentItemDTO i : allItems){
-            items.add(i);
-        }
-        return items;
+       List<DocumentItem> items = documentItemRepository.findAll();
+       List<DocumentItemDTO> itemDTOS = new ArrayList<>();
+       for (DocumentItem i : items){
+           if (i.getId() == id){
+               itemDTOS.add(new DocumentItemDTO(i));
+           }
+       }
+       return itemDTOS;
     }
 
     public TrafficDocument save(TrafficDocument trafficDocument){
@@ -66,11 +67,11 @@ public class TrafficDocumentService {
         if(trafficDocumentDTO.getType().equals("Otpremnica")){
             for (DocumentItemDTO i : items){
                 ProductCard card = null;
-                for (ProductCard p : i.getProduct().getProductCards()){
-                    if (p.getWarehouse().getId() ==  trafficDocumentDTO.getWarehouse().getId()){
-                        card = p;
-                    }
-                }
+//                for (ProductCard p : i.getProduct().getProductCards()){
+//                    if (p.getWarehouse().getId() ==  trafficDocumentDTO.getWarehouse().getId()){
+//                        card = p;
+//                    }
+//                }
 
                 if(card.getTotalAmount() >= i.getQuantity()){
                     card.setTotalAmount(card.getTotalValue() - i.getQuantity());

@@ -3,7 +3,7 @@
   class="btn btn-success btn-lg ml-4"
   style="float: right"
 >
-  <i class="fa fa-plus"></i> Add document
+  <i class="fa fa-plus" [routerLink]="['/document/add']">Add document</i> 
 </button>
 <br />
 <br />
@@ -21,7 +21,7 @@
       </p>
     </div>
     <div class="card-footer text-muted">
-      <button class="btn btn-primary"
+      <button class="btn btn-primary" [routerLink]="['/document', document.id]"
         >Details</button
       >
     </div>

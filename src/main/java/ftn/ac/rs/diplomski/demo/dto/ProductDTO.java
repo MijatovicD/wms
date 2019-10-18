@@ -57,4 +57,13 @@ public class ProductDTO {
         this.measurementUnitDTO = measurementUnitDTO;
     }
 
+    @Override
+    public String toString() {
+        return "ProductDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", productGroupDTO=" + productGroupDTO +
+                ", measurementUnitDTO=" + measurementUnitDTO +
+                '}';
+    }
 }

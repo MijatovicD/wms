@@ -27,15 +27,15 @@ export class DocumentItemService {
     return this.http.get<any>(this.baseUrl + "/product/" + id);
   }
 
-  getStavke(id): Observable<any> {
+  getItems(id): Observable<any> {
     return this.http.get(
-      "http://localhost:8080/api/dokumenti/dokument/" + id + "/stavke"
+      "http://localhost:8080/api/document/" + id + "/item"
     );
   }
 
-  saveStavka(stavka): any {
+  saveItem(stavka): any {
     return this.http.post(
-      "http://localhost:8080/api/stavkadokumenta/create",
+      "http://localhost:8080/api/documentItem",
       stavka
     );
   }

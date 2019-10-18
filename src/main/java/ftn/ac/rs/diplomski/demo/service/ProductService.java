@@ -19,6 +19,10 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    public Product getOne(Integer id){
+        return productRepository.findById(id).get();
+    }
+
     public Page<Product> findAllPaged(Integer page, Integer size){
         PageRequest pageReq = PageRequest.of(page, size);
         Page<Product> products = productRepository.findAll(pageReq);

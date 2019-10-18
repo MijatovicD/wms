@@ -43,7 +43,7 @@ export class DocumentItemComponent implements OnInit {
     price: null,
     quantity: null,
     value: null,
-    trafficDocument: null,
+    document: null,
     product: null
   };
   status;
@@ -83,6 +83,7 @@ export class DocumentItemComponent implements OnInit {
       this.documentService
         .getDokument(this.route.snapshot.url[1].path)
         .subscribe(res => {
+          console.log(res);
           this.dokument = res;
           if (res.status == "Formiranje") {
             this.status = "Proknjizi";
@@ -92,7 +93,7 @@ export class DocumentItemComponent implements OnInit {
           }
         });
       this.itemService
-        .getStavke(this.route.snapshot.url[1].path)
+        .getItems(this.route.snapshot.url[1].path)
         .subscribe(res => {
           this.privremenaListaRobe = res.map(r => {
             r.name = r.product.name;
@@ -205,27 +206,27 @@ export class DocumentItemComponent implements OnInit {
           r.trafficDocument = this.dokument;
           this.item.price = r.price;
           this.item.quantity = r.quantity;
-          this.item.trafficDocument = this.dokument;
+          this.item.document = this.dokument;
           this.item.product = r;
           this.item.value = r.value;
           console.log(this.item);
-          this.itemService.saveStavka(this.item).subscribe(res => {
-            this.router.navigateByUrl("/dokument");
+          this.itemService.saveItem(this.item).subscribe(res => {
+            this.router.navigateByUrl("/document");
           });
         });
       });
     }
   }
 
-  promeniStatus() {
+  changeStatus() {
     if (this.status == "Proknjizi") {
       this.documentService.proknjizi(this.dokument).subscribe(res => {
         console.log(res);
-        this.router.navigateByUrl("/dokument");
+        this.router.navigateByUrl("/document");
       });
     } else {
       this.documentService.storniraj(this.dokument).subscribe(res => {
-        this.router.navigateByUrl("/dokument");
+        this.router.navigateByUrl("/document");
       });
     }
   }

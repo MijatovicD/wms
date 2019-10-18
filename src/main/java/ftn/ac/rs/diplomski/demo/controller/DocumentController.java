@@ -1,5 +1,6 @@
 package ftn.ac.rs.diplomski.demo.controller;
 
+import ftn.ac.rs.diplomski.demo.dto.DocumentItemDTO;
 import ftn.ac.rs.diplomski.demo.dto.TrafficDocumentDTO;
 import ftn.ac.rs.diplomski.demo.entity.TrafficDocument;
 import ftn.ac.rs.diplomski.demo.service.*;
@@ -8,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/document")
@@ -32,6 +35,21 @@ public class DocumentController {
         Page<TrafficDocumentDTO> documentDTOS = documents.map(TrafficDocumentDTO::new);
 
         return new ResponseEntity<Page<TrafficDocumentDTO>>(documentDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<TrafficDocumentDTO> getOne(@PathVariable("id") Integer id){
+        TrafficDocument document = documentService.getDocument(id);
+        TrafficDocumentDTO dto = new TrafficDocumentDTO(document);
+
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/item")
+    public ResponseEntity<List<DocumentItemDTO>> getItems(@PathVariable("id") Integer id){
+        List<DocumentItemDTO> items = documentService.getItem(id);
+
+        return new ResponseEntity<>(items, HttpStatus.OK);
     }
 
     @PostMapping()
