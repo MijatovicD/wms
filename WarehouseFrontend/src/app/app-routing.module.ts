@@ -1,3 +1,4 @@
+import { DocumentItemComponent } from './document/document-item/document-item.component';
 import { DocumentComponent } from './document/document.component';
 import { ProductComponent } from './product/product.component';
 import { UnitComponent } from './unit/unit.component';
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: "document",
     component: DocumentComponent,  
+  },
+  {
+    path: "document/add",
+    component: DocumentItemComponent,  
   },
 ];
 

@@ -109,4 +109,19 @@ public class TrafficDocumentDTO {
     public void setBusinessYear(BussinessYearDTO businessYear) {
         this.businessYear = businessYear;
     }
+
+    @Override
+    public String toString() {
+        return "TrafficDocumentDTO{" +
+                "id=" + id +
+                ", serialNumber=" + serialNumber +
+                ", createDate=" + createDate +
+                ", bookingDate=" + bookingDate +
+                ", status='" + status + '\'' +
+                ", type='" + type + '\'' +
+                ", businessPartner=" + businessPartner +
+                ", warehouse=" + warehouse +
+                ", businessYear=" + businessYear +
+                '}';
+    }
 }

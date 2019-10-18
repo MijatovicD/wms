@@ -15,6 +15,10 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    public List<Product> findAll(){
+        return productRepository.findAll();
+    }
+
     public Page<Product> findAllPaged(Integer page, Integer size){
         PageRequest pageReq = PageRequest.of(page, size);
         Page<Product> products = productRepository.findAll(pageReq);

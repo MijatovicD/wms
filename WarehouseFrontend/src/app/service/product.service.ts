@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -28,5 +29,9 @@ export class ProductService {
 
   search(name): any{
     return this.http.get<any>(this.baseUrl + "/name/" + name);
+  }
+
+  getAll(): Observable<any[]>{
+    return this.http.get<any[]>(this.baseUrl).pipe();
   }
 }

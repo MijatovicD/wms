@@ -21,7 +21,7 @@ public class BussinesPartnerController {
     private BussinesPartnerService partnerService;
 
 
-    @GetMapping(value = "/")
+    @GetMapping()
     public ResponseEntity<List<BussinessPartnerDTO>> findAll(){
         List<BussinessPartner> partners = partnerService.findAll();
         List<BussinessPartnerDTO> partnerDTOS = new ArrayList<>();

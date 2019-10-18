@@ -30,6 +30,16 @@ public class ProductController {
         return new ResponseEntity<Page<ProductDTO>>(productDTOS, HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity<List<ProductDTO>> getAll(){
+        List<Product> products = productService.findAll();
+        List<ProductDTO> productDTOS = new ArrayList<>();
+        for (Product p : products){
+            productDTOS.add(new ProductDTO(p));
+        }
+        return new ResponseEntity<>(productDTOS, HttpStatus.OK);
+    }
+
     @GetMapping(value = "/name/{name}")
     public ResponseEntity<List<ProductDTO>> findByName(@PathVariable("name") String name){
         List<Product> products = productService.findAllByName(name);

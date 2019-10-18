@@ -13,6 +13,7 @@ import { BussinesYearComponent } from './bussines-year/bussines-year.component';
 import { UnitComponent } from './unit/unit.component';
 import { ProductComponent } from './product/product.component';
 import { DocumentComponent } from './document/document.component';
+import { DocumentItemComponent } from './document/document-item/document-item.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { DocumentComponent } from './document/document.component';
     BussinesYearComponent,
     UnitComponent,
     ProductComponent,
-    DocumentComponent
+    DocumentComponent,
+    DocumentItemComponent
   ],
   imports: [
     BrowserModule,

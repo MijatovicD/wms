@@ -5,9 +5,9 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductCardService {
+export class DocumentItemService {
 
-  private baseUrl = "http://localhost:8080/api/productCard";
+  private baseUrl = "http://localhost:8080/api/warehouse";
 
   constructor(
     private http: HttpClient
@@ -27,8 +27,16 @@ export class ProductCardService {
     return this.http.get<any>(this.baseUrl + "/product/" + id);
   }
 
-  
-  getCardsByWarehouse(id): Observable<any> {
-    return this.http.get("http://localhost:8080/api/warehouse/" + id + "/productCard");
+  getStavke(id): Observable<any> {
+    return this.http.get(
+      "http://localhost:8080/api/dokumenti/dokument/" + id + "/stavke"
+    );
+  }
+
+  saveStavka(stavka): any {
+    return this.http.post(
+      "http://localhost:8080/api/stavkadokumenta/create",
+      stavka
+    );
   }
 }

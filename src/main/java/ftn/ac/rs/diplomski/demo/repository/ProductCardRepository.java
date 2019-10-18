@@ -15,4 +15,6 @@ public interface ProductCardRepository extends JpaRepository<ProductCard, Intege
     Page<ProductCard> findAllById(Integer id, Pageable pageable);
 
     List<ProductCard> findAllByProductId(Integer id);
+
+    List<ProductCard> findAllByWarehouseId(Integer id);
 }

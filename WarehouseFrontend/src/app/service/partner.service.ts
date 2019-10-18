@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -20,6 +21,10 @@ export class PartnerService {
     }
 
     return this.http.get<any>(this.baseUrl + queryString);
+  }
+
+  getAll(): Observable<any[]>{
+    return this.http.get<any[]>(this.baseUrl).pipe();
   }
 
   add(partner): any{

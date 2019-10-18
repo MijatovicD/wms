@@ -13,6 +13,10 @@ public class BussinesYearServise {
     @Autowired
     private BussinesYearRepository bussinesYearRepository;
 
+    public BusinessYear findOne(Integer id){
+        return bussinesYearRepository.getOne(id);
+    }
+
     public Page<BusinessYear> findAllPaged(Integer page, Integer size){
         PageRequest pageReq = PageRequest.of(page, size);
         Page<BusinessYear> years = bussinesYearRepository.findAll(pageReq);

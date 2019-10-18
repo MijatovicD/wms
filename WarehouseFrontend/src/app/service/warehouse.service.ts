@@ -5,9 +5,9 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductCardService {
+export class WarehouseSerice {
 
-  private baseUrl = "http://localhost:8080/api/productCard";
+  private baseUrl = "http://localhost:8080/api/warehouse";
 
   constructor(
     private http: HttpClient
@@ -27,8 +27,7 @@ export class ProductCardService {
     return this.http.get<any>(this.baseUrl + "/product/" + id);
   }
 
-  
-  getCardsByWarehouse(id): Observable<any> {
-    return this.http.get("http://localhost:8080/api/warehouse/" + id + "/productCard");
+  getAll(): Observable<any[]>{
+    return this.http.get<any[]>(this.baseUrl).pipe();
   }
 }
