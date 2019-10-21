@@ -34,6 +34,11 @@ public class Product implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     private List<DocumentItem> items = new ArrayList<>();
 
+    public Product(){
+
+    }
+
+
     public Integer getId() {
         return id;
     }
@@ -89,8 +94,6 @@ public class Product implements Serializable {
                 ", name='" + name + '\'' +
                 ", productGroup=" + productGroup +
                 ", measurementUnit=" + measurementUnit +
-                ", productCards=" + productCards +
-                ", items=" + items +
                 '}';
     }
 }

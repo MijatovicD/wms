@@ -23,6 +23,11 @@ export class ProductCardService {
     return this.http.get<any>(this.baseUrl + queryString);
   }
 
+  
+  getId(id) {
+    return this.http.get<any>(this.baseUrl + "/" + id);
+  }
+
   findByProductId(id):any{
     return this.http.get<any>(this.baseUrl + "/product/" + id);
   }
@@ -30,5 +35,9 @@ export class ProductCardService {
   
   getCardsByWarehouse(id): Observable<any> {
     return this.http.get("http://localhost:8080/api/warehouse/" + id + "/productCard");
+  }
+
+  nivelacija(id) {
+    return this.http.post(this.baseUrl + "/" + id + "/nivelacija", {});
   }
 }

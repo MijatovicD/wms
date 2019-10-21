@@ -1,6 +1,5 @@
 package ftn.ac.rs.diplomski.demo.dto;
 
-import ftn.ac.rs.diplomski.demo.entity.Product;
 import ftn.ac.rs.diplomski.demo.entity.ProductGroup;
 
 public class ProductGroupDTO {

@@ -69,4 +69,23 @@ public class DocumentController {
 
         return new ResponseEntity<>(new TrafficDocumentDTO(trafficDocument), HttpStatus.CREATED);
     }
+
+    @PostMapping(value = "/proknjizi")
+    public ResponseEntity<TrafficDocumentDTO> proknjizi(@RequestBody TrafficDocumentDTO trafficDocumentDTO){
+        System.out.println("DOKUMENTTT JEBENI  " + trafficDocumentDTO.toString());
+        if(documentService.proknjiziDokument(trafficDocumentDTO)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping(value = "/storniraj")
+    public ResponseEntity<TrafficDocumentDTO> storniraj(@RequestBody TrafficDocumentDTO trafficDocumentDTO){
+        if(documentService.storniraj(trafficDocumentDTO)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

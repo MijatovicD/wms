@@ -1,5 +1,7 @@
 package ftn.ac.rs.diplomski.demo.entity;
 
+import ftn.ac.rs.diplomski.demo.dto.BussinessPartnerDTO;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -49,6 +51,12 @@ public class BussinessPartner implements Serializable {
         this.documents = documents;
     }
 
+    public BussinessPartner(BussinessPartnerDTO partnerDTO){
+        this.id = partnerDTO.getId();
+        this.name = partnerDTO.getName();
+        this.PIB = partnerDTO.getPIB();
+        this.address = partnerDTO.getAddress();
+    }
     public Integer getId() {
         return id;
     }
@@ -114,7 +122,6 @@ public class BussinessPartner implements Serializable {
                 ", address='" + address + '\'' +
                 ", company=" + company +
                 ", place=" + place +
-                ", documents=" + documents +
                 '}';
     }
 }

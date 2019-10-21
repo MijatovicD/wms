@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/productCard")
+@CrossOrigin(value = "http://localhost:4200")
 public class ProductCardController {
 
     @Autowired
@@ -29,12 +30,26 @@ public class ProductCardController {
     }
 
     @GetMapping(value = "/product/{id}")
-    public ResponseEntity<List<ProductCardDTO>> findByProduct(@PathVariable("id") Integer id){
+    public ResponseEntity<List<ProductCardDTO>> findByProduct(@PathVariable("id") Integer id) {
         List<ProductCard> productCards = productCardService.findAllByProductId(id);
         List<ProductCardDTO> productCardDTOS = new ArrayList<>();
-        for (ProductCard p : productCards){
+        for (ProductCard p : productCards) {
             productCardDTOS.add(new ProductCardDTO(p));
         }
         return new ResponseEntity<>(productCardDTOS, HttpStatus.OK);
     }
+
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<ProductCardDTO> findById(@PathVariable("id") Integer id){
+        ProductCard card = productCardService.findById(id);
+
+        return new ResponseEntity<>(new ProductCardDTO(card), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/{id}/nivelacija")
+    public ResponseEntity<Boolean> nivelacija(@PathVariable("id") Integer id){
+        return new ResponseEntity<>(this.productCardService.nivelacija(id), HttpStatus.OK);
+    }
+
 }

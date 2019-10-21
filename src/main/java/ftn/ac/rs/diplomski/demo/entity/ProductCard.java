@@ -206,7 +206,6 @@ public class ProductCard implements Serializable {
                 ", year=" + year +
                 ", product=" + product +
                 ", warehouse=" + warehouse +
-                ", cards=" + cards +
                 '}';
     }
 }

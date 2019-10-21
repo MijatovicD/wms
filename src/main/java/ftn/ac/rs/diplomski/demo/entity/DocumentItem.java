@@ -1,5 +1,7 @@
 package ftn.ac.rs.diplomski.demo.entity;
 
+import ftn.ac.rs.diplomski.demo.dto.DocumentItemDTO;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -46,6 +48,16 @@ public class DocumentItem implements Serializable {
         this.trafficDocument = trafficDocument;
         this.product = product;
         this.cards = cards;
+    }
+
+    public DocumentItem(DocumentItemDTO itemDTO){
+        this.id = itemDTO.getId();
+        this.quantity = itemDTO.getQuantity();
+        this.price = itemDTO.getPrice();
+        this.value = itemDTO.getValue();
+        this.trafficDocument = new TrafficDocument(itemDTO.getDocument());
+        this.product = null;
+        this.cards = null;
     }
 
     public Integer getId() {

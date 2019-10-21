@@ -22,9 +22,10 @@ public class ProductGroup implements Serializable {
 
     }
 
-    public ProductGroup(String name, Company company) {
+    public ProductGroup(Integer id, String name) {
+        super();
+        this.id = id;
         this.name = name;
-        this.company = company;
     }
 
     public int getId() {
@@ -43,20 +44,11 @@ public class ProductGroup implements Serializable {
         this.name = name;
     }
 
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
     @Override
     public String toString() {
         return "ProductGroup{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", company=" + company +
                 '}';
     }
 }

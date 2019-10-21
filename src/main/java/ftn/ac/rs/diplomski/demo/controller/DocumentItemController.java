@@ -54,12 +54,5 @@ public class DocumentItemController {
         return new ResponseEntity<>(new DocumentItemDTO(item), HttpStatus.CREATED);
     }
 
-    @PostMapping(value = "/proknjizi")
-    public ResponseEntity<TrafficDocumentDTO> proknjizi(@RequestBody TrafficDocumentDTO trafficDocumentDTO){
-        if(trafficDocumentService.proknjiziDokument(trafficDocumentDTO)){
-            return new ResponseEntity<>(HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+
 }

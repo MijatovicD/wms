@@ -53,7 +53,7 @@ export class DocumentService {
 
   storniraj(dokument): any {
     return this.http.post(
-      "http://localhost:8080/api/dokumenti/dokument/storniraj",
+      "http://localhost:8080/api/dokument/storniraj",
       dokument
     );
   }

@@ -57,6 +57,8 @@ public class ProductCardDTO {
     }
 
 
+
+
     public Integer getId() {
         return id;
     }

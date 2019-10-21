@@ -1,0 +1,44 @@
+<app-nav></app-nav>
+<div class="container col-lg-8" *ngFor="let card of all">
+  <div class="card text-center">
+    <div class="card-header">
+      Product card for product {{ card.product.name }}
+    </div>
+    <div class="card-body">
+      <p class="card-text">
+        Total amount: {{ card.totalQuantity }}
+        <br />
+        Total value: {{ card.totalValue }}
+      </p>
+    </div>
+    <div class="card-footer text-muted">
+      <button
+        type="submit"
+        class="btn btn-success btn-lg ml-3"
+        [routerLink]="['/productCard/', card.id]"
+      >
+        Details
+      </button>
+      <button
+        type="submit"
+        class="btn btn-secondary btn-lg ml-3 "
+      >
+        Download report
+      </button>
+    </div>
+  </div>
+  <br />
+</div>
+<div class="row d-flex justify-content-center">
+  <pagination
+  [boundaryLinks]="true"
+  [itemsPerPage]="itemPage.size"
+  [totalItems]="itemPage.totalElements"
+  (pageChanged)="pageChanged($event)"
+  previousText="&lsaquo;"
+  nextText="&rsaquo;"
+  firstText="&laquo;"
+  lastText="&raquo;"
+>
+</pagination>
+</div>

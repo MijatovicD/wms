@@ -24,9 +24,8 @@ public class MeasurementUnit implements Serializable {
 
     }
 
-    public MeasurementUnit(String name, List<Product> products) {
+    public MeasurementUnit(String name) {
         this.name = name;
-        this.products = products;
     }
 
     public Integer getId() {
@@ -45,20 +44,12 @@ public class MeasurementUnit implements Serializable {
         this.name = name;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
 
     @Override
     public String toString() {
         return "MeasurementUnit{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", products=" + products +
                 '}';
     }
 }

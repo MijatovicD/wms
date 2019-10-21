@@ -70,8 +70,6 @@ public class Place implements Serializable {
         return "Place{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", companies=" + companies +
-                ", partners=" + partners +
                 '}';
     }
 }

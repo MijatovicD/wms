@@ -43,14 +43,11 @@ public class Company implements Serializable {
 
     }
 
-    public Company(String name, String PIB, String address, Set<Warehouse> warehouses, Set<ProductGroup> groups, Set<BussinessPartner> partners, Place place) {
+    public Company(Integer id, String name, String PIB, String address) {
+        this.id = id;
         this.name = name;
         this.PIB = PIB;
         this.address = address;
-        this.warehouses = warehouses;
-        this.groups = groups;
-        this.partners = partners;
-        this.place = place;
     }
 
     public Integer getId() {
@@ -124,10 +121,6 @@ public class Company implements Serializable {
                 ", name='" + name + '\'' +
                 ", PIB='" + PIB + '\'' +
                 ", address='" + address + '\'' +
-                ", warehouses=" + warehouses +
-                ", groups=" + groups +
-                ", partners=" + partners +
-                ", place=" + place +
                 '}';
     }
 }

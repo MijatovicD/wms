@@ -1,0 +1,38 @@
+<h4 class="text-center display-4">Analytics warehouse card</h4>
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Serial number</th>
+      <th>Direction type</th>
+      <th>Smer Prometa</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let a of all">
+      <th scope="row">{{ a.id }}</th>
+      <td>{{ a.ordinalNumber }}</td>
+      <td>{{ a.trafficDirectionEnum }}</td>
+      <td>{{ a.trafficTypeDirectionEnum }}</td>
+      <td>{{ a.quantity }}</td>
+      <td>{{ a.price }}</td>
+      <td>{{ a.totalValue }}</td>
+    </tr>
+  </tbody>
+</table>
+<div class="row d-flex justify-content-center">
+  <pagination
+  [boundaryLinks]="true"
+  [itemsPerPage]="itemPage.size"
+  [totalItems]="itemPage.totalElements"
+  (pageChanged)="pageChanged($event)"
+  previousText="&lsaquo;"
+  nextText="&rsaquo;"
+  firstText="&laquo;"
+  lastText="&raquo;"
+>
+</pagination>
+</div>

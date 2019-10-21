@@ -1,0 +1,36 @@
+<app-nav></app-nav>
+<div class="container col-lg-8">
+  <div class="card text-center">
+    <div class="card-header">
+      Product card for product {{ card.product.name }} <br />
+      Product card id {{ card.id }}
+    </div>
+    <div class="card-body">
+      <p class="card-text">
+        Price: {{card.price}}
+        <br />
+        Init state of quantity {{ card.initialStateQuantity }}
+        <br />
+        Init state of value: {{ card.initialStateValue }}
+        <br />
+        Traffic entry quantity: {{ card.trafficEntryQuantity }}
+        <br />
+        Traffic entry value {{ card.trafficEntryValue }}
+        <br />
+        Traffic exit quantity: {{ card.trafficExitQuantity }}
+        <br />
+        Traffic exit value: {{ card.trafficExitValue }}
+        <br />
+        Total quantity: {{ card.totalQuantity }}
+        <br />
+        Total value: {{ card.totalValue }}
+      </p>
+    </div>
+    <div class="card-footer text-muted">
+      <button class="btn btn-lg btn-primary" [disabled]="nivelacijaPokusana" (click)="nivelacija()">Do nivelaciju</button>
+    </div>
+  </div>
+  <br />
+</div>
+
+<app-analytics></app-analytics>

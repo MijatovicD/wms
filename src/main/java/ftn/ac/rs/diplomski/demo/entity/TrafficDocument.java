@@ -1,5 +1,7 @@
 package ftn.ac.rs.diplomski.demo.entity;
 
+import ftn.ac.rs.diplomski.demo.dto.TrafficDocumentDTO;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -59,6 +61,18 @@ public class TrafficDocument implements Serializable {
         this.year = year;
         this.warehouse = warehouse;
         this.items = items;
+    }
+
+    public TrafficDocument(TrafficDocumentDTO documentDTO){
+        this.id = documentDTO.getId();
+        this.typeOfDocument = documentDTO.getType();
+        this.number = documentDTO.getSerialNumber();
+        this.formatDate = documentDTO.getCreateDate();
+        this.datumKnjizenja = documentDTO.getBookingDate();
+        this.status = documentDTO.getStatus();
+        this.bussinessPartner = new BussinessPartner(documentDTO.getBusinessPartner());
+        this.year = new BusinessYear(documentDTO.getBusinessYear());
+        this.warehouse = new Warehouse(documentDTO.getWarehouse());
     }
 
     public int getId() {

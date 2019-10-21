@@ -25,8 +25,6 @@ export class BussinesPartnerComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-   
-
     this.getPartnerPage(0,3);
   }
 

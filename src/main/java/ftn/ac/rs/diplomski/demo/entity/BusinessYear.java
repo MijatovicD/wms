@@ -1,5 +1,7 @@
 package ftn.ac.rs.diplomski.demo.entity;
 
+import ftn.ac.rs.diplomski.demo.dto.BussinessYearDTO;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -43,6 +45,12 @@ public class BusinessYear implements Serializable {
         this.productCards = productCards;
         this.documents = documents;
         this.company = company;
+    }
+
+    public BusinessYear(BussinessYearDTO yearDTO){
+        this.id = yearDTO.getId();
+        this.year = yearDTO.getYear();
+        this.close = yearDTO.isClosed();
     }
 
     public Integer getId() {
@@ -99,8 +107,6 @@ public class BusinessYear implements Serializable {
                 "id=" + id +
                 ", year='" + year + '\'' +
                 ", close=" + close +
-                ", productCards=" + productCards +
-                ", documents=" + documents +
                 ", company=" + company +
                 '}';
     }

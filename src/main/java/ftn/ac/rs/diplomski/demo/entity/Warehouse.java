@@ -1,5 +1,7 @@
 package ftn.ac.rs.diplomski.demo.entity;
 
+import ftn.ac.rs.diplomski.demo.dto.WarehouseDTO;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,11 +36,16 @@ public class Warehouse implements Serializable {
 
     }
 
-    public Warehouse(String name, Company company, List<ProductCard> productCards, List<TrafficDocument> trafficDocuments) {
+    public Warehouse(Integer id, String name, Company company) {
+        super();
+        this.id = id;
         this.name = name;
         this.company = company;
-        this.productCards = productCards;
-        this.trafficDocuments = trafficDocuments;
+    }
+
+    public Warehouse(WarehouseDTO warehouseDTO){
+        this.id = warehouseDTO.getId();
+        this.name = warehouseDTO.getName();
     }
 
     public Integer getId() {
@@ -87,8 +94,6 @@ public class Warehouse implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", company=" + company +
-                ", productCards=" + productCards +
-                ", trafficDocuments=" + trafficDocuments +
                 '}';
     }
 }

@@ -25,6 +25,7 @@ public class ProductDTO {
         this(product.getId(), product.getName(), new ProductGroupDTO(product.getProductGroup()), new MeasurementUnitDTO(product.getMeasurementUnit()));
     }
 
+
     public Integer getId() {
         return id;
     }
@@ -56,6 +57,7 @@ public class ProductDTO {
     public void setMeasurementUnitDTO(MeasurementUnitDTO measurementUnitDTO) {
         this.measurementUnitDTO = measurementUnitDTO;
     }
+
 
     @Override
     public String toString() {

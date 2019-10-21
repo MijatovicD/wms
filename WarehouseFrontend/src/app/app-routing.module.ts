@@ -1,3 +1,4 @@
+import { ProductCardComponent } from './product-card/product-card.component';
 import { DocumentItemComponent } from './document/document-item/document-item.component';
 import { DocumentComponent } from './document/document.component';
 import { ProductComponent } from './product/product.component';
@@ -7,6 +8,7 @@ import { BussinesPartnerComponent } from './bussines-partner/bussines-partner.co
 import { CompanyComponent } from './company/company.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ProductCardDetailComponent } from './product-card/product-card-detail/product-card-detail.component';
 
 const routes: Routes = [
   {
@@ -40,6 +42,14 @@ const routes: Routes = [
   {
     path: "document/:id",
     component: DocumentItemComponent,  
+  },
+  {
+    path: "productCard",
+    component: ProductCardComponent,  
+  },
+  {
+    path: "productCard/:id",
+    component: ProductCardDetailComponent,  
   }
 ];
 

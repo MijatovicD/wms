@@ -21,7 +21,7 @@ export class DocumentItemComponent implements OnInit {
     createDate: new Date(),
     status: null,
     businessPartner: { name: null },
-    businessYear: { id: 5 },
+    businessYear: { id: 5 , year:2019},
     warehouse: { name: null }
   };
   warehouses;
@@ -49,7 +49,7 @@ export class DocumentItemComponent implements OnInit {
   status;
   primka = true;
 
-  @ViewChild("selectVrsta") selectVrsta = {
+  @ViewChild("selectType") selectType = {
     nativeElement: { value: null }
   };
 
@@ -61,7 +61,7 @@ export class DocumentItemComponent implements OnInit {
     nativeElement: { value: null }
   };
 
-  @ViewChild("selectRoba") selectRoba = {
+  @ViewChild("selectProduct") selectProduct = {
     nativeElement: { value: null }
   };
   constructor(
@@ -116,7 +116,7 @@ export class DocumentItemComponent implements OnInit {
       w => w.name === this.selectWarehouse.nativeElement.value
     )[0];
 
-    if (this.selectVrsta.nativeElement.value == "Primka") {
+    if (this.selectType.nativeElement.value == "Primka") {
       this.productService.getAll().subscribe(res => {
         this.productList = res;
       });
@@ -137,7 +137,7 @@ export class DocumentItemComponent implements OnInit {
   dodajNaListu() {
     if (this.quantity == "" || this.quantity > 0) {
       this.productSelected = this.productList.filter(
-        r => r.name === this.selectRoba.nativeElement.value
+        r => r.name === this.selectProduct.nativeElement.value
       )[0];
       console.log(this.productSelected);
       if (this.primka) {
@@ -195,7 +195,7 @@ export class DocumentItemComponent implements OnInit {
       this.dokument.businessPartner = this.partners.filter(
         b => b.name === this.selectBusinessPartner.nativeElement.value
       )[0];
-      this.dokument.type = this.selectVrsta.nativeElement.value;
+      this.dokument.type = this.selectType.nativeElement.value;
       this.dokument.status = "Formiranje";
       console.log(this.dokument);
       this.documentService.addDokument(this.dokument).subscribe(res => {
@@ -221,7 +221,7 @@ export class DocumentItemComponent implements OnInit {
   changeStatus() {
     if (this.status == "Proknjizi") {
       this.documentService.proknjizi(this.dokument).subscribe(res => {
-        console.log(res);
+        console.log("knjizenjeee ");
         this.router.navigateByUrl("/document");
       });
     } else {

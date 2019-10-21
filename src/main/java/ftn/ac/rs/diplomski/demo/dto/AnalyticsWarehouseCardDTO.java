@@ -16,7 +16,7 @@ public class AnalyticsWarehouseCardDTO {
     private BigDecimal price;
     private BigDecimal totalValue;
     private ProductCardDTO productCard;
-    private  DocumentItemDTO documentItem;
+    private DocumentItemDTO documentItem;
 
     public AnalyticsWarehouseCardDTO(){
         super();
