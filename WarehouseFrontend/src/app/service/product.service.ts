@@ -1,3 +1,4 @@
+import { Product } from './../model/product';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -27,8 +28,8 @@ export class ProductService {
     return this.http.post<any>(this.baseUrl, product);
   }
 
-  search(name): any{
-    return this.http.get<any>(this.baseUrl + "/name/" + name);
+  search(name): Observable<Product[]>{
+    return this.http.get<Product[]>(this.baseUrl + "/name/" + name);
   }
 
   getAll(): Observable<any[]>{

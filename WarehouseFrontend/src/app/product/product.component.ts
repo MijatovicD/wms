@@ -1,6 +1,10 @@
+import { Observable } from 'rxjs';
+import { Product } from './../model/product';
+import { ProductCardService } from './../service/productCard.service';
 import { ItemPage } from './../model/item.page.model';
 import { ProductService } from './../service/product.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ModalModule, ModalDirective } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-product',
@@ -9,22 +13,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductComponent implements OnInit {
 
-  all:any[];
+  all:Product[];
   currentPage: number;
   itemsPerPage: number;
   itemPage: ItemPage;
-  productCard:any[];
+  productCard;
+  name;
+  price;
+  prodcutCard;
+  id;
 
   constructor(
-    private productService: ProductService
+    private productService: ProductService,
+    private productCardService: ProductCardService
   ) { }
 
   ngOnInit() {
     this.getProductPage(0,9);
   }
 
-  search(name):any{
+  search(name: Observable<Product[]>){
     this.productService.search(name).subscribe(p =>{
+      console.log(this.all);
         this.all = p;
     });
   }

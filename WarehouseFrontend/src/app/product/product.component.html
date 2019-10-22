@@ -37,9 +37,7 @@
       </p>
     </div>
     <div class="card-footer text-muted">
-     <button class="btn btn-primary">Buy</button>
-     <button class="btn btn-primary">Add to cart</button>
-     <button class="btn btn-primary">Details</button>
+     <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Details</button>
     </div>
   </div>
   <br />
@@ -57,3 +55,58 @@
   >
   </pagination>
 </div>
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Add bussiness partner</h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          <label>Type name of bussines partner</label>
+          <input
+            name="name"
+            id="inputName"
+            type="text"
+            class="form-control"
+            [(ngModel)] = "name"
+          />
+  
+          <label>Type PIB</label>
+          <input
+            name="pib"
+            id="inputName"
+            type="text"
+            class="form-control"
+            [(ngModel)] = "pib"
+          />
+          
+          <label>Type address</label>
+          <input
+            name="address"
+            id="inputName"
+            type="text"
+            class="form-control"
+            [(ngModel)] = "address"
+          />
+  
+          <button
+            type="button"
+            class="btn btn-primary"
+            style="margin: 10px"
+            data-dismiss="modal"
+            (click)="addPartner()"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

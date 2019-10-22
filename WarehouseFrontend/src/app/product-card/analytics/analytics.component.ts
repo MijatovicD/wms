@@ -26,23 +26,10 @@ export class AnalyticsComponent implements OnInit {
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.cardId = params['id'];
-      this.getCardPage(0,3);
-    });
-  }
-
-
-  getCardPage(page: number, size:number) {
-    this.analyticsService.getAllPaged(page, size)
-      .subscribe(page => {
-        this.itemPage = page;
-        this.all = page.content;
+      this.analyticsService.findByProductCardId(this.cardId).subscribe(a =>{
+          this.all = a;
       });
-  }
-
-  pageChanged(event: any): void {
-    this.currentPage = event.page;
-    this.itemsPerPage = event.itemsPerPage;
-    this.getCardPage(this.currentPage - 1, this.itemsPerPage);
+    });
   }
 
 }

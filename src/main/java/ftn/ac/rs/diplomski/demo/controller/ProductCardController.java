@@ -44,11 +44,17 @@ public class ProductCardController {
     public ResponseEntity<ProductCardDTO> findById(@PathVariable("id") Integer id){
         ProductCard card = productCardService.findById(id);
 
+        if(card == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(new ProductCardDTO(card), HttpStatus.OK);
     }
 
     @PostMapping(value = "/{id}/nivelacija")
     public ResponseEntity<Boolean> nivelacija(@PathVariable("id") Integer id){
+        if(id == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(this.productCardService.nivelacija(id), HttpStatus.OK);
     }
 

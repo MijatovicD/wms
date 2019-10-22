@@ -1,6 +1,6 @@
+import { ProductCard } from './productCard';
 export class Product {
-    constructor(
-        public id: number,
-        public name: string,
-    ) {}
+        public id: number;
+        public name: string;
+        public producCard: ProductCard
 }

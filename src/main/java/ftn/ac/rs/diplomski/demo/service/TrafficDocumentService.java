@@ -75,7 +75,6 @@ public class TrafficDocumentService {
     public boolean proknjiziDokument(TrafficDocumentDTO trafficDocumentDTO){
         List<DocumentItemDTO> items = getItem(trafficDocumentDTO.getId());
 
-        System.out.println("sdasdasdasdas " + items.toString());
         if(trafficDocumentDTO.getType().equals("Otpremnica")){
             System.out.println("ulaziii?");
             for (DocumentItemDTO i : items){
@@ -88,14 +87,12 @@ public class TrafficDocumentService {
 
 
                 if(card.getTotalAmount() >= i.getQuantity()){
-                    System.out.println("KARTICA PRE " + card.toString());
                     card.setTotalAmount(card.getTotalValue() - i.getQuantity());
                     card.setTrafficExitQuantity((int) (card.getTrafficExitQuantity() + i.getQuantity()));
                     card.setTotalValue(card.getTotalValue() - i.getValue());
                     card.setTrafficExitValue(card.getTrafficExitValue() + i.getValue());
                     cardRepository.save(card);
 
-                    System.out.println("KARTICA POSLEEEEEEEEEEEEEE " + card.toString());
 
                     AnalyticsWarehouseCard analytics = new AnalyticsWarehouseCard();
                     analytics.setPrice(new BigDecimal(i.getPrice()));
@@ -105,7 +102,9 @@ public class TrafficDocumentService {
                     analytics.setTrafficDirectionEnum(AnalyticsWarehouseCard.TrafficDirectionEnum.I);
                     analytics.setTrafficTypeDirectionEnum(AnalyticsWarehouseCard.TrafficTypeDirectionEnum.OT);
                     analytics.setValue(new BigDecimal(i.getValue()));
+                    analytics = analyticsWarehouseCardService.save(analytics);
                     analytics.setSerialNumber(analytics.getId());
+                    analyticsWarehouseCardService.save(analytics);
                     trafficDocumentDTO.setStatus("Proknjizen");
                     Date date = new Date();
                     trafficDocumentDTO.setBookingDate(date);
@@ -116,19 +115,18 @@ public class TrafficDocumentService {
                 }
             }
 
-        }
+        }else {
         //prijem robe
 
-        for (DocumentItemDTO i : items){
+        for (DocumentItemDTO i : items) {
             ProductCard card = null;
-            for (ProductCard p : i.getProduct().getProductCards()){
-                if (p.getWarehouse().getId() ==  trafficDocumentDTO.getWarehouse().getId()){
-                    System.out.println("fhgfjhfhf " + p.toString());
+            for (ProductCard p : i.getProduct().getProductCards()) {
+                if (p.getWarehouse().getId() == trafficDocumentDTO.getWarehouse().getId()) {
                     card = p;
                 }
             }
 
-            if (card == null){
+            if (card == null) {
                 card = new ProductCard();
                 card.setPrice(BigDecimal.valueOf(i.getPrice()).toBigInteger());
                 card.setInitStateOfQuantity(0);
@@ -142,14 +140,15 @@ public class TrafficDocumentService {
                 card.setYear(yearServise.findOne(5));
                 card.setProduct(i.getProduct());
                 card.setWarehouse(warehouseService.findOne(trafficDocumentDTO.getWarehouse().getId()));
-            }else{
-                card.setPrice(BigDecimal.valueOf(((card.getTotalValue() + i.getQuantity() * i.getPrice())/(card.getTotalAmount() + i.getQuantity()))).toBigInteger());
+            } else {
+                card.setPrice(BigDecimal.valueOf(((card.getTotalValue() + i.getQuantity() * i.getPrice()) / (card.getTotalAmount() + i.getQuantity()))).toBigInteger());
             }
 
-            if (i.getQuantity() > 0){
+            if (i.getQuantity() > 0) {
 
                 card.setTotalAmount(card.getTotalAmount() + i.getQuantity());
-                card.setTotalValue(card.getTotalValue() * card.getTotalAmount());
+                card.setTotalValue(card.getPrice().intValue() * card.getTotalAmount());
+                card.setTrafficEntryQuantity((int) (card.getTrafficEntryQuantity() + i.getQuantity()));
                 card.setTrafficEntryValue(card.getTrafficEntryValue() + i.getValue());
                 cardRepository.save(card);
 
@@ -161,16 +160,19 @@ public class TrafficDocumentService {
                 analytics.setTrafficDirectionEnum(AnalyticsWarehouseCard.TrafficDirectionEnum.U);
                 analytics.setTrafficTypeDirectionEnum(AnalyticsWarehouseCard.TrafficTypeDirectionEnum.PR);
                 analytics.setValue(new BigDecimal(i.getValue()));
+                analytics = analyticsWarehouseCardService.save(analytics);
                 analytics.setSerialNumber(analytics.getId());
+                analyticsWarehouseCardService.save(analytics);
                 trafficDocumentDTO.setStatus("Proknjizen");
                 Date date = new Date();
                 trafficDocumentDTO.setBookingDate(date);
                 documentRepository.save(new TrafficDocument(trafficDocumentDTO));
 
                 return true;
-            }else {
+            } else {
                 return false;
             }
+        }
         }
         return false;
     }
@@ -206,6 +208,7 @@ public class TrafficDocumentService {
                     analytics.setTrafficDirectionEnum(AnalyticsWarehouseCard.TrafficDirectionEnum.I);
                     analytics.setDocumentItem(documentItemRepository.getOne(i.getId()));
                     analytics.setTrafficTypeDirectionEnum(AnalyticsWarehouseCard.TrafficTypeDirectionEnum.OT);
+                    analytics = analyticsWarehouseCardService.save(analytics);
                     analytics.setSerialNumber(analytics.getId());
                     analyticsWarehouseCardService.save(analytics);
 

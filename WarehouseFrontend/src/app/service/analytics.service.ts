@@ -28,4 +28,14 @@ export class AnalyticsService {
     return this.http.get<any>(this.baseUrl + "/productCard/" + id);
   }
 
+  getAllPagedForCard(id: number, page: number, itemsPerPage: number) {
+    let queryString = '?';
+
+    if (page != null && itemsPerPage != null) {
+      queryString += 'page=' + page + '&size=' + itemsPerPage;
+    }
+
+    return this.http.get<any>(this.baseUrl + '/robnaKartica/' + id + queryString);
+  }
+
 }

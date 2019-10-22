@@ -46,7 +46,7 @@ public class ProductCardService{
     @Transactional
     public boolean nivelacija(Integer id){
         ProductCard card = productCardRepository.getOne(id);
-        List<AnalyticsWarehouseCard> am = analyticsWarehouseCardRepository.findAllByProductCardId(id);
+        List<AnalyticsWarehouseCard> am = analyticsWarehouseCardRepository.findAllByProductCardId(card.getId());
         int totalValue = 0;
         for (AnalyticsWarehouseCard a : am){
             if (a.getTrafficTypeDirectionEnum() == AnalyticsWarehouseCard.TrafficTypeDirectionEnum.NI){
