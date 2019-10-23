@@ -1,0 +1,44 @@
+<app-nav></app-nav>
+<div class="row justify-content-center">
+  <h4 class="display-4">Download report analasyis</h4>
+</div>
+<div class="row justify-content-center">
+  <p>for Card <strong>{{card.id}}</strong> - {{card?.product?.name}} - u {{card?.warehouse?.name}}</p>
+</div>
+
+<form
+  [formGroup]="izvestajForm"
+  class="col-md-8 offset-md-2 needs-validation"
+  (ngSubmit)="onSubmit()"
+>
+
+<div class="form-group" >
+  <label for="datumPocetni" class="font-weight-bold text-center">Početni datum</label>
+<input class="form-control" type="text" bsDatepicker [bsConfig]="bsConfig" placeholder="Početni datum" formControlName="datumPocetni" id="datumPocetni" 
+[ngClass]="(izvestajForm.get('datumPocetni').errors && izvestajForm.get('datumPocetni').touched) ? 'is-invalid': 
+(((izvestajForm.get('datumPocetni').errors == null) && izvestajForm.get('datumPocetni').touched) ? 'is-valid' : '')">
+<div class="invalid-feedback" *ngIf="izvestajForm.get('datumPocetni').hasError('required') && izvestajForm.get('datumPocetni').touched">
+    Mora se izabrati početni datum.
+</div>
+</div>
+
+<div class="form-group" >
+  <label for="datumKrajnji" class="font-weight-bold text-center">Krajnji datum</label>
+<input class="form-control" type="text" bsDatepicker [bsConfig]="bsConfig" placeholder="Krajnji datum" formControlName="datumKrajnji" id="datumKrajnji"
+[ngClass]="(izvestajForm.get('datumKrajnji').errors && izvestajForm.get('datumKrajnji').touched) ? 'is-invalid': 
+(((izvestajForm.get('datumKrajnji').errors == null) && izvestajForm.get('datumKrajnji').touched) ? 'is-valid' : '')">
+<div class="invalid-feedback" *ngIf="izvestajForm.get('datumKrajnji').hasError('required') && izvestajForm.get('datumKrajnji').touched">
+    Mora se izabrati krajnji datum.
+</div>
+</div>
+
+  <div class="row">
+    <button type="submit" class="btn btn-success btn-lg ml-3">Download</button>
+    <button
+      class="btn btn-secondary btn-lg ml-auto mr-3"
+      [routerLink]="['/productCard']"
+    >
+      Back
+    </button>
+  </div>
+</form>

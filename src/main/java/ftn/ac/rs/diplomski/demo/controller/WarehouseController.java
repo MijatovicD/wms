@@ -8,6 +8,7 @@ import ftn.ac.rs.diplomski.demo.repository.ProductCardRepository;
 import ftn.ac.rs.diplomski.demo.service.ProductCardService;
 import ftn.ac.rs.diplomski.demo.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,14 @@ public class WarehouseController {
         }
 
         return new ResponseEntity<>(warehouseDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping(value = {"", "/"}, params = {"page", "size"})
+    public ResponseEntity<Page<WarehouseDTO>> getAllPaged(@RequestParam("page") Integer page, @RequestParam("size") Integer size) {
+        Page<Warehouse> warehouses = (Page<Warehouse>) warehouseService.findAllPaged(page, size);
+        Page<WarehouseDTO> partnerDTOS = warehouses.map(WarehouseDTO::new);
+
+        return new ResponseEntity<Page<WarehouseDTO>>(partnerDTOS, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}/productCard")

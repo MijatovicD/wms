@@ -17,6 +17,8 @@ import { DocumentItemComponent } from './document/document-item/document-item.co
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ProductCardDetailComponent } from './product-card/product-card-detail/product-card-detail.component';
 import { AnalyticsComponent } from './product-card/analytics/analytics.component';
+import { WarehouseComponent } from './warehouse/warehouse.component';
+import { ReportComponent } from './report/report.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { AnalyticsComponent } from './product-card/analytics/analytics.component
     DocumentItemComponent,
     ProductCardComponent,
     ProductCardDetailComponent,
-    AnalyticsComponent
+    AnalyticsComponent,
+    WarehouseComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,

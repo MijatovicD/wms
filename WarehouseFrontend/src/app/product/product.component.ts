@@ -19,9 +19,10 @@ export class ProductComponent implements OnInit {
   itemPage: ItemPage;
   productCard;
   name;
-  price;
+  price:any;
   prodcutCard;
-  id;
+  id:number;
+  p:any;
 
   constructor(
     private productService: ProductService,
@@ -53,4 +54,16 @@ export class ProductComponent implements OnInit {
     this.getProductPage(this.currentPage - 1, this.itemsPerPage);
   }
 
+
+  editProduct(id){
+    this.productCardService.findByProductId(id).subscribe(c =>{
+        console.log(c);
+        this.p = c;
+        console.log(this.p);
+    });
+  }
+
+  addToCard(){
+    
+  }
 }

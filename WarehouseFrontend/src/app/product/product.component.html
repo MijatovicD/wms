@@ -37,7 +37,7 @@
       </p>
     </div>
     <div class="card-footer text-muted">
-     <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Details</button>
+     <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" (click)="editProduct(product.id)">Details</button>
     </div>
   </div>
   <br />
@@ -57,12 +57,12 @@
 </div>
 
 <!-- The Modal -->
-<div class="modal fade" id="myModal">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
+<div class="modal fade" id="myModal" >
+    <div class="modal-dialog modal-dialog-centered" >
+      <div class="modal-content" *ngFor="let card of p">
         <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Add bussiness partner</h4>
+        <div class="modal-header" >
+          <h4 class="modal-title">Buy product</h4>
           <button type="button" class="close" data-dismiss="modal">
             &times;
           </button>
@@ -70,31 +70,31 @@
   
         <!-- Modal body -->
         <div class="modal-body">
-          <label>Type name of bussines partner</label>
+          <label>Product</label>
           <input
-            name="name"
+            name="price"
             id="inputName"
             type="text"
             class="form-control"
-            [(ngModel)] = "name"
+            [(ngModel)] = "card.product.name"
           />
   
-          <label>Type PIB</label>
+          <label>Quantity</label>
           <input
-            name="pib"
+            name="totalValue"
             id="inputName"
-            type="text"
+            type="number"
             class="form-control"
-            [(ngModel)] = "pib"
           />
           
-          <label>Type address</label>
+          <label>Price</label>
           <input
-            name="address"
+            name="totalValue"
             id="inputName"
             type="text"
             class="form-control"
-            [(ngModel)] = "address"
+            disabled
+            [(ngModel)] = "card.price"
           />
   
           <button
@@ -102,9 +102,10 @@
             class="btn btn-primary"
             style="margin: 10px"
             data-dismiss="modal"
-            (click)="addPartner()"
+            id="buy"
+            (click)="addToCard()"
           >
-            Add
+            Add to card
           </button>
         </div>
       </div>

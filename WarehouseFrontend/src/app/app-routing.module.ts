@@ -1,3 +1,5 @@
+import { ReportComponent } from './report/report.component';
+import { WarehouseComponent } from './warehouse/warehouse.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { DocumentItemComponent } from './document/document-item/document-item.component';
 import { DocumentComponent } from './document/document.component';
@@ -50,6 +52,14 @@ const routes: Routes = [
   {
     path: "productCard/:id",
     component: ProductCardDetailComponent,  
+  },
+  {
+    path: "warehouse",
+    component: WarehouseComponent,  
+  },
+  {
+    path: "report/:id",
+    component: ReportComponent,  
   }
 ];
 
