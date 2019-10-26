@@ -28,8 +28,8 @@ export class ProductCardService {
     return this.http.get<any>(this.baseUrl + "/" + id);
   }
 
-  findByProductId(id):any{
-    return this.http.get<any>(this.baseUrl + "/product/" + id);
+  findByProductId(id: number){
+    return this.http.get(this.baseUrl + "/product/" + id);
   }
 
   

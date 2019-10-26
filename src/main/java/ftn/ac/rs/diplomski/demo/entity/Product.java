@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "product")
@@ -33,6 +35,9 @@ public class Product implements Serializable {
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     private List<DocumentItem> items = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    private Set<ShoppingCartItem> shoppingCartItems = new HashSet<ShoppingCartItem>();
 
     public Product(){
 

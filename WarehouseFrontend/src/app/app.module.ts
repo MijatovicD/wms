@@ -1,11 +1,11 @@
+import { JwtInterceptor } from './service/jwt.interceptor';
 import { NavComponent } from './nav/nav.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CompanyComponent } from './company/company.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BsDropdownModule, PaginationModule, BsDatepickerModule } from "ngx-bootstrap";
 import { BussinesPartnerComponent } from './bussines-partner/bussines-partner.component';
@@ -19,6 +19,7 @@ import { ProductCardDetailComponent } from './product-card/product-card-detail/p
 import { AnalyticsComponent } from './product-card/analytics/analytics.component';
 import { WarehouseComponent } from './warehouse/warehouse.component';
 import { ReportComponent } from './report/report.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ReportComponent } from './report/report.component';
     ProductCardDetailComponent,
     AnalyticsComponent,
     WarehouseComponent,
-    ReportComponent
+    ReportComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,7 @@ import { ReportComponent } from './report/report.component';
     BsDatepickerModule.forRoot(),
     
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

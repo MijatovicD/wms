@@ -85,6 +85,7 @@
             id="inputName"
             type="number"
             class="form-control"
+            [(ngModel)] = "quantity"
           />
           
           <label>Price</label>
@@ -103,9 +104,9 @@
             style="margin: 10px"
             data-dismiss="modal"
             id="buy"
-            (click)="addToCard()"
+            (click)="addToCart()"
           >
-            Add to card
+            Add to cart
           </button>
         </div>
       </div>

@@ -1,15 +1,15 @@
 export class ProductCard{
-    private id: number;
-    private initialStateQuantity;
-    private initialStateValue;
-    private trafficEntryQuantity;
-    private trafficEntryValue;
-    private trafficExitQuantity;
-    private trafficExitValue;
-    private totalQuantity;
-    private totalValue;
-    private businessYear;
-    private product;
-    private warehouse;
-    private price;
+    public id: number;
+    public initialStateQuantity;
+    public initialStateValue;
+    public trafficEntryQuantity;
+    public trafficEntryValue;
+    public trafficExitQuantity;
+    public trafficExitValue;
+    public totalQuantity;
+    public totalValue;
+    public businessYear;
+    public product;
+    public warehouse;
+    public price;
 }

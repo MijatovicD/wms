@@ -1,3 +1,5 @@
+import { ProductCard } from './../model/productCard';
+import { ShoppingCartItemService } from './../service/shoppingCartItem.service';
 import { Observable } from 'rxjs';
 import { Product } from './../model/product';
 import { ProductCardService } from './../service/productCard.service';
@@ -22,11 +24,19 @@ export class ProductComponent implements OnInit {
   price:any;
   prodcutCard;
   id:number;
-  p:any;
+  p:ProductCard;
+  quantity;
+  item:{
+    product,
+    user,
+    cart,
+    quantity
+  };
 
   constructor(
     private productService: ProductService,
-    private productCardService: ProductCardService
+    private productCardService: ProductCardService,
+    private cartService: ShoppingCartItemService
   ) { }
 
   ngOnInit() {
@@ -56,14 +66,23 @@ export class ProductComponent implements OnInit {
 
 
   editProduct(id){
-    this.productCardService.findByProductId(id).subscribe(c =>{
+    this.productCardService.findByProductId(id).subscribe((c:ProductCard) =>{
         console.log(c);
         this.p = c;
-        console.log(this.p);
+        console.log(c.price);
+        console.log(this.p.price);
+        // localStorage.setItem("product", this.p);
     });
   }
 
-  addToCard(){
-    
+  addToCart(){
+    this.item.product = localStorage.getItem("product");
+    this.item.quantity = this.quantity;
+
+    this.cartService.add(this.item).subscribe(i =>{
+      console.log(i);
+    })
+
+    localStorage.removeItem("product");
   }
 }

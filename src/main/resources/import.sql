@@ -71,3 +71,10 @@ INSERT INTO document_item(quantity, price, value, document_id, product_id) VALUE
 INSERT INTO document_item(quantity, price, value, document_id, product_id) VALUES (20, 10, 100, 1,2);
 
 INSERT INTO analytics(price, quantity, serial_number, smer, value, vrsta_prometa, product_card_id, document_item_id) VALUES (1400, 2, 1, 'U', 120, 'PR', 1, 1 )
+
+INSERT INTO user(name, username, password, role) VALUES ('pera', 'a', '$2a$10$uAJxjAToe7LUtqZMEXrZsOB5bgjisBcMBztDSaQ1kzj/A2xnpg41y', 0);
+INSERT INTO user(name, username, password, role) VALUES ('mika', 'b', '$2a$10$uAJxjAToe7LUtqZMEXrZsOB5bgjisBcMBztDSaQ1kzj/A2xnpg41y', 1);
+
+INSERT INTO shopping_cart(id) VALUES (1);
+
+INSERT INTO shopping_cart_item(product_id, shopping_cart_id, user_id, quantity) VALUES (1,1,1,10);
