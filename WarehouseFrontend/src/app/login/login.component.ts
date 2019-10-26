@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
         (res: boolean) => {
           console.log(res);
           if (res) {
-            this.router.navigate(["/partner"]);
+            this.router.navigate(["/product"]);
           }
         },
         (err: Error) => {

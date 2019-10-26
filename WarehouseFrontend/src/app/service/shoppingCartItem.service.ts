@@ -23,6 +23,7 @@ export class ShoppingCartItemService {
   }
 
   add(cart): any{
+    console.log(cart);
     return this.http.post<any>(this.baseUrl, cart);
   }
 

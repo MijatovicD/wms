@@ -1,3 +1,4 @@
+import { ShoppingCartItem } from './../model/shoppingCartItem';
 import { ProductCard } from './../model/productCard';
 import { ShoppingCartItemService } from './../service/shoppingCartItem.service';
 import { Observable } from 'rxjs';
@@ -21,16 +22,18 @@ export class ProductComponent implements OnInit {
   itemPage: ItemPage;
   productCard;
   name;
+  
   price:any;
   prodcutCard;
-  id:number;
+  // id:number;
   p:ProductCard;
   quantity;
-  item:{
-    product,
-    user,
-    cart,
-    quantity
+  productId:number;
+  shoppingCartitem = {
+    productDTO: new Object({}),
+    shoppingCart: {id:1},
+    userDTO: new Object({}),
+    quantity: null
   };
 
   constructor(
@@ -66,23 +69,26 @@ export class ProductComponent implements OnInit {
 
 
   editProduct(id){
-    this.productCardService.findByProductId(id).subscribe((c:ProductCard) =>{
+    this.productCardService.findByProductId(id).subscribe((c: ProductCard) =>{
         console.log(c);
         this.p = c;
-        console.log(c.price);
-        console.log(this.p.price);
-        // localStorage.setItem("product", this.p);
     });
   }
 
-  addToCart(){
-    this.item.product = localStorage.getItem("product");
-    this.item.quantity = this.quantity;
+  addToCart(pId){
+    console.log(pId);
+    this.shoppingCartitem.productDTO = pId;
+    let user = JSON.parse(localStorage.getItem("userInfo")).username;
+    console.log(JSON.stringify(user));
+    this.shoppingCartitem.productDTO = {"id": pId};
+    this.shoppingCartitem.shoppingCart;
+    this.shoppingCartitem.userDTO = {"username": user};
+    this.shoppingCartitem.quantity = this.quantity;
 
-    this.cartService.add(this.item).subscribe(i =>{
+    this.cartService.add(this.shoppingCartitem).subscribe(i =>{
+      alert("Successful added to shopping cart");
       console.log(i);
-    })
+    });
 
-    localStorage.removeItem("product");
   }
 }

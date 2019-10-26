@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
+  isUserLogged = false;
+  name;
+  
+  constructor(private router: Router) { }
 
   ngOnInit() {
+    if (localStorage.getItem("userInfo")){
+      this.name = JSON.parse(localStorage.getItem("userInfo"));
+      this.name = this.name.username;
+      this.isUserLogged = true;
+    }
   }
 
+  logout(){
+    localStorage.removeItem("userInfo");
+    localStorage.removeItem("token");
+    this.isUserLogged = false;
+    this.router.navigateByUrl("/login");
+  }
 }

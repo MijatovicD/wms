@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/cartItem")
+@CrossOrigin(value = "http://localhost:4200")
 public class ShoppingCartItemController {
 
     @Autowired
@@ -31,6 +32,16 @@ public class ShoppingCartItemController {
     @Autowired
     private ShoppingCartService cartService;
 
+    @GetMapping
+    public ResponseEntity<List<ShoppingCartItemDTO>> findAll(){
+        List<ShoppingCartItem> items = itemService.findAll();
+        List<ShoppingCartItemDTO> dtos = new ArrayList<>();
+        for (ShoppingCartItem i : items){
+            dtos.add(new ShoppingCartItemDTO(i));
+        }
+
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
+    }
     @GetMapping(value = "/user/{id}")
     public ResponseEntity<List<ShoppingCartItemDTO>> findByUserId(@PathVariable("id") Integer id){
         List<ShoppingCartItem> items = itemService.findByUserId(id);
@@ -45,6 +56,7 @@ public class ShoppingCartItemController {
 
     @PostMapping
     public ResponseEntity<ShoppingCartItemDTO> save(@RequestBody ShoppingCartItemDTO shoppingCartItemDTO){
+        System.out.println("ITEEEMS " + shoppingCartItemDTO.toString());
         ShoppingCartItem cartItem = new ShoppingCartItem();
         cartItem.setProduct(productService.getOne(shoppingCartItemDTO.getProductDTO().getId()));
         User u = usersService.findByUsername(shoppingCartItemDTO.getUserDTO().getUsername());

@@ -48,12 +48,12 @@
             class="btn nav-link dropdown-toggle"
             style="cursor: pointer"
             dropdownToggle
-            >Welcome, <span class="caret"></span
+            >Welcome, {{name}}<span class="caret"></span
           ></a>
           <ul class="dropdown-menu" *dropdownMenu>
             <div class="dropdown-divider"></div>
             <li>
-              <a class="dropdown-item"
+              <a class="dropdown-item" (click)="logout()"
                 ><i class="fa fa-sign-out"></i>Sign out</a
               >
             </li>

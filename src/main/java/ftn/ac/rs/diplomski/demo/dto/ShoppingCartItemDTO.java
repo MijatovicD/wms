@@ -65,4 +65,15 @@ public class ShoppingCartItemDTO {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
+
+    @Override
+    public String toString() {
+        return "ShoppingCartItemDTO{" +
+                "id=" + id +
+                ", productDTO=" + productDTO +
+                ", shoppingCart=" + shoppingCart +
+                ", userDTO=" + userDTO +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

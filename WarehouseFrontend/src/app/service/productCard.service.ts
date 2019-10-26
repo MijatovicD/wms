@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ProductCard } from '../model/productCard';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +29,8 @@ export class ProductCardService {
     return this.http.get<any>(this.baseUrl + "/" + id);
   }
 
-  findByProductId(id: number){
-    return this.http.get(this.baseUrl + "/product/" + id);
+  findByProductId(id: number): Observable<ProductCard>{
+    return this.http.get<ProductCard>(this.baseUrl + "/product/" + id);
   }
 
   
