@@ -16,5 +16,7 @@ public interface ProductCardRepository extends JpaRepository<ProductCard, Intege
 
     List<ProductCard> findAllByProductId(Integer id);
 
+    ProductCard findByProductId(Integer id);
+
     List<ProductCard> findAllByWarehouseId(Integer id);
 }

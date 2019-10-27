@@ -20,6 +20,7 @@ import { AnalyticsComponent } from './product-card/analytics/analytics.component
 import { WarehouseComponent } from './warehouse/warehouse.component';
 import { ReportComponent } from './report/report.component';
 import { LoginComponent } from './login/login.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { LoginComponent } from './login/login.component';
     AnalyticsComponent,
     WarehouseComponent,
     ReportComponent,
-    LoginComponent
+    LoginComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,

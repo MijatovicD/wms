@@ -7,7 +7,6 @@ import { ProductCardService } from './../service/productCard.service';
 import { ItemPage } from './../model/item.page.model';
 import { ProductService } from './../service/product.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ModalModule, ModalDirective } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-product',
@@ -72,9 +71,12 @@ export class ProductComponent implements OnInit {
     this.productCardService.findByProductId(id).subscribe((c: ProductCard) =>{
         console.log(c);
         this.p = c;
+        console.log(this.p.price);
     });
   }
 
+  //metoda za dodavanje robe u korpu.
+  //prosledjuje se id robe koja je selektovana
   addToCart(pId){
     console.log(pId);
     this.shoppingCartitem.productDTO = pId;
@@ -88,7 +90,9 @@ export class ProductComponent implements OnInit {
     this.cartService.add(this.shoppingCartitem).subscribe(i =>{
       alert("Successful added to shopping cart");
       console.log(i);
-    });
+    },
+    (error) => alert("Sorry we don't have that quantity in warehouse")
+    );
 
   }
 }

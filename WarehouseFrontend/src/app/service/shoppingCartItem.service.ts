@@ -26,5 +26,9 @@ export class ShoppingCartItemService {
     console.log(cart);
     return this.http.post<any>(this.baseUrl, cart);
   }
+  
+  findByUserId(username){
+    return this.http.get(this.baseUrl + "/user/" + username);
+  }
 
 }

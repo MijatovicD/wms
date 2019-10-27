@@ -1,3 +1,4 @@
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { LoginComponent } from './login/login.component';
 import { ReportComponent } from './report/report.component';
 import { WarehouseComponent } from './warehouse/warehouse.component';
@@ -74,6 +75,11 @@ const routes: Routes = [
   {
     path: "report/:id",
     component: ReportComponent,  
+    canActivate: [LoggedOutGuard]
+  },
+  {
+    path: "shoppingCart",
+    component: ShoppingCartComponent,  
     canActivate: [LoggedOutGuard]
   },
   { 

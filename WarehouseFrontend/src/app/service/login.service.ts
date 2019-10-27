@@ -25,8 +25,6 @@ export class LoginService {
             let claims = JSON.parse(decodedJwtJsonData);
             console.log('claims ' + claims);
             let role = claims.role[0].authority;
-            let id = claims.id;
-            console.log('idd '  + id);
             let userInfo = { username: credentials.username, role: role };
             localStorage.setItem("userInfo", JSON.stringify(userInfo));
             localStorage.setItem("token", token);

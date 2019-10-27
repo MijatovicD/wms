@@ -35,6 +35,14 @@ public class ProductCardService{
         return productCardRepository.findAllByProductId(id);
     }
 
+    public ProductCard findByProductId(Integer id){
+        return productCardRepository.findByProductId(id);
+    }
+
+    public ProductCard save(ProductCard productCard){
+        return productCardRepository.save(productCard);
+    }
+
     public List<ProductCard> findAllByWarehouseId(Integer id){
         return productCardRepository.findAllByWarehouseId(id);
     }

@@ -3,10 +3,7 @@ package ftn.ac.rs.diplomski.demo.controller;
 import ftn.ac.rs.diplomski.demo.dto.ShoppingCartItemDTO;
 import ftn.ac.rs.diplomski.demo.entity.ShoppingCartItem;
 import ftn.ac.rs.diplomski.demo.entity.User;
-import ftn.ac.rs.diplomski.demo.service.ProductService;
-import ftn.ac.rs.diplomski.demo.service.ShoppingCartItemService;
-import ftn.ac.rs.diplomski.demo.service.ShoppingCartService;
-import ftn.ac.rs.diplomski.demo.service.UsersService;
+import ftn.ac.rs.diplomski.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +29,9 @@ public class ShoppingCartItemController {
     @Autowired
     private ShoppingCartService cartService;
 
+    @Autowired
+    private ProductCardService productCardService;
+
     @GetMapping
     public ResponseEntity<List<ShoppingCartItemDTO>> findAll(){
         List<ShoppingCartItem> items = itemService.findAll();
@@ -42,9 +42,10 @@ public class ShoppingCartItemController {
 
         return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
-    @GetMapping(value = "/user/{id}")
-    public ResponseEntity<List<ShoppingCartItemDTO>> findByUserId(@PathVariable("id") Integer id){
-        List<ShoppingCartItem> items = itemService.findByUserId(id);
+    @GetMapping(value = "/user/{username}")
+    public ResponseEntity<List<ShoppingCartItemDTO>> findByUserId(@PathVariable("username") String username){
+        User u = usersService.findByUsername(username);
+        List<ShoppingCartItem> items = itemService.findByUserId(u.getId());
         List<ShoppingCartItemDTO> itemDTOS = new ArrayList<>();
         for (ShoppingCartItem i : items){
             itemDTOS.add(new ShoppingCartItemDTO(i));
@@ -64,7 +65,9 @@ public class ShoppingCartItemController {
         cartItem.setShoppingCart(cartService.findById(shoppingCartItemDTO.getShoppingCart().getId()));
         cartItem.setQuantity(shoppingCartItemDTO.getQuantity());
 
-        cartItem = itemService.save(cartItem);
+        itemService.save(cartItem);
+
+        cartItem = itemService.saveInCard(cartItem);
 
         return new ResponseEntity<>(new ShoppingCartItemDTO(cartItem), HttpStatus.CREATED);
     }

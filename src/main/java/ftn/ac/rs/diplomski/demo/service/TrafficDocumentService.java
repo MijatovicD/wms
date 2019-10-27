@@ -140,6 +140,7 @@ public class TrafficDocumentService {
                 card.setYear(yearServise.findOne(5));
                 card.setProduct(i.getProduct());
                 card.setWarehouse(warehouseService.findOne(trafficDocumentDTO.getWarehouse().getId()));
+
             } else {
                 card.setPrice(BigDecimal.valueOf(((card.getTotalValue() + i.getQuantity() * i.getPrice()) / (card.getTotalAmount() + i.getQuantity()))).toBigInteger());
             }
