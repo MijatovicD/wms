@@ -27,6 +27,13 @@ public class AnalyticsWarehouseCardService {
         return analyticsWarehouseCardRepository.findAllByProductCardId(id);
     }
 
+    public AnalyticsWarehouseCard findByProducCardId(Integer id){
+        return analyticsWarehouseCardRepository.findByProductCardId(id);
+    }
+
+    public AnalyticsWarehouseCard findByDocumentItemId(Integer id){
+        return analyticsWarehouseCardRepository.findAllByDocumentItemId(id);
+    }
 
     public Page<AnalyticsWarehouseCard> findAllPaged(Integer page, Integer size){
         PageRequest pageReq = PageRequest.of(page, size);

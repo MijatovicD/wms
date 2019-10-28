@@ -13,4 +13,6 @@ public interface AnalyticsWarehouseCardRepository extends JpaRepository<Analytic
 
     List<AnalyticsWarehouseCard> findAllByProductCardId(Integer id);
     Page<AnalyticsWarehouseCard> findAllByProductCardId(Integer id, Pageable pageable);
+    AnalyticsWarehouseCard findAllByDocumentItemId(Integer id);
+    AnalyticsWarehouseCard findByProductCardId(Integer id);
 }
