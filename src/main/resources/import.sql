@@ -77,4 +77,4 @@ INSERT INTO user(name, username, password, role) VALUES ('mika', 'b', '$2a$10$uA
 
 INSERT INTO shopping_cart(id) VALUES (1);
 
-INSERT INTO shopping_cart_item(product_id, shopping_cart_id, user_id, quantity) VALUES (1,1,1,10);
+-- INSERT INTO shopping_cart_item(product_id, shopping_cart_id, user_id, quantity) VALUES (1,1,1,10);

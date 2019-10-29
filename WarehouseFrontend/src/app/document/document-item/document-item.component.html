@@ -88,8 +88,20 @@
         data-target="#myModal"
         (click)="productListUcitavanje()"
       >
-        Add product
+        Add existing product
       </button>
+      <br />
+      <button
+      *ngIf="
+        dodavanje &&
+        this.selectWarehouse.nativeElement.value != 'Izaberite magacin'
+      "
+      class="btn btn-primary"
+      data-toggle="modal"
+      data-target="#productModal"
+    >
+      Add new product
+    </button>
       <br />
     </div>
     <table class="table" style="margin: 10px">
@@ -177,6 +189,73 @@
           type="button"
           class="btn btn-primary"
           (click)="dodajNaListu()"
+          style="margin: 10px"
+          data-dismiss="modal"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- The Modal for new product-->
+<div class="modal fade" id="productModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Add document item</h4>
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <label>Enter a product name</label>
+          <input
+            name="name"
+            type="text"
+            class="form-control"
+            [(ngModel)]="name"
+          />
+        <label>Enter a quantity</label>
+        <input
+          name="quantitya"
+          [(ngModel)]="quantity"
+          type="text"
+          class="form-control"
+        />
+        <div *ngIf="primka">
+          <label>Enter a price </label>
+          <input
+            name="price"
+            [(ngModel)]="price"
+            type="text"
+            class="form-control"
+          />
+          <label>Enter a product group</label>
+          <select #selectGroup class="form-control">
+            <option *ngFor="let g of groupList" [value]="g.id">{{
+              g.name
+            }}</option>
+          </select>
+          <label>Enter a measurement unit</label>
+          <select #selectUnit class="form-control">
+            <option *ngFor="let u of unitList" [value]="u.id">{{
+              u.name
+            }}</option>
+          </select>
+        </div>
+        <p style="color:red; text-align: center">{{ errorModal }}</p>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="dodajNaListuNovProizvod()"
           style="margin: 10px"
           data-dismiss="modal"
         >

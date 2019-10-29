@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cardAnalysis" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ee758a96-9373-486f-86f1-cbd4bf876bf9">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[YmVjaGVsb3IuYW5hbHl0aWNzIEFTICw2Nyw1MCw2ODNmMjY0Mi05ZjdmLTQ0YjAtYWVjOC00Mzg2
+NDQ0OTljYTI7YmVjaGVsb3IucHJvZHVjdF9jYXJkIEFTICw0MjEsNTgsMzAxODZiNjktYzAzMi00
+MmI1LWE1NWYtNjNjNzcwNzBkNmU0Ow==]]>
+	</property>
+	<queryString>
+		<![CDATA[SELECT bechelor.analytics.id,
+	bechelor.analytics.price,
+	bechelor.analytics.quantity,
+	bechelor.analytics.serial_number,
+	bechelor.analytics.smer,
+	bechelor.analytics.vrsta_prometa,
+	bechelor.analytics.value,
+	bechelor.analytics.product_card_id
+FROM bechelor.product_card,
+	bechelor.analytics]]>
+	</queryString>
+	<field name="Id" class="java.lang.String"/>
+	<field name="Price" class="java.lang.String"/>
+	<field name="Quantity" class="java.lang.String"/>
+	<field name="Smer" class="java.lang.String"/>
+	<field name="vrsta_prometa" class="java.lang.String"/>
+	<field name="Value" class="java.lang.String"/>
+	<field name="product_card_id" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="180" y="0" width="220" height="30" uuid="b2009595-88c2-4f04-84f7-73ed3e26366e"/>
+				<text><![CDATA[Analysis for product card #]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="30" height="30" uuid="210d7da7-b429-4868-8278-c4a8cfa02f11"/>
+				<text><![CDATA[Date:]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="30" y="0" width="100" height="30" uuid="1d6a12fc-0b81-49e1-837b-49ddcb3e018c"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="30" uuid="2d2a1806-d8ba-4557-9a31-5bd5991b5b33"/>
+				<textFieldExpression><![CDATA[$F{product_card_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="30" height="30" uuid="18ba69e7-4db0-49d8-8425-cd03f972825f"/>
+				<text><![CDATA[Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="0" width="60" height="30" uuid="996acdcb-f1bd-4bc0-8bd2-0820eb4106b9"/>
+				<text><![CDATA[Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="0" width="70" height="30" uuid="5b36415f-7932-4156-9e7f-4136043769d2"/>
+				<text><![CDATA[Quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="0" width="70" height="30" uuid="077c7132-08a3-4935-bb50-22487b6d5747"/>
+				<text><![CDATA[Direction]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="30" uuid="240458d9-4158-49ac-a776-a419cf279f76"/>
+				<text><![CDATA[Direction type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="0" width="100" height="30" uuid="21b4a7d6-6574-453c-b154-bdc61363a5b2"/>
+				<text><![CDATA[Value]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="30" height="30" uuid="6584a509-af46-4651-907f-e531b9731fbd"/>
+				<textFieldExpression><![CDATA[$F{Id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="0" width="50" height="30" uuid="cf68b2bb-8c29-4d50-b968-1dd22d5f460d"/>
+				<textFieldExpression><![CDATA[$F{Price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="0" width="70" height="30" uuid="e3c52eb9-a644-49ae-817e-034952e8bf75"/>
+				<textFieldExpression><![CDATA[$F{Quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="0" width="60" height="30" uuid="83e56fc1-02d3-433f-8648-0d99f0859c38"/>
+				<textFieldExpression><![CDATA[$F{Smer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="90" height="30" uuid="7c419d30-5d92-48e3-a7e8-e7136cd2a32d"/>
+				<textFieldExpression><![CDATA[$F{vrsta_prometa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="0" width="100" height="30" uuid="fb2633c9-ca27-470b-a2cd-70843434423c"/>
+				<textFieldExpression><![CDATA[$F{Value}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="49" splitType="Stretch">
+			<textField>
+				<reportElement x="470" y="10" width="100" height="30" uuid="0da0e21b-d8ac-45a2-a425-71c85dbc6517"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

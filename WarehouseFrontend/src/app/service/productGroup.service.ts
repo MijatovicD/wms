@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class UnitService {
+export class ProductGroupService {
 
-  private baseUrl = "http://localhost:8080/api/unit";
+  private baseUrl = "http://localhost:8080/api/group";
 
   constructor(
     private http: HttpClient
@@ -22,12 +22,13 @@ export class UnitService {
     return this.http.get<any>(this.baseUrl + queryString);
   }
 
-  add(unit): any{
-    return this.http.post<any>(this.baseUrl, "/add", unit);
+  add(cart): any{
+    console.log(cart);
+    return this.http.post<any>(this.baseUrl, cart);
   }
-
-  getAll(){
-    return this.http.get(this.baseUrl);
+  
+  findAll(){
+      return this.http.get(this.baseUrl);
   }
 
 }

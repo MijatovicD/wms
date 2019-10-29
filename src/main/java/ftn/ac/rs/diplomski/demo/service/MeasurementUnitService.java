@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MeasurementUnitService {
 
@@ -20,8 +22,16 @@ public class MeasurementUnitService {
         return units;
     }
 
+    public List<MeasurementUnit> findAll(){
+        return measurementUnitRepository.findAll();
+    }
+
     public MeasurementUnit save(MeasurementUnit measurementUnit){
 
         return measurementUnitRepository.save(measurementUnit);
+    }
+
+    public MeasurementUnit getById(Integer id){
+        return measurementUnitRepository.getOne(id);
     }
 }

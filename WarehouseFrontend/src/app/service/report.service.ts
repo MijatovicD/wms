@@ -21,7 +21,7 @@ export class ReportService {
 
     queryString += 'cardId=' + karticaId + '&startDate=' + datumPocetni + '&endDate=' + datumKrajnji;
 
-    this.http.get(this.baseUrl + "/analasysForCard"+ queryString,
+    this.http.get(this.baseUrl + "/cardAnalysis"+ queryString,
       {observe: 'response', headers: headers, responseType: 'blob'})
       .subscribe(response => this.saveToFileSystem(response));
   }

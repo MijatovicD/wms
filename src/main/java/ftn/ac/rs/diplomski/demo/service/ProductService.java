@@ -23,6 +23,10 @@ public class ProductService {
         return productRepository.findById(id).get();
     }
 
+    public Product save(Product product){
+        return productRepository.save(product);
+    }
+
     public Page<Product> findAllPaged(Integer page, Integer size){
         PageRequest pageReq = PageRequest.of(page, size);
         Page<Product> products = productRepository.findAll(pageReq);

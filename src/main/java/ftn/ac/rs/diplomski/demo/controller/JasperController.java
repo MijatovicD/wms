@@ -49,6 +49,7 @@ public class JasperController {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
+
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("cardId", cardId);
         parameters.put("startDate", startDate);
@@ -58,7 +59,9 @@ public class JasperController {
         headers.add("Content-Disposition",
                 "attachment; filename=\""+ reportName + "-" + cardId.toString() + "-od-" + startDateString + "-do-" + endDateString + ".pdf\"");
 
+
         byte[] report = reportService.exportToPdfParameterized(reportName, parameters);
+        System.out.println("bytees " + report);
         ByteArrayResource resource = new ByteArrayResource(report);
 
         return ResponseEntity.ok()

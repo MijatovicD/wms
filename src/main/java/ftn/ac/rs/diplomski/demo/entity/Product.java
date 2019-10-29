@@ -43,6 +43,11 @@ public class Product implements Serializable {
 
     }
 
+    public Product(String name, ProductGroup productGroup, MeasurementUnit measurementUnit) {
+        this.name = name;
+        this.productGroup = productGroup;
+        this.measurementUnit = measurementUnit;
+    }
 
     public Integer getId() {
         return id;

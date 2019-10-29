@@ -11,7 +11,7 @@ public class ProductDTO {
     private MeasurementUnitDTO measurementUnitDTO;
 
     public ProductDTO(){
-        super();
+
     }
 
     public ProductDTO(Integer id, String name, ProductGroupDTO productGroupDTO, MeasurementUnitDTO measurementUnitDTO) {

@@ -1,3 +1,5 @@
+import { UnitService } from './../../service/unit.service';
+import { ProductGroupService } from './../../service/productGroup.service';
 import { DocumentItemService } from './../../service/documentItemService.service';
 import { DocumentService } from './../../service/document.service';
 import { ProductCardService } from './../../service/productCard.service';
@@ -27,6 +29,8 @@ export class DocumentItemComponent implements OnInit {
   warehouses;
   partners;
   productList;
+  unitList;
+  groupList;
   productSelected = {
     id: null,
     product: { name: null },
@@ -34,7 +38,25 @@ export class DocumentItemComponent implements OnInit {
     price: null,
     value: null
   };
+  newProduct = {
+    id: null,
+    name: null,
+    quantity: null,
+    price: null,
+    value: null,
+    group: null,
+    unit: null
+  }
+  produt = {
+    id: null,
+    name: null,
+    quantity: null,
+    price: null,
+    productGroupDTO: {id:null},
+    measurementUnitDTO: {id:null}
+  }
   privremenaListaRobe = [];
+  name;
   quantity;
   price;
   errorMsg;
@@ -44,7 +66,7 @@ export class DocumentItemComponent implements OnInit {
     quantity: null,
     value: null,
     document: null,
-    product: null
+    product: {id:null}
   };
   status;
   primka = true;
@@ -64,6 +86,12 @@ export class DocumentItemComponent implements OnInit {
   @ViewChild("selectProduct") selectProduct = {
     nativeElement: { value: null }
   };
+  @ViewChild("selectGroup") selectGroup = {
+    nativeElement: { value: null }
+  };
+  @ViewChild("selectUnit") selectUnit = {
+    nativeElement: { value: null }
+  };
   constructor(
     private route: ActivatedRoute,
     private documentService: DocumentService,
@@ -72,7 +100,9 @@ export class DocumentItemComponent implements OnInit {
     private itemService: DocumentItemService,
     private productCardService: ProductCardService,
     private router: Router,
-    private productService: ProductService
+    private productService: ProductService,
+    private groupSerice: ProductGroupService,
+    private unitSerice: UnitService
   ) {}
 
   ngOnInit() {
@@ -108,6 +138,16 @@ export class DocumentItemComponent implements OnInit {
     });
     this.partnerService.getAll().subscribe(res => {
       this.partners = res;
+    });
+
+    this.groupSerice.findAll().subscribe(res =>{
+        this.groupList = res;
+        console.log(this.groupList);
+    })
+
+    this.unitSerice.getAll().subscribe(res =>{
+        this.unitList = res;
+        console.log(this.unitList);
     });
   }
 
@@ -162,6 +202,42 @@ export class DocumentItemComponent implements OnInit {
     }
   }
 
+  dodajNaListuNovProizvod() {
+    if (this.quantity == "" || this.quantity > 0) {
+     
+      let postojeca = false;
+
+      this.privremenaListaRobe = this.privremenaListaRobe.map(r => {
+        if (r.name == this.name) {
+          postojeca = true;
+          // r.name = this.name;
+          r.quantity = parseInt(r.quantity, 10) + parseInt(this.quantity, 10);
+          r.price = parseInt(r.price, 10) + parseInt(this.price, 10);
+        }
+        return r;
+      });
+        this.newProduct.name = this.name;
+        this.newProduct.quantity = this.quantity;
+        this.newProduct.price = this.price;
+        this.privremenaListaRobe.push(this.newProduct);
+        console.log(this.selectGroup.nativeElement.value);
+        this.privremenaListaRobe.map(p =>{
+            this.produt.id = p.id;
+            this.produt.name = p.name;
+            this.produt.productGroupDTO.id = this.selectGroup.nativeElement.value
+            this.produt.measurementUnitDTO.id = this.selectUnit.nativeElement.value
+            this.productService.add(this.produt).subscribe(producut =>{
+            console.log("IDDDDDDDDDDDDDDDDDDDD" +p.id + " dsahkuhfdkjhcljkas " + this.produt.id + "rifeiesfcsdc " + producut.id);
+                  this.produt.id = producut.id;
+                  console.log("dsaldas " + producut);
+            });
+            
+        });
+    } else {
+      this.errorModal = "Pogresan unos kolicine";
+    }
+  }
+
   validacija() {
     if (
       this.warehouses.filter(
@@ -207,7 +283,7 @@ export class DocumentItemComponent implements OnInit {
           this.item.price = r.price;
           this.item.quantity = r.quantity;
           this.item.document = this.dokument;
-          this.item.product = r;
+          this.item.product.id = this.produt.id;
           this.item.value = r.value;
           console.log(this.item);
           this.itemService.saveItem(this.item).subscribe(res => {
