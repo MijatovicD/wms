@@ -17,6 +17,7 @@ export class ShoppingCartComponent implements OnInit {
   itemPage: ItemPage;
   p:ProductCard;
   quantity;
+  price;
 
   constructor(
     private shoppingCartItemService: ShoppingCartItemService,
@@ -29,7 +30,16 @@ export class ShoppingCartComponent implements OnInit {
     this.shoppingCartItemService.findByUserId(user).subscribe(u =>{
         console.log(u);
         this.all = u;
+        for(var i in this.all){
+          console.log("FAsdas");
+          console.log(i);
+          this.quantity = u[i].quantity;
+        }
     });
+  }
+
+  downloadReport(){
+    let user = JSON.parse(localStorage.getItem("userInfo")).username;
   }
 
   editProduct(id){

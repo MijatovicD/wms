@@ -22,6 +22,7 @@
         <button
         type="submit"
         class="btn btn-secondary btn-lg ml-3 "
+        (click)="downloadReport()"
       >
         Download report
       </button>
@@ -78,10 +79,10 @@
   
           <label>Quantity</label>
           <input
-            name="totalValue"
+            name="quantity"
             id="inputName"
-            type="number"
             class="form-control"
+            type="number"
             [(ngModel)] = "quantity"
           />
           

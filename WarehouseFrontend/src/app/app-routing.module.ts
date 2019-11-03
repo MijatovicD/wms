@@ -1,3 +1,4 @@
+import { ProductGroupComponent } from './product-group/product-group.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { LoginComponent } from './login/login.component';
 import { ReportComponent } from './report/report.component';
@@ -70,6 +71,11 @@ const routes: Routes = [
   {
     path: "warehouse",
     component: WarehouseComponent,  
+    canActivate: [LoggedOutGuard]
+  },
+  {
+    path: "productGroup",
+    component: ProductGroupComponent,  
     canActivate: [LoggedOutGuard]
   },
   {

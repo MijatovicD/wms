@@ -14,7 +14,7 @@
         />
       </div>
       <div class="form-group col-md-4">
-        <label for="inputPassword4">Bussiness year</label>
+        <label for="inputPassword">Bussiness year</label>
         <input
           name="businessYear"
           [(ngModel)]="dokument.businessYear.year"
@@ -93,12 +93,14 @@
       <br />
       <button
       *ngIf="
+        primka && 
         dodavanje &&
         this.selectWarehouse.nativeElement.value != 'Izaberite magacin'
       "
       class="btn btn-primary"
       data-toggle="modal"
       data-target="#productModal"
+      
     >
       Add new product
     </button>

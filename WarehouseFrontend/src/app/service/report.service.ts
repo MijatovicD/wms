@@ -26,6 +26,21 @@ export class ReportService {
       .subscribe(response => this.saveToFileSystem(response));
   }
 
+  downloadShoppingCartReport(karticaId: number) {
+    const headers = new HttpHeaders({
+      'Accept': 'application/pdf'
+    });
+
+    let queryString = '?';
+
+    queryString += 'cartId=' + karticaId;
+
+    this.http.get(this.baseUrl + "/shoppingCart"+ queryString,
+      {observe: 'response', headers: headers, responseType: 'blob'})
+      .subscribe(response => this.saveToFileSystem(response));
+  }
+
+
   private saveToFileSystem(response) {
     console.log(response);
     const contentDispositionHeader: string = response.headers.get('Content-Disposition');

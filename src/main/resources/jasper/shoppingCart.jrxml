@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="shoppingCart" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9c4fcab3-ba66-4fac-882f-29c7d9916b8f">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[YmVjaGVsb3Iuc2hvcHBpbmdfY2FydF9pdGVtICwxNSwxMTksOTIxMmM2MzktZmM0OC00ZWJkLWJi
+NDUtMzI2OGQ0ZjU4NTQ1O2JlY2hlbG9yLnByb2R1Y3RfY2FyZCAsMTcxLDE1LDk0YWMyYjdkLTQ1
+MjktNGZiNC05ZDY1LTdiNzA2MmY4ZDlhNjs=]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="445"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="548"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="720"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="266"/>
+	<parameter name="cartId" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Id Shopping cart]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT bechelor.shopping_cart_item.quantity,
+	bechelor.shopping_cart_item.product_id,
+	bechelor.shopping_cart_item.id,
+	bechelor.product_card.product_id AS product,
+	bechelor.product_card.price,
+	bechelor.product_card.id,
+	bechelor.shopping_cart_item.user_id
+FROM bechelor.shopping_cart_item,
+	bechelor.product_card
+WHERE 
+	 bechelor.shopping_cart_item.user_id = $P{cartId}]]>
+	</queryString>
+	<field name="quantity" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="quantity"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shopping_cart_item"/>
+	</field>
+	<field name="product_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="product_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shopping_cart_item"/>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shopping_cart_item"/>
+	</field>
+	<field name="Price" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="product_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="product_card"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="40" y="0" width="100" height="30" uuid="938cd167-e143-4add-b0ac-412dd5787398"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="180" y="0" width="200" height="30" uuid="b672b4cd-59d0-436b-b4ec-1255bf644955"/>
+				<text><![CDATA[Shopping cart items]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="0" width="100" height="30" uuid="4ba25480-8cdc-4c9e-b861-db6d33d10960"/>
+				<text><![CDATA[Date:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="30" height="30" uuid="2b756c29-79d7-41fd-8056-e9f2b88d0330"/>
+				<text><![CDATA[Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="70" height="30" uuid="9113bc64-2afe-4920-9372-9c12ad654fa9"/>
+				<text><![CDATA[Quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="80" height="30" uuid="2b793404-4542-4b0c-becb-bd752064a38d"/>
+				<text><![CDATA[Product]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="70" height="30" uuid="41c83891-784d-4d37-9c94-5a44525930e4"/>
+				<text><![CDATA[Price]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="50" height="30" uuid="e4870b75-8de6-488a-9074-a2ebeee19e49"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="0" width="70" height="30" uuid="31d68f16-e0ce-4630-8592-3705fae69687"/>
+				<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="80" height="30" uuid="fff57225-a1f8-47a4-a537-dfbb5ef35b6c"/>
+				<textFieldExpression><![CDATA[$F{product_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="70" height="30" uuid="9e0ccbd0-3d0a-41f3-8f43-4cb136e84fe6"/>
+				<textFieldExpression><![CDATA[$F{Price}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="51" splitType="Stretch">
+			<textField>
+				<reportElement x="460" y="10" width="100" height="30" uuid="96b7f246-c7ba-48e9-b29e-bd9363a5e31f"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -69,6 +69,7 @@ export class DocumentItemComponent implements OnInit {
     product: {id:null}
   };
   status;
+  statusNovProizvod;
   primka = true;
 
   @ViewChild("selectType") selectType = {
@@ -173,6 +174,7 @@ export class DocumentItemComponent implements OnInit {
         });
     }
   }
+
 
   dodajNaListu() {
     if (this.quantity == "" || this.quantity > 0) {
@@ -283,7 +285,7 @@ export class DocumentItemComponent implements OnInit {
           this.item.price = r.price;
           this.item.quantity = r.quantity;
           this.item.document = this.dokument;
-          this.item.product.id = this.produt.id;
+          this.item.product.id = r.id;
           this.item.value = r.value;
           console.log(this.item);
           this.itemService.saveItem(this.item).subscribe(res => {
@@ -292,6 +294,10 @@ export class DocumentItemComponent implements OnInit {
         });
       });
     }
+  }
+
+  sacuvajDokumentNovProizvod(){
+
   }
 
   changeStatus() {

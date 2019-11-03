@@ -1,5 +1,6 @@
 package ftn.ac.rs.diplomski.demo.service;
 
+import ftn.ac.rs.diplomski.demo.entity.User;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -22,6 +23,9 @@ public class ReportService {
 
     @Autowired
     private ResourceLoader resourceLoader;
+
+    @Autowired
+    private UsersService usersService;
 
     public ByteArrayResource exportToPdf(String reportName){
         try {
@@ -52,6 +56,31 @@ public class ReportService {
                     parameters,
                     dataSource.getConnection()
             );
+
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
+
+            byte[] report = outputStream.toByteArray();
+
+            return JasperExportManager.exportReportToPdf(jasperPrint);
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    public byte[] exportToPdfCartParameterized(String reportName, Map<String, Object> parameters) throws JRException{
+        try {
+
+            String filename = "/jasper/" + reportName + ".jasper";
+            Resource resource = resourceLoader.getResource("classpath:jasper/" + reportName + ".jasper");
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(
+                    resource.getInputStream(),
+                    parameters,
+                    dataSource.getConnection()
+            );
+
+
 
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);

@@ -4,12 +4,10 @@ import ftn.ac.rs.diplomski.demo.dto.ProductGroupDTO;
 import ftn.ac.rs.diplomski.demo.entity.ProductGroup;
 import ftn.ac.rs.diplomski.demo.service.ProductGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,5 +30,13 @@ public class ProductGroupController {
         }
 
         return new ResponseEntity<>(dtos, HttpStatus.OK);
+    }
+
+    @GetMapping(value = {"", "/"}, params = {"page", "size"})
+    public ResponseEntity<Page<ProductGroupDTO>> getAllPaged(@RequestParam("page") Integer page, @RequestParam("size") Integer size) {
+        Page<ProductGroup> groups = (Page<ProductGroup>) groupService.findAllPaged(page, size);
+        Page<ProductGroupDTO> groupDTOS = groups.map(ProductGroupDTO::new);
+
+        return new ResponseEntity<Page<ProductGroupDTO>>(groupDTOS, HttpStatus.OK);
     }
 }

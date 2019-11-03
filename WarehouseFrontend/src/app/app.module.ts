@@ -21,6 +21,7 @@ import { WarehouseComponent } from './warehouse/warehouse.component';
 import { ReportComponent } from './report/report.component';
 import { LoginComponent } from './login/login.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ProductGroupComponent } from './product-group/product-group.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     WarehouseComponent,
     ReportComponent,
     LoginComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    ProductGroupComponent
   ],
   imports: [
     BrowserModule,

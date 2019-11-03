@@ -1,6 +1,8 @@
 package ftn.ac.rs.diplomski.demo.controller;
 
+import ftn.ac.rs.diplomski.demo.entity.User;
 import ftn.ac.rs.diplomski.demo.service.ReportService;
+import ftn.ac.rs.diplomski.demo.service.UsersService;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -23,6 +25,9 @@ public class JasperController {
 
     @Autowired
     private ReportService reportService;
+
+    @Autowired
+    private UsersService usersService;
 
     static final DateFormat dd_MM_gggg = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -67,6 +72,34 @@ public class JasperController {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_PDF)
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+ reportName + "-" + cardId.toString() + "-od-" + startDateString + "-do-" + endDateString + ".pdf\"")
+                .header(HttpHeaders.CONTENT_TYPE, "application/pdf; charset=utf-8")
+                .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Content-Disposition")
+                .contentLength(report.length)
+                .body(resource);
+    }
+
+
+    @GetMapping(value = "/{reportName}", params = {"username"})
+    public ResponseEntity getByShoppingCartId(@PathVariable("reportName") String reportName, @RequestParam("username") String username) throws JRException {
+
+
+
+        Map<String, Object> parameters = new HashMap<>();
+        User u = usersService.findByUsername(username);
+        parameters.put("userId", u.getId());
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition",
+                "attachment; filename=\""+ reportName + "-" + username.toString() + ".pdf\"");
+
+
+        byte[] report = reportService.exportToPdfCartParameterized(reportName, parameters);
+        System.out.println("bytees " + report);
+        ByteArrayResource resource = new ByteArrayResource(report);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_PDF)
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+ reportName + "-" + username.toString() + ".pdf\"")
                 .header(HttpHeaders.CONTENT_TYPE, "application/pdf; charset=utf-8")
                 .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Content-Disposition")
                 .contentLength(report.length)
