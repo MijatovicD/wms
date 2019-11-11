@@ -77,4 +77,12 @@ INSERT INTO user(name, username, password, role) VALUES ('mika', 'b', '$2a$10$uA
 
 INSERT INTO shopping_cart(id) VALUES (1);
 
+INSERT INTO inventory_document(format_date, booking_date, status, warehouse_id, year_id) VALUES ('2019-01-01', '2019-02-02', 'Formiranje', 1, 1);
+INSERT INTO inventory_document(format_date, booking_date, status, warehouse_id, year_id) VALUES ('2019-03-03', '2019-04-04', 'Formiranje', 2, 3);
+INSERT INTO inventory_document(format_date, booking_date, status, warehouse_id, year_id) VALUES ('2019-05-06', '2019-07-08', 'Formiranje', 2, 3);
+
+
+INSERT INTO commision(name, president, inventory_document_id) VALUES ('jovan jovic', true, 1);
+INSERT INTO commision(name, president, inventory_document_id) VALUES ('milka milic', false, 1);
+INSERT INTO commision(name, president, inventory_document_id) VALUES ('marija maric', false, 1);
 -- INSERT INTO shopping_cart_item(product_id, shopping_cart_id, user_id, quantity) VALUES (1,1,1,10);

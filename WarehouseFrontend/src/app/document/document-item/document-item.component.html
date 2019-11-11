@@ -33,6 +33,8 @@
         >
           <option selected [(ngValue)]="Primka">Primka</option>
           <option [(ngValue)]="Otpremnica">Otpremnica</option>
+          <option [(ngValue)]="Medjumagacinski">Medjumagacinski</option>
+          <option [(ngValue)]="Popis">Popis</option>
         </select>
         <input
           *ngIf="dodavanje == false"
@@ -106,7 +108,7 @@
     </button>
       <br />
     </div>
-    <table class="table" style="margin: 10px">
+    <table class="table" style="margin: 10px" >
       <thead>
         <tr>
           <th scope="col">Code</th>

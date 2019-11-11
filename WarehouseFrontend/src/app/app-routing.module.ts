@@ -1,3 +1,5 @@
+import { InventoryItemComponent } from './inventory/inventory-item/inventory-item.component';
+import { InventoryComponent } from './inventory/inventory.component';
 import { ProductGroupComponent } from './product-group/product-group.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { LoginComponent } from './login/login.component';
@@ -84,8 +86,18 @@ const routes: Routes = [
     canActivate: [LoggedOutGuard]
   },
   {
-    path: "shoppingCart",
-    component: ShoppingCartComponent,  
+    path: "inventory",
+    component: InventoryComponent,  
+    canActivate: [LoggedOutGuard]
+  },
+  {
+    path: "inventory/add",
+    component: InventoryItemComponent,  
+    canActivate: [LoggedOutGuard]
+  },
+  {
+    path: "inventory/:id",
+    component: InventoryItemComponent,  
     canActivate: [LoggedOutGuard]
   },
   { 

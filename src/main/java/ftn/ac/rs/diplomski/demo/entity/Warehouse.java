@@ -31,6 +31,8 @@ public class Warehouse implements Serializable {
 //	@JoinColumn(name = "prometni_dokument_id", referencedColumnName = "id")
     private List<TrafficDocument> trafficDocuments = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "warehouse")
+    private List<InventoryDocument> inventoryDocuments = new ArrayList<>();
 
     public Warehouse(){
 

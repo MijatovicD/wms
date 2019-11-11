@@ -17,6 +17,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class DocumentItemComponent implements OnInit {
 
   dodavanje;
+  medjumagacinski;
   dokument = {
     id: null,
     type: null,
@@ -109,7 +110,15 @@ export class DocumentItemComponent implements OnInit {
   ngOnInit() {
     if (this.route.snapshot.url[1].path == "add") {
       this.dodavanje = true;
-    } else {
+
+          
+      if (this.selectType.nativeElement.value == "Medjumagacinski"){
+        console.log("cliiiick");
+      }
+
+    }
+    
+    else {
       this.dodavanje = false;
       this.documentService
         .getDokument(this.route.snapshot.url[1].path)

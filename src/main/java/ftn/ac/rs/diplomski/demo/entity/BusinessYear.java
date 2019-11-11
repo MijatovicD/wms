@@ -35,6 +35,10 @@ public class BusinessYear implements Serializable {
     @JoinColumn(name = "company_id", referencedColumnName = "id")
     private Company company;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "year")
+    private List<InventoryDocument> inventoryDocuments = new ArrayList<>();
+
+
     public BusinessYear(){
 
     }

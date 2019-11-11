@@ -72,7 +72,7 @@ public class DocumentController {
 
     @PostMapping(value = "/proknjizi")
     public ResponseEntity<TrafficDocumentDTO> proknjizi(@RequestBody TrafficDocumentDTO trafficDocumentDTO){
-        System.out.println("DOKUMENTTT JEBENI  " + trafficDocumentDTO.toString());
+        System.out.println("DOKUMENTTT  " + trafficDocumentDTO.toString());
         if(documentService.proknjiziDokument(trafficDocumentDTO)){
             return new ResponseEntity<>(HttpStatus.OK);
         }else{

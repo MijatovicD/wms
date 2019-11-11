@@ -1,0 +1,140 @@
+<app-nav></app-nav>
+<div class="col-lg-6" style="margin: auto">
+  <h3 style="text-align: center">Inventory document</h3>
+  <form>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label>Date</label>
+        <input
+          name="datum"
+          
+          type="text"
+          class="form-control"
+          placeholder="Datum"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputPassword">Bussiness year</label>
+        <input
+          name="businessYear"
+         
+          type="text"
+          class="form-control"
+          placeholder="Bussiness year"
+        />
+      </div>
+    </div> 
+
+    <div class="form-group">
+      <label>Warehouse</label>
+      <select *ngIf="dodavanje" #selectWarehouse class="form-control">
+        <option [ngValue]="null">Select a warehouse</option>
+        <option *ngFor="let w of warehouses" [ngValue]="w">{{
+          w.name
+        }}</option>
+      </select>
+      <input
+        *ngIf="dodavanje == false"
+        name="warehouse"
+        [(ngModel)]="dokument.warehouse.name"
+        type="text"
+        class="form-control"
+      />
+    </div>
+    <br/>
+
+    <div class="form-group">
+      <label>Commissions</label>
+    </div>
+
+    <table class="table" style="margin: 10px" >
+      <thead>
+        <tr>
+          <th scope="col">Code</th>
+          <th scope="col">Name</th>
+          <th scope="col">President</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let c of commissions">
+        <tr>
+          <th scope="row">{{ c.id }}</th>
+          <td>{{ c.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <br/>
+
+    <button
+    class="btn btn-primary"
+    data-toggle="modal"
+    data-target="#myModal"
+  >
+    Add product
+  </button>
+
+    <table class="table" style="margin: 10px" >
+      <thead>
+        <tr>
+          <th scope="col">Code</th>
+          <th scope="col">Name</th>
+          <th scope="col">Quantity</th>
+          <!-- <th scope="col">Price</th>
+          <th scope="col">Value</th> -->
+        </tr>
+      </thead>
+      <tbody *ngFor="let r of privremenaListaRobe">
+        <tr>
+          <th scope="row">{{ r.id }}</th>
+          <td>{{ r.name }}</td>
+          <td>{{ r.quantity }}</td>
+          <!-- <td>{{ r.price }}</td>
+          <td>{{ r.quantity * r.price }}</td> -->
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>
+
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Add document item</h4>
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <label>Select a product</label>
+        <select #selectProduct class="form-control">
+          <option *ngFor="let r of productList" [ngValue]="r">{{
+            r.name
+          }}</option>
+        </select>
+        <label>Enter a quantity</label>
+        <input
+          name="quantitya"
+          [(ngModel)]="quantity"
+          type="text"
+          class="form-control"
+        />
+        <p style="color:red; text-align: center">{{ errorModal }}</p>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="dodajNaListu()"
+          style="margin: 10px"
+          data-dismiss="modal"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

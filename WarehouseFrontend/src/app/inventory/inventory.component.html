@@ -1,0 +1,45 @@
+<app-nav></app-nav>
+<button
+  class="btn btn-success btn-lg ml-4"
+  style="float: right"
+>
+  <i class="fa fa-plus" [routerLink]="['/inventory/add']">Add inventory item</i> 
+</button>
+<br />
+<br />
+<div class="container col-lg-8" *ngFor="let inventory of all">
+  <div class="card text-center">
+    <div class="card-header">
+      Inventory
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Inventory #{{ inventory.id }}</h5>
+      <p class="card-text">
+        Status: {{ inventory.status }}
+        <br />
+        Create date: {{ inventory.createDate }}
+        <br />
+        Warehouse: {{inventory.warehouse.name}}
+      </p>
+    </div>
+    <div class="card-footer text-muted">
+      <button class="btn btn-primary" [routerLink]="['/inventory', inventory.id]"
+        >Details</button
+      >
+    </div>
+  </div>
+  <br />
+</div>
+<div class="row d-flex justify-content-center">
+  <pagination
+    [boundaryLinks]="true"
+    [itemsPerPage]="itemPage.size"
+    [totalItems]="itemPage.totalElements"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;"
+  >
+  </pagination>
+</div>

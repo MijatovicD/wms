@@ -39,6 +39,10 @@ public class Product implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     private Set<ShoppingCartItem> shoppingCartItems = new HashSet<ShoppingCartItem>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    private List<InventoryItem> inventoryItems = new ArrayList<>();
+
+
     public Product(){
 
     }
