@@ -7,6 +7,7 @@ public class InventoryCommissionDTO {
     private Integer id;
     private String name;
     private Boolean president;
+    private InventoryDocumentDTO documentDTO;
 
     public InventoryCommissionDTO(){
 
@@ -16,6 +17,10 @@ public class InventoryCommissionDTO {
         this.id = id;
         this.name = name;
         this.president = president;
+    }
+
+    public InventoryCommissionDTO(InventoryDocumentDTO documentDTO) {
+        this.documentDTO = documentDTO;
     }
 
     public InventoryCommissionDTO(InventoryCommission commission){

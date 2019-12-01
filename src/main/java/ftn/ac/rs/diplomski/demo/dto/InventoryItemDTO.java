@@ -1,17 +1,18 @@
 package ftn.ac.rs.diplomski.demo.dto;
 
 import ftn.ac.rs.diplomski.demo.entity.InventoryItem;
+import ftn.ac.rs.diplomski.demo.entity.Product;
 
 public class InventoryItemDTO {
 
     private Integer id;
     private Integer quantity;
     private InventoryDocumentDTO inventoryDocumentDTO;
-    private ProductDTO productDTO;
+    private Product productDTO;
 
 
 
-    public InventoryItemDTO(Integer id, Integer quantity, InventoryDocumentDTO inventoryDocumentDTO, ProductDTO productDTO) {
+    public InventoryItemDTO(Integer id, Integer quantity, InventoryDocumentDTO inventoryDocumentDTO, Product productDTO) {
         this.id = id;
         this.quantity = quantity;
         this.inventoryDocumentDTO = inventoryDocumentDTO;
@@ -19,7 +20,7 @@ public class InventoryItemDTO {
     }
 
     public InventoryItemDTO(InventoryItem item){
-        this(item.getId(), item.getQuantity(), new InventoryDocumentDTO(item.getInventoryDocument()), new ProductDTO(item.getProduct()));
+        this(item.getId(), item.getQuantity(), new InventoryDocumentDTO(item.getInventoryDocument()), item.getProduct());
     }
 
     public Integer getId() {
@@ -46,11 +47,21 @@ public class InventoryItemDTO {
         this.inventoryDocumentDTO = inventoryDocumentDTO;
     }
 
-    public ProductDTO getProductDTO() {
+    public Product getProductDTO() {
         return productDTO;
     }
 
-    public void setProductDTO(ProductDTO productDTO) {
+    public void setProductDTO(Product productDTO) {
         this.productDTO = productDTO;
+    }
+
+    @Override
+    public String toString() {
+        return "InventoryItemDTO{" +
+                "id=" + id +
+                ", quantity=" + quantity +
+                ", inventoryDocumentDTO=" + inventoryDocumentDTO +
+                ", productDTO=" + productDTO +
+                '}';
     }
 }

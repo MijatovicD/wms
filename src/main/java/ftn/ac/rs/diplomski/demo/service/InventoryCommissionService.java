@@ -17,4 +17,12 @@ public class InventoryCommissionService {
     public List<InventoryCommission> findAll(){
         return commissionRepository.findAll();
     }
+
+    public List<InventoryCommission> updateByDocumentId(){
+        return commissionRepository.findAllByInventoryDocumentIsNotContaining();
+    }
+
+    public InventoryCommission save(InventoryCommission commission){
+        return commissionRepository.save(commission);
+    }
 }

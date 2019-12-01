@@ -7,7 +7,7 @@
         <label>Date</label>
         <input
           name="datum"
-          
+          [(ngModel)]="dokument.createDate"
           type="text"
           class="form-control"
           placeholder="Datum"
@@ -17,7 +17,7 @@
         <label for="inputPassword">Bussiness year</label>
         <input
           name="businessYear"
-         
+          [(ngModel)]="dokument.businessYear.year"
           type="text"
           class="form-control"
           placeholder="Bussiness year"
@@ -47,6 +47,12 @@
       <label>Commissions</label>
     </div>
 
+    <button
+    class="btn btn-primary"
+    data-toggle="modal"
+    data-target="#commisionModal"
+    >Add commision</button>
+
     <table class="table" style="margin: 10px" >
       <thead>
         <tr>
@@ -55,20 +61,22 @@
           <th scope="col">President</th>
         </tr>
       </thead>
-      <tbody *ngFor="let c of commissions">
+      <tbody *ngFor="let c of privremenaListaKomisije">
         <tr>
           <th scope="row">{{ c.id }}</th>
           <td>{{ c.name }}</td>
+          <td>{{ c.isPresident }}</td>
         </tr>
       </tbody>
     </table>
     
     <br/>
-
+<!-- ----------------------------------------------------------------------------------------------- -->
     <button
     class="btn btn-primary"
     data-toggle="modal"
     data-target="#myModal"
+    (click) = "productListUcitavanje()"
   >
     Add product
   </button>
@@ -79,24 +87,28 @@
           <th scope="col">Code</th>
           <th scope="col">Name</th>
           <th scope="col">Quantity</th>
-          <!-- <th scope="col">Price</th>
-          <th scope="col">Value</th> -->
         </tr>
       </thead>
-      <tbody *ngFor="let r of privremenaListaRobe">
+      <tbody *ngFor="let p of privremenaListaRobe">
         <tr>
-          <th scope="row">{{ r.id }}</th>
-          <td>{{ r.name }}</td>
-          <td>{{ r.quantity }}</td>
-          <!-- <td>{{ r.price }}</td>
-          <td>{{ r.quantity * r.price }}</td> -->
+          <th scope="row">{{ p.id }}</th>
+          <td>{{ p.name }}</td>
+          <td>{{ p.quantity }}</td>
         </tr>
       </tbody>
     </table>
   </form>
+  <div class="col-lg-4" style="margin: 10px auto">
+    <button
+      (click)="saveDocument()"
+      class="btn btn-success"
+    >
+      Save
+    </button>
+
 </div>
 
-
+<!--         Robaaaaaaaaaaaaaaaaaaaaaaaaaaaa           -->
 <!-- The Modal -->
 <div class="modal fade" id="myModal">
   <div class="modal-dialog modal-dialog-centered">
@@ -129,6 +141,41 @@
           type="button"
           class="btn btn-primary"
           (click)="dodajNaListu()"
+          style="margin: 10px"
+          data-dismiss="modal"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal Commission -->
+<div class="modal fade" id="commisionModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Add commission</h4>
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <label>Select a commsion</label>
+        <select #commissionSelect class="form-control">
+          <option *ngFor="let c of commissionsList" [ngValue]="c">{{
+            c.name
+          }}</option>
+        </select>
+        <p style="color:red; text-align: center">{{ errorModal }}</p>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="listKomisije()"
           style="margin: 10px"
           data-dismiss="modal"
         >

@@ -6,9 +6,9 @@ import { map, catchError } from "rxjs/operators";
 @Injectable({
   providedIn: 'root'
 })
-export class CommisionService {
+export class InventoryItemService {
 
-  private baseUrl = "http://localhost:8080/api/commission";
+  private baseUrl = "http://localhost:8080/api/inventoryItem";
   constructor(private http: HttpClient) {}
 
   getAllPaged(page: number, itemsPerPage: number) {
@@ -25,10 +25,11 @@ export class CommisionService {
     return this.http.get(this.baseUrl);
   }
 
-  updateByDocument(id):any{
-    const url = `${this.baseUrl}/update/`+id;
-    console.log("dolazi?" + id);
-    return this.http.put(url, id);
+  saveItem(item): any {
+    return this.http.post(
+      this.baseUrl,
+      item
+    );
   }
 
 }

@@ -25,4 +25,12 @@ public class InventoryDocumentService {
 
         return documents;
     }
+
+    public InventoryDocument getOne(Integer id){
+        return documentRepository.getOne(id);
+    }
+
+    public InventoryDocument save(InventoryDocument inventoryDocument){
+        return documentRepository.save(inventoryDocument);
+    }
 }

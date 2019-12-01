@@ -82,7 +82,10 @@ INSERT INTO inventory_document(format_date, booking_date, status, warehouse_id, 
 INSERT INTO inventory_document(format_date, booking_date, status, warehouse_id, year_id) VALUES ('2019-05-06', '2019-07-08', 'Formiranje', 2, 3);
 
 
-INSERT INTO commision(name, president, inventory_document_id) VALUES ('jovan jovic', true, 1);
-INSERT INTO commision(name, president, inventory_document_id) VALUES ('milka milic', false, 1);
-INSERT INTO commision(name, president, inventory_document_id) VALUES ('marija maric', false, 1);
+INSERT INTO commision(name, president) VALUES ('jovan jovic', true);
+INSERT INTO commision(name, president) VALUES ('milka milic', false);
+INSERT INTO commision(name, president) VALUES ('marija maric', false);
+INSERT INTO commision(name, president, inventory_document_id) VALUES ('dimitrije mijatovic', true, 2);
+INSERT INTO commision(name, president, inventory_document_id) VALUES ('marija broceta', false, 2);
+INSERT INTO commision(name, president, inventory_document_id) VALUES ('marko topic', false, 2);
 -- INSERT INTO shopping_cart_item(product_id, shopping_cart_id, user_id, quantity) VALUES (1,1,1,10);

@@ -3,13 +3,11 @@ package ftn.ac.rs.diplomski.demo.controller;
 import ftn.ac.rs.diplomski.demo.dto.InventoryCommissionDTO;
 import ftn.ac.rs.diplomski.demo.entity.InventoryCommission;
 import ftn.ac.rs.diplomski.demo.service.InventoryCommissionService;
+import ftn.ac.rs.diplomski.demo.service.InventoryDocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +20,9 @@ public class InventoryCommissionController {
     @Autowired
     private InventoryCommissionService commissionService;
 
+    @Autowired
+    private InventoryDocumentService documentService;
+
 
     @GetMapping
     public ResponseEntity<List<InventoryCommissionDTO>> getAll(){
@@ -32,5 +33,18 @@ public class InventoryCommissionController {
         }
 
         return new ResponseEntity<>(commissionDTOS, HttpStatus.OK);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<List<InventoryCommission>> updateCommissionByInventortyDocument(@PathVariable("id") Integer id){
+        List<InventoryCommission> commissions = commissionService.updateByDocumentId();
+        System.out.println("Komisija za dokument " + commissions.toString());
+        for(InventoryCommission commission : commissions){
+            commission.setInventoryDocument(documentService.getOne(id));
+            commissionService.save(commission);
+        }
+
+        return new ResponseEntity<>(commissions, HttpStatus.OK);
+
     }
 }
