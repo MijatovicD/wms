@@ -35,16 +35,16 @@ public class InventoryCommissionController {
         return new ResponseEntity<>(commissionDTOS, HttpStatus.OK);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<List<InventoryCommission>> updateCommissionByInventortyDocument(@PathVariable("id") Integer id){
-        List<InventoryCommission> commissions = commissionService.updateByDocumentId();
-        System.out.println("Komisija za dokument " + commissions.toString());
-        for(InventoryCommission commission : commissions){
-            commission.setInventoryDocument(documentService.getOne(id));
-            commissionService.save(commission);
-        }
+//    @PutMapping("/update/{id}")
+//    public ResponseEntity<List<InventoryCommission>> updateCommissionByInventortyDocument(@PathVariable("id") Integer id){
+//        List<InventoryCommission> commissions = commissionService.updateByDocumentId();
+//        System.out.println("Komisija za dokument " + commissions.toString());
+//        for(InventoryCommission commission : commissions){
+//            commission.setInventoryDocument(documentService.getOne(id));
+//            commissionService.save(commission);
+//        }
+//
+//        return new ResponseEntity<>(commissions, HttpStatus.OK);
 
-        return new ResponseEntity<>(commissions, HttpStatus.OK);
-
-    }
+//    }
 }

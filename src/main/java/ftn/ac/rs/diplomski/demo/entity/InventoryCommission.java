@@ -2,6 +2,8 @@ package ftn.ac.rs.diplomski.demo.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "commision")
@@ -21,6 +23,9 @@ public class InventoryCommission implements Serializable {
     @ManyToOne
     @JoinColumn(name = "inventory_document_id", referencedColumnName = "id")
     private InventoryDocument inventoryDocument;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "commission")
+    private List<InventoryCommissionDocument> commission = new ArrayList<>();
 
     public InventoryCommission(){
 

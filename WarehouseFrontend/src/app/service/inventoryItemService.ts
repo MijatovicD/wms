@@ -32,4 +32,11 @@ export class InventoryItemService {
     );
   }
 
+  getItems(id): Observable<any>{
+    return this.http.get("http://localhost:8080/api/inventory" + "/" + id + "/item");
+  }
+
+  getCommission(id): Observable<any>{
+    return this.http.get("http://localhost:8080/api/inventory" + "/" + id + "/commission");
+  }
 }

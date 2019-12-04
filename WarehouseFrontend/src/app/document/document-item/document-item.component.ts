@@ -297,6 +297,9 @@ export class DocumentItemComponent implements OnInit {
           this.item.product.id = r.id;
           this.item.value = r.value;
           console.log(this.item);
+          if (this.newProduct != null){
+            console.log("ulazi?");
+          }
           this.itemService.saveItem(this.item).subscribe(res => {
             this.router.navigateByUrl("/document");
           });

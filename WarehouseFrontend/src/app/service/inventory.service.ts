@@ -35,6 +35,10 @@ export class InventoryService {
     return this.http.post("http://localhost:8080/api/inventory", dokument);
   }
 
+  addCommission(commissionDocument):Observable<any>{
+    return this.http.post("http://localhost:8080/api/commissionDocument", commissionDocument);
+  }
+
   proknjizi(dokument): any {
     return this.http
       .post("http://localhost:8080/api/inventory/proknjizi", dokument)

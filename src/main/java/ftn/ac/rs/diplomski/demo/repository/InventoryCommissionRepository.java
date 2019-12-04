@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface InventoryCommissionRepository extends JpaRepository<InventoryCommission, Integer> {
 
-    List<InventoryCommission> findAllByInventoryDocumentIsNotContaining();
+//    List<InventoryCommission> findAllByInventoryDocumentIsNotContaining();
 }

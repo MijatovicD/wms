@@ -13,10 +13,11 @@ public class InventoryCommissionDTO {
 
     }
 
-    public InventoryCommissionDTO(Integer id, String name, Boolean president) {
+    public InventoryCommissionDTO(Integer id, String name, Boolean president, InventoryDocumentDTO inventoryDocumentDTO) {
         this.id = id;
         this.name = name;
         this.president = president;
+        this.documentDTO = inventoryDocumentDTO;
     }
 
     public InventoryCommissionDTO(InventoryDocumentDTO documentDTO) {
@@ -24,7 +25,7 @@ public class InventoryCommissionDTO {
     }
 
     public InventoryCommissionDTO(InventoryCommission commission){
-        this(commission.getId(), commission.getName(), commission.getPresident());
+        this(commission.getId(), commission.getName(), commission.getPresident(), new InventoryDocumentDTO(commission.getInventoryDocument()));
     }
 
     public Integer getId() {
@@ -41,5 +42,21 @@ public class InventoryCommissionDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean getPresident() {
+        return president;
+    }
+
+    public void setPresident(Boolean president) {
+        this.president = president;
+    }
+
+    public InventoryDocumentDTO getDocumentDTO() {
+        return documentDTO;
+    }
+
+    public void setDocumentDTO(InventoryDocumentDTO documentDTO) {
+        this.documentDTO = documentDTO;
     }
 }

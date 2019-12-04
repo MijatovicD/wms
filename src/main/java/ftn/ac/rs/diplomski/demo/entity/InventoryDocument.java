@@ -38,6 +38,10 @@ public class InventoryDocument implements Serializable {
     @JoinColumn(name = "year_id", referencedColumnName = "id")
     private BusinessYear year;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "document")
+    private List<InventoryCommissionDocument> documents = new ArrayList<>();
+
+
     public InventoryDocument(){
 
     }

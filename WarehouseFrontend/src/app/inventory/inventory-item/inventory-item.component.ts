@@ -48,10 +48,11 @@ export class InventoryItemComponent implements OnInit {
     inventoryDocumentDTO: null,
     productDTO: {id:null}
   };
-  commission = {
-    inventoryDocument: null
+  commissionDocument = {
+    inventoryDocumentDTO: {id:null},
+    inventoryCommissionDTO: {id:null}
   };
-
+  status;
 
   @ViewChild("selectWarehouse") selectWarehouse = {
     nativeElement: { value: null }
@@ -76,7 +77,38 @@ export class InventoryItemComponent implements OnInit {
       this.dodavanje = true;
       
     }
-   
+    else{
+      this.dodavanje = false;
+      this.inventoryService.getDokument(this.route.snapshot.url[1].path).subscribe(res =>{
+        this.dokument = res;
+        if (res.status == "Formiranje"){
+            this.status = "Proknjizi";
+        }
+        if (res.status == "Proknjizen"){
+            this.status = "Storniraj";
+        }
+      });
+      this.inventoryItemSerice
+          .getItems(this.route.snapshot.url[1].path)
+          .subscribe(res => {
+            this.privremenaListaRobe = res.map(r => {
+              console.log(res);
+              r.name = r.productDTO.name;
+              r.quantity = r.quantity;
+              return r;
+            });
+          });
+      this.inventoryItemSerice.
+        getCommission(this.route.snapshot.url[1].path).
+        subscribe(res =>{
+          console.log(res);
+            this.privremenaListaKomisije = res.map(c =>{
+              c.name = c.inventoryCommissionDTO.name;
+              c.president = c.inventoryCommissionDTO.president;
+              return c;
+            });
+        });
+    }
     this.warehosueService.getAll().subscribe(res => {
       this.warehouses = res;
     });
@@ -84,6 +116,7 @@ export class InventoryItemComponent implements OnInit {
     this.commisionService.getAll().subscribe(res =>{
         this.commissionsList = res;
     });
+   
   }
 
 
@@ -150,16 +183,21 @@ export class InventoryItemComponent implements OnInit {
     this.inventoryService.addDokument(this.dokument).subscribe(res =>{
       this.dokument.id = res.id;
 
-      this.commisionService.updateByDocument(this.dokument.id).subscribe(res =>{
-        console.log(res);
+      this.privremenaListaKomisije.map(c =>{
+          this.commissionDocument.inventoryDocumentDTO.id = this.dokument.id;
+          this.commissionDocument.inventoryCommissionDTO.id = c.id
+          this.inventoryService.addCommission(this.commissionDocument).subscribe(res =>{
+              console.log(this.commissionDocument);
+          });
       });
 
+    
       this.privremenaListaRobe.map(r => {
         r.trafficDocument = this.dokument;
         this.item.quantity = r.quantity;
         this.item.inventoryDocumentDTO = this.dokument;
         this.item.productDTO.id = r.id;
-        this.commission.inventoryDocument = this.dokument.id;
+        // this.commission.inventoryDocument = this.dokument.id;
         console.log(this.item);
         this.inventoryItemSerice.saveItem(this.item).subscribe(res => {
           this.router.navigateByUrl("/inventory");
@@ -167,5 +205,18 @@ export class InventoryItemComponent implements OnInit {
       });
      
     });
+  }
+
+  changeStatus() {
+    if (this.status == "Proknjizi") {
+      this.inventoryService.proknjizi(this.dokument).subscribe(res => {
+        console.log("knjizenjeee ");
+        this.router.navigateByUrl("/document");
+      });
+    } else {
+      this.inventoryService.storniraj(this.dokument).subscribe(res => {
+        this.router.navigateByUrl("/document");
+      });
+    }
   }
 }
