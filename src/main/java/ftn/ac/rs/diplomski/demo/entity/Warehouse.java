@@ -34,6 +34,12 @@ public class Warehouse implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "warehouse")
     private List<InventoryDocument> inventoryDocuments = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "originWarehouse")
+    private List<InterWarehouseTraffic> originWarehouse = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "destinationWarehouse")
+    private List<InterWarehouseTraffic> destinationWarehouse = new ArrayList<>();
+
     public Warehouse(){
 
     }

@@ -1,7 +1,6 @@
 package ftn.ac.rs.diplomski.demo.controller;
 
 import ftn.ac.rs.diplomski.demo.dto.CommissionDocumentDTO;
-import ftn.ac.rs.diplomski.demo.dto.InventoryCommissionDTO;
 import ftn.ac.rs.diplomski.demo.dto.InventoryDocumentDTO;
 import ftn.ac.rs.diplomski.demo.dto.InventoryItemDTO;
 import ftn.ac.rs.diplomski.demo.entity.InventoryDocument;
@@ -47,14 +46,14 @@ public class InventoryDocumentController {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/item")
+    @GetMapping(value ="/{id}/item")
     public ResponseEntity<List<InventoryItemDTO>> getItems(@PathVariable("id") Integer id){
         List<InventoryItemDTO> items = documentService.getItems(id);
 
         return new ResponseEntity<>(items, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/commission")
+    @GetMapping(value ="/{id}/commission")
     public ResponseEntity<List<CommissionDocumentDTO>> getCommision(@PathVariable("id") Integer id){
         List<CommissionDocumentDTO> commissions = documentService.getCommissions(id);
 
@@ -74,5 +73,15 @@ public class InventoryDocumentController {
         document = documentService.save(document);
 
         return new ResponseEntity<>(new InventoryDocumentDTO(document), HttpStatus.CREATED);
+    }
+
+    @PostMapping(value = "/proknjizi")
+    public ResponseEntity<InventoryDocumentDTO> proknjizi(@RequestBody InventoryDocumentDTO inventoryDocumentDTO){
+        System.out.println("popis " + inventoryDocumentDTO);
+        if(documentService.proknjizi(inventoryDocumentDTO)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

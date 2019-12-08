@@ -77,4 +77,16 @@ public class InventoryDocumentDTO {
     public void setBusinessYear(BussinessYearDTO businessYear) {
         this.businessYear = businessYear;
     }
+
+    @Override
+    public String toString() {
+        return "InventoryDocumentDTO{" +
+                "id=" + id +
+                ", createDate=" + createDate +
+                ", bookingDate=" + bookingDate +
+                ", status='" + status + '\'' +
+                ", warehouse=" + warehouse +
+                ", businessYear=" + businessYear +
+                '}';
+    }
 }

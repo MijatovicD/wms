@@ -25,4 +25,8 @@ export class YearService {
   add(year): any{
     return this.http.post<any>(this.baseUrl, year);
   }
+
+  zakljuci(year):any{
+    return this.http.post<any>(this.baseUrl + "/zakljuci", year);
+  }
 }

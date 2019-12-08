@@ -55,6 +55,10 @@ public class AnalyticsWarehouseCard implements Serializable {
     @JoinColumn(name = "documentItem_id", referencedColumnName = "id", nullable = true)
     private DocumentItem documentItem;
 
+    @ManyToOne
+    @JoinColumn(name = "interWarehouse", referencedColumnName = "id", nullable = true)
+    private InterWarehouseTraffic interWarehouseTraffic;
+
     public AnalyticsWarehouseCard(){
 
     }

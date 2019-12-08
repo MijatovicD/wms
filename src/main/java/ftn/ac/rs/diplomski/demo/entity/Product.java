@@ -42,6 +42,8 @@ public class Product implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     private List<InventoryItem> inventoryItems = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
+    private List<InterWarehouseTraffic> interWarehouseProduct = new ArrayList<>();
 
     public Product(){
 

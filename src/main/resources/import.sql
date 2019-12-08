@@ -89,4 +89,5 @@ INSERT INTO commision(name, president, inventory_document_id) VALUES ('dimitrije
 INSERT INTO commision(name, president, inventory_document_id) VALUES ('marija broceta', false, 2);
 INSERT INTO commision(name, president, inventory_document_id) VALUES ('marko topic', false, 2);
 
+INSERT INTO warehouse_traffic (quantity, destination_warehouse_id, origin_warehouse_id, product_id) VALUES (10, 1, 3, 1);
 -- INSERT INTO shopping_cart_item(product_id, shopping_cart_id, user_id, quantity) VALUES (1,1,1,10);

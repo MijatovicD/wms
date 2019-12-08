@@ -35,4 +35,13 @@ public class BussinesYearController {
 
         return new ResponseEntity<>(new BussinessYearDTO(year), HttpStatus.CREATED);
     }
+
+    @PostMapping(value = "/zakljuci")
+    public ResponseEntity<BussinessYearDTO> proknjizi(@RequestBody BussinessYearDTO bussinessYearDTO){
+        if(bussinesYearServise.zakljuci(bussinessYearDTO)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

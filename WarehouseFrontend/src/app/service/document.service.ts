@@ -35,6 +35,14 @@ export class DocumentService {
     return this.http.post("http://localhost:8080/api/document", dokument);
   }
 
+  addInterDocument(document):any{
+    return this.http.post("http://localhost:8080/api/document/interWarehouse", document);
+  }
+
+  getInterItems(id):any{
+    return this.http.get(this.baseUrl + "/" + id + "/interWarehouse");
+  }
+
   proknjizi(dokument): any {
     return this.http
       .post("http://localhost:8080/api/document/proknjizi", dokument)

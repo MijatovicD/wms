@@ -3,6 +3,7 @@ package ftn.ac.rs.diplomski.demo.dto;
 import ftn.ac.rs.diplomski.demo.entity.TrafficDocument;
 
 import java.util.Date;
+import java.util.Optional;
 
 public class TrafficDocumentDTO {
 
@@ -15,6 +16,7 @@ public class TrafficDocumentDTO {
     private BussinessPartnerDTO businessPartner;
     private WarehouseDTO warehouse;
     private BussinessYearDTO businessYear;
+    private InterWarehouseDTO interWarehouseDTO;
 
     public TrafficDocumentDTO(){
         super();
@@ -32,10 +34,23 @@ public class TrafficDocumentDTO {
         this.businessYear = businessYear;
     }
 
+    public TrafficDocumentDTO(Integer id, Integer serialNumber, Date createDate, Date bookingDate, String status, String type, BussinessPartnerDTO businessPartner, WarehouseDTO warehouse, BussinessYearDTO businessYear, InterWarehouseDTO interWarehouseDTO) {
+        this.id = id;
+        this.serialNumber = serialNumber;
+        this.createDate = createDate;
+        this.bookingDate = bookingDate;
+        this.status = status;
+        this.type = type;
+        this.businessPartner = businessPartner;
+        this.warehouse = warehouse;
+        this.businessYear = businessYear;
+        this.interWarehouseDTO = interWarehouseDTO;
+    }
+
     public TrafficDocumentDTO(TrafficDocument document){
         this(document.getId(), document.getNumber(), document.getFormatDate(), document.getDatumKnjizenja(),
                 document.getStatus(), document.getTypeOfDocument(), new BussinessPartnerDTO(document.getBussinessPartner()),
-                new WarehouseDTO(document.getWarehouse()), new BussinessYearDTO(document.getYear()));
+                new WarehouseDTO(document.getWarehouse()), new BussinessYearDTO(document.getYear()), new InterWarehouseDTO(document.getInterWarehouseTraffic()));
     }
 
     public Integer getId() {
@@ -108,6 +123,14 @@ public class TrafficDocumentDTO {
 
     public void setBusinessYear(BussinessYearDTO businessYear) {
         this.businessYear = businessYear;
+    }
+
+    public InterWarehouseDTO getInterWarehouseDTO() {
+        return interWarehouseDTO;
+    }
+
+    public void setInterWarehouseDTO(InterWarehouseDTO interWarehouseDTO) {
+        this.interWarehouseDTO = interWarehouseDTO;
     }
 
     @Override

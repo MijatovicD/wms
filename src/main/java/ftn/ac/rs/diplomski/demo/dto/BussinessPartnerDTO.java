@@ -2,6 +2,8 @@ package ftn.ac.rs.diplomski.demo.dto;
 
 import ftn.ac.rs.diplomski.demo.entity.BussinessPartner;
 
+import java.util.Optional;
+
 public class BussinessPartnerDTO {
 
     private Integer id;
@@ -11,7 +13,7 @@ public class BussinessPartnerDTO {
     private PlaceDTO placeDTO;
 
     public BussinessPartnerDTO(){
-        super();
+
     }
 
     public BussinessPartnerDTO(Integer id, String name, String PIB, String address) {
@@ -65,14 +67,4 @@ public class BussinessPartnerDTO {
         this.placeDTO = placeDTO;
     }
 
-    @Override
-    public String toString() {
-        return "BussinessPartnerDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", PIB='" + PIB + '\'' +
-                ", address='" + address + '\'' +
-                ", placeDTO=" + placeDTO +
-                '}';
-    }
 }

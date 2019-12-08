@@ -30,6 +30,7 @@
           #selectType
           id="vrstaSelect"
           class="form-control"
+          (change)="onChangeSelect($event)"
         >
           <option selected [(ngValue)]="Primka">Primka</option>
           <option [(ngValue)]="Otpremnica">Otpremnica</option>
@@ -47,12 +48,19 @@
 
     <div class="form-group">
       <label>Warehouse</label>
-      <select *ngIf="dodavanje" #selectWarehouse class="form-control">
+      <select *ngIf="dodavanje || primka || otpremnica" #selectWarehouse class="form-control">
         <option [ngValue]="null">Select a warehouse</option>
         <option *ngFor="let w of warehouses" [ngValue]="w">{{
           w.name
         }}</option>
       </select>
+      <label *ngIf="medjumagacinski">Destination warehouse</label>
+      <select *ngIf="medjumagacinski" #selectDestinationWarehouse class="form-control">
+          <option [ngValue]="null">Select a warehouse</option>
+          <option *ngFor="let w of warehouses" [ngValue]="w">{{
+            w.name
+          }}</option>
+        </select>
       <input
         *ngIf="dodavanje == false"
         name="warehouse"
@@ -62,8 +70,8 @@
       />
     </div>
     <div class="form-group">
-      <label>Bussiness partner</label>
-      <select *ngIf="dodavanje" #selectBusinessPartner class="form-control">
+      <label *ngIf="dodavanje || primka || otpremnica">Bussiness partner</label>
+      <select *ngIf="dodavanje || primka || otpremnica" #selectBusinessPartner class="form-control">
         <option [ngValue]="null">Select a bussiness partner</option>
         <option *ngFor="let p of partners" [ngValue]="p">{{ p.name }}</option>
       </select>
@@ -96,6 +104,7 @@
       *ngIf="
         primka && 
         dodavanje &&
+        !medjumagacinski &&
         this.selectWarehouse.nativeElement.value != 'Izaberite magacin'
       "
       class="btn btn-primary"
@@ -115,7 +124,7 @@
           <th scope="col">Name</th>
           <th scope="col">Quantity</th>
           <th scope="col">Price</th>
-          <th scope="col">Value</th>
+          <th scope="col" *ngIf="primka || otpremnica">Value</th>
         </tr>
       </thead>
       <tbody *ngFor="let r of privremenaListaRobe">
@@ -124,7 +133,7 @@
           <td>{{ r.name }}</td>
           <td>{{ r.quantity }}</td>
           <td>{{ r.price }}</td>
-          <td>{{ r.quantity * r.price }}</td>
+          <td *ngIf="primka || otpremnica">{{ r.quantity * r.price }}</td>
         </tr>
       </tbody>
     </table>

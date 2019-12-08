@@ -209,13 +209,14 @@ export class InventoryItemComponent implements OnInit {
 
   changeStatus() {
     if (this.status == "Proknjizi") {
+      console.log(this.dokument);
       this.inventoryService.proknjizi(this.dokument).subscribe(res => {
         console.log("knjizenjeee ");
-        this.router.navigateByUrl("/document");
+        this.router.navigateByUrl("/inventory");
       });
     } else {
       this.inventoryService.storniraj(this.dokument).subscribe(res => {
-        this.router.navigateByUrl("/document");
+        this.router.navigateByUrl("/inventory");
       });
     }
   }

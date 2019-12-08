@@ -1,10 +1,12 @@
 package ftn.ac.rs.diplomski.demo.service;
 
 import ftn.ac.rs.diplomski.demo.dto.DocumentItemDTO;
+import ftn.ac.rs.diplomski.demo.dto.InterWarehouseDTO;
 import ftn.ac.rs.diplomski.demo.dto.ProductCardDTO;
 import ftn.ac.rs.diplomski.demo.dto.TrafficDocumentDTO;
 import ftn.ac.rs.diplomski.demo.entity.*;
 import ftn.ac.rs.diplomski.demo.repository.DocumentRepository;
+import ftn.ac.rs.diplomski.demo.repository.InterWarehouseTrafficRepository;
 import ftn.ac.rs.diplomski.demo.repository.ProductCardRepository;
 import ftn.ac.rs.diplomski.demo.repository.TrafficDocumentItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,9 @@ public class TrafficDocumentService {
     @Autowired
     private AnalyticsWarehouseCardService analyticsWarehouseCardService;
 
+    @Autowired
+    private InterWarehouseTrafficRepository interWarehouseTrafficRepository;
+
 
     public TrafficDocument getDocument(Integer id){
 
@@ -61,6 +66,19 @@ public class TrafficDocumentService {
         List<DocumentItemDTO> items = new ArrayList<>();
         for (DocumentItemDTO i : allDTO){
             if(i.getDocument().getId() == id){
+                items.add(i);
+            }
+        }
+        return items;
+    }
+
+    public List<InterWarehouseDTO> getInterWarehouseItems(Integer id){
+        List<InterWarehouseDTO> allDTO = interWarehouseTrafficRepository.findAll().stream().map(
+                item -> new InterWarehouseDTO(item)
+        ).collect(Collectors.toList());
+        List<InterWarehouseDTO> items = new ArrayList<>();
+        for (InterWarehouseDTO i : allDTO){
+            if (i.getOriginDTO().getId() == id){
                 items.add(i);
             }
         }

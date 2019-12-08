@@ -16,6 +16,11 @@ export class BussinesYearComponent implements OnInit {
   itemPage: ItemPage;
   bussinessYear: BussinesYear;
   year:string;
+  bussinesYear = {
+    id: null,
+    year: null,
+    isClosed: false
+  };
 
   constructor(
     private yearService: YearService
@@ -45,5 +50,12 @@ export class BussinesYearComponent implements OnInit {
     this.currentPage = event.page;
     this.itemsPerPage = event.itemsPerPage;
     this.getYearPage(this.currentPage - 1, this.itemsPerPage);
+  }
+
+  closeYear(year){
+    this.bussinesYear.id = year;
+    this.yearService.zakljuci(this.bussinesYear).subscribe(res =>{
+      console.log(res);
+    });
   }
 }

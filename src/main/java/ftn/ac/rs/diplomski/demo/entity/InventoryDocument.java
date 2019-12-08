@@ -1,5 +1,7 @@
 package ftn.ac.rs.diplomski.demo.entity;
 
+import ftn.ac.rs.diplomski.demo.dto.InventoryDocumentDTO;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -56,6 +58,14 @@ public class InventoryDocument implements Serializable {
         this.year = year;
     }
 
+    public InventoryDocument(InventoryDocumentDTO documentDTO){
+        this.id = documentDTO.getId();
+        this.formatDate = documentDTO.getCreateDate();
+        this.bookingDate = documentDTO.getBookingDate();
+        this.status = documentDTO.getStatus();
+        this.warehouse = new Warehouse(documentDTO.getWarehouse());
+        this.year = new BusinessYear(documentDTO.getBusinessYear());
+    }
     public Integer getId() {
         return id;
     }

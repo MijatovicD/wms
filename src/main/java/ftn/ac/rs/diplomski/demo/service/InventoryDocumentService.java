@@ -6,10 +6,8 @@ import ftn.ac.rs.diplomski.demo.dto.InventoryDocumentDTO;
 import ftn.ac.rs.diplomski.demo.dto.InventoryItemDTO;
 import ftn.ac.rs.diplomski.demo.entity.InventoryCommission;
 import ftn.ac.rs.diplomski.demo.entity.InventoryDocument;
-import ftn.ac.rs.diplomski.demo.repository.CommissionDocumentRepository;
-import ftn.ac.rs.diplomski.demo.repository.InventoryCommissionRepository;
-import ftn.ac.rs.diplomski.demo.repository.InventoryDocumentRepository;
-import ftn.ac.rs.diplomski.demo.repository.InventoryItemRepository;
+import ftn.ac.rs.diplomski.demo.entity.ProductCard;
+import ftn.ac.rs.diplomski.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +33,9 @@ public class InventoryDocumentService {
 
     @Autowired
     private CommissionDocumentRepository commissionDocumentRepository;
+
+    @Autowired
+    private ProductCardRepository cardRepository;
 
     public List<InventoryDocument> findAll(){
         return documentRepository.findAll();
@@ -83,8 +85,33 @@ public class InventoryDocumentService {
 
     @Transactional
     public boolean proknjizi(InventoryDocumentDTO inventoryDocumentDTO){
+        System.out.println("ulazi?");
         List<InventoryItemDTO> itemDTOS = getItems(inventoryDocumentDTO.getId());
 
+        for (InventoryItemDTO i : itemDTOS){
+            ProductCard productCard = null;
+            for (ProductCard p : i.getProductDTO().getProductCards()){
+                if (p.getWarehouse().getId() == inventoryDocumentDTO.getWarehouse().getId()){
+                    productCard = p;
+                }
+            }
+
+//           if(productCard.getYear().isClose() == true && productCard.getTotalAmount() > 0){
+               productCard.setInitStateOfQuantity((int) productCard.getTotalAmount());
+               productCard.setInitStateOfValue(productCard.getTotalValue());
+               productCard.setPrice(productCard.getPrice());
+               productCard.setTrafficEntryQuantity(0);
+               productCard.setTrafficEntryValue(0);
+               productCard.setTrafficExitQuantity(0);
+               productCard.setTrafficExitValue(0);
+               cardRepository.save(productCard);
+
+               inventoryDocumentDTO.setStatus("Proknjizen");
+               Date date = new Date();
+               inventoryDocumentDTO.setBookingDate(date);
+               documentRepository.save(new InventoryDocument(inventoryDocumentDTO));
+//           }
+        }
 
         return false;
     }

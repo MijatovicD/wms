@@ -25,8 +25,16 @@ export class DocumentItemComponent implements OnInit {
     status: null,
     businessPartner: { name: null },
     businessYear: { id: 5 , year:2019},
-    warehouse: { name: null }
+    warehouse: { name: null },
+    interWarehouseDTO: { id: null }
   };
+  interDocument = {
+    id: null,
+    originDTO: { name: null },
+    destinationDTO : { name: null },
+    productDTO: { id: null},
+    quantity : null
+  }
   warehouses;
   partners;
   productList;
@@ -72,12 +80,16 @@ export class DocumentItemComponent implements OnInit {
   status;
   statusNovProizvod;
   primka = true;
+  otpremnica;
 
   @ViewChild("selectType") selectType = {
     nativeElement: { value: null }
   };
 
   @ViewChild("selectWarehouse") selectWarehouse = {
+    nativeElement: { value: null }
+  };
+  @ViewChild("selectDestinationWarehouse") selectDestinationWarehouse = {
     nativeElement: { value: null }
   };
 
@@ -110,12 +122,6 @@ export class DocumentItemComponent implements OnInit {
   ngOnInit() {
     if (this.route.snapshot.url[1].path == "add") {
       this.dodavanje = true;
-
-          
-      if (this.selectType.nativeElement.value == "Medjumagacinski"){
-        console.log("cliiiick");
-      }
-
     }
     
     else {
@@ -141,6 +147,8 @@ export class DocumentItemComponent implements OnInit {
             return r;
           });
         });
+
+       
     }
 
     this.warehouseService.getAll().subscribe(res => {
@@ -238,9 +246,7 @@ export class DocumentItemComponent implements OnInit {
             this.produt.productGroupDTO.id = this.selectGroup.nativeElement.value
             this.produt.measurementUnitDTO.id = this.selectUnit.nativeElement.value
             this.productService.add(this.produt).subscribe(producut =>{
-            console.log("IDDDDDDDDDDDDDDDDDDDD" +p.id + " dsahkuhfdkjhcljkas " + this.produt.id + "rifeiesfcsdc " + producut.id);
                   this.produt.id = producut.id;
-                  console.log("dsaldas " + producut);
             });
             
         });
@@ -258,14 +264,14 @@ export class DocumentItemComponent implements OnInit {
       this.errorMsg = "Morate izabrati magacin.";
       return false;
     }
-    if (
-      this.partners.filter(
-        b => b.name === this.selectBusinessPartner.nativeElement.value
-      )[0] == null
-    ) {
-      this.errorMsg = "Morate izabrati poslovnog partnera.";
-      return false;
-    }
+    // if (
+    //   this.partners.filter(
+    //     b => b.name === this.selectBusinessPartner.nativeElement.value
+    //   )[0] == null
+    // ) {
+    //   this.errorMsg = "Morate izabrati poslovnog partnera.";
+    //   return false;
+    // }
     if (this.privremenaListaRobe.length == 0) {
       this.errorMsg = "Morate dodati robu.";
       return false;
@@ -279,12 +285,40 @@ export class DocumentItemComponent implements OnInit {
       this.dokument.warehouse = this.warehouses.filter(
         w => w.name === this.selectWarehouse.nativeElement.value
       )[0];
+     
       this.dokument.businessPartner = this.partners.filter(
         b => b.name === this.selectBusinessPartner.nativeElement.value
       )[0];
       this.dokument.type = this.selectType.nativeElement.value;
       this.dokument.status = "Formiranje";
+
+      
       console.log(this.dokument);
+      this.privremenaListaRobe.map(r => {
+          this.interDocument.quantity = r.quantity;
+          this.interDocument.productDTO.id = r.id;
+      });
+      if (this.medjumagacinski == true){
+        this.interDocument.originDTO = this.warehouses.filter(
+          w => w.name === this.selectWarehouse.nativeElement.value
+        )[0];
+        if(this.selectDestinationWarehouse.nativeElement.value != 0){
+          this.interDocument.destinationDTO = this.warehouses.filter(
+            w => w.name === this.selectDestinationWarehouse.nativeElement.value
+          )[0];
+        }
+        
+       this.documentService.addInterDocument(this.interDocument).subscribe(res => {
+           this.dokument.interWarehouseDTO.id = res.id;
+           console.log(res.id);
+           this.documentService.addDokument(this.dokument).subscribe(res => {
+              console.log(res);
+              this.router.navigateByUrl("/document");
+           });
+        });
+      }
+      else{
+        console.log("ulaziiiiiiiiiiiiii?");
       this.documentService.addDokument(this.dokument).subscribe(res => {
         console.log(res);
         this.dokument.id = res.id;
@@ -297,14 +331,13 @@ export class DocumentItemComponent implements OnInit {
           this.item.product.id = r.id;
           this.item.value = r.value;
           console.log(this.item);
-          if (this.newProduct != null){
-            console.log("ulazi?");
-          }
+
           this.itemService.saveItem(this.item).subscribe(res => {
             this.router.navigateByUrl("/document");
-          });
+           });        
         });
       });
+    }
     }
   }
 
@@ -322,6 +355,28 @@ export class DocumentItemComponent implements OnInit {
       this.documentService.storniraj(this.dokument).subscribe(res => {
         this.router.navigateByUrl("/document");
       });
+    }
+  }
+
+  onChangeSelect(event:any){
+    console.log(event);
+    if(this.selectType.nativeElement.value == "Primka"){
+      this.primka = true;
+      this.otpremnica = false;
+      this.medjumagacinski = false;
+      console.log("primka");
+    }
+    if(this.selectType.nativeElement.value == "Otpremnica"){
+      this.otpremnica = true;
+      this.primka = false;
+      this.medjumagacinski = false;
+      console.log("otpremnica");
+    }
+    if(this.selectType.nativeElement.value == "Medjumagacinski"){
+      this.medjumagacinski = true;
+      this.primka = false;
+      this.otpremnica = false;
+      console.log("medjumagacinski");
     }
   }
 }

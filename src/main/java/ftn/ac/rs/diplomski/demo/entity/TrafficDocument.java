@@ -33,7 +33,7 @@ public class TrafficDocument implements Serializable {
     private String status;
 
     @ManyToOne
-    @JoinColumn(name = "bussinessPartner_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "bussinessPartner_id", referencedColumnName = "id", nullable = true)
     private BussinessPartner bussinessPartner;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -41,11 +41,15 @@ public class TrafficDocument implements Serializable {
     private BusinessYear year;
 
     @ManyToOne
-    @JoinColumn(name = "warehouse_id", referencedColumnName = "id")
+    @JoinColumn(name = "warehouse_id", referencedColumnName = "id", nullable = true)
     private Warehouse warehouse;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "trafficDocument")
     private List<DocumentItem> items = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "interWarehouse", referencedColumnName = "id")
+    private InterWarehouseTraffic interWarehouseTraffic;
 
     public TrafficDocument(){
 
@@ -61,6 +65,27 @@ public class TrafficDocument implements Serializable {
         this.year = year;
         this.warehouse = warehouse;
         this.items = items;
+    }
+
+    public TrafficDocument(String typeOfDocument, Integer number, Date formatDate, Date datumKnjizenja, String status) {
+        this.typeOfDocument = typeOfDocument;
+        this.number = number;
+        this.formatDate = formatDate;
+        this.datumKnjizenja = datumKnjizenja;
+        this.status = status;
+    }
+
+    public TrafficDocument(String typeOfDocument, Integer number, Date formatDate, Date datumKnjizenja, String status, BussinessPartner bussinessPartner, BusinessYear year, Warehouse warehouse, List<DocumentItem> items, InterWarehouseTraffic interWarehouseTraffic) {
+        this.typeOfDocument = typeOfDocument;
+        this.number = number;
+        this.formatDate = formatDate;
+        this.datumKnjizenja = datumKnjizenja;
+        this.status = status;
+        this.bussinessPartner = bussinessPartner;
+        this.year = year;
+        this.warehouse = warehouse;
+        this.items = items;
+        this.interWarehouseTraffic = interWarehouseTraffic;
     }
 
     public TrafficDocument(TrafficDocumentDTO documentDTO){
@@ -155,6 +180,14 @@ public class TrafficDocument implements Serializable {
         this.items = items;
     }
 
+    public InterWarehouseTraffic getInterWarehouseTraffic() {
+        return interWarehouseTraffic;
+    }
+
+    public void setInterWarehouseTraffic(InterWarehouseTraffic interWarehouseTraffic) {
+        this.interWarehouseTraffic = interWarehouseTraffic;
+    }
+
     @Override
     public String toString() {
         return "TrafficDocument{" +
@@ -168,6 +201,7 @@ public class TrafficDocument implements Serializable {
                 ", year=" + year +
                 ", warehouse=" + warehouse +
                 ", items=" + items +
+                ", interWarehouseTraffic=" + interWarehouseTraffic +
                 '}';
     }
 }
