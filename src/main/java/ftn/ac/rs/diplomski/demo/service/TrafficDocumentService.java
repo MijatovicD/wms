@@ -78,7 +78,7 @@ public class TrafficDocumentService {
         ).collect(Collectors.toList());
         List<InterWarehouseDTO> items = new ArrayList<>();
         for (InterWarehouseDTO i : allDTO){
-            if (i.getOriginDTO().getId() == id){
+            if (i.getTrafficDocumentDTO().getId() == id){
                 items.add(i);
             }
         }
@@ -204,7 +204,7 @@ public class TrafficDocumentService {
 
                 if(i.getQuantity() <= card.getTotalAmount()){
                     card.setTrafficEntryQuantity((int) (card.getTrafficEntryQuantity() - i.getQuantity()));
-
+                    cardRepository.save(card);
 
 
                     AnalyticsWarehouseCard analytics = new AnalyticsWarehouseCard();

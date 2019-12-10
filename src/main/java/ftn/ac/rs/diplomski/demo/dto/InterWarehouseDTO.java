@@ -9,21 +9,23 @@ public class InterWarehouseDTO {
     private WarehouseDTO destinationDTO;
     private ProductDTO productDTO;
     private Integer quantity;
+    private TrafficDocumentDTO trafficDocumentDTO;
 
     public InterWarehouseDTO(){
 
     }
 
-    public InterWarehouseDTO(Integer id, WarehouseDTO originDTO, WarehouseDTO destinationDTO, ProductDTO productDTO, Integer quantity) {
+    public InterWarehouseDTO(Integer id, WarehouseDTO originDTO, WarehouseDTO destinationDTO, ProductDTO productDTO, Integer quantity, TrafficDocumentDTO trafficDocumentDTO) {
         this.id = id;
         this.originDTO = originDTO;
         this.destinationDTO = destinationDTO;
         this.productDTO = productDTO;
         this.quantity = quantity;
+        this.trafficDocumentDTO = trafficDocumentDTO;
     }
 
     public InterWarehouseDTO(InterWarehouseTraffic traffic){
-        this(traffic.getId(), new WarehouseDTO(traffic.getOriginWarehouse()), new WarehouseDTO(traffic.getDestinationWarehouse()), new ProductDTO(traffic.getProduct()), traffic.getQuantity());
+        this(traffic.getId(), new WarehouseDTO(traffic.getOriginWarehouse()), new WarehouseDTO(traffic.getDestinationWarehouse()), new ProductDTO(traffic.getProduct()), traffic.getQuantity(), new TrafficDocumentDTO(traffic.getTrafficDocument()));
     }
 
     public Integer getId() {
@@ -66,6 +68,14 @@ public class InterWarehouseDTO {
         this.quantity = quantity;
     }
 
+    public TrafficDocumentDTO getTrafficDocumentDTO() {
+        return trafficDocumentDTO;
+    }
+
+    public void setTrafficDocumentDTO(TrafficDocumentDTO trafficDocumentDTO) {
+        this.trafficDocumentDTO = trafficDocumentDTO;
+    }
+
     @Override
     public String toString() {
         return "InterWarehouseDTO{" +
@@ -74,6 +84,7 @@ public class InterWarehouseDTO {
                 ", destinationDTO=" + destinationDTO +
                 ", productDTO=" + productDTO +
                 ", quantity=" + quantity +
+                ", trafficDocumentDTO=" + trafficDocumentDTO +
                 '}';
     }
 }

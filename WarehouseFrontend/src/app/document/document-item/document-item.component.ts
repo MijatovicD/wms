@@ -25,15 +25,15 @@ export class DocumentItemComponent implements OnInit {
     status: null,
     businessPartner: { name: null },
     businessYear: { id: 5 , year:2019},
-    warehouse: { name: null },
-    interWarehouseDTO: { id: null }
+    warehouse: { name: null }
   };
   interDocument = {
     id: null,
     originDTO: { name: null },
     destinationDTO : { name: null },
     productDTO: { id: null},
-    quantity : null
+    quantity : null,
+    trafficDocumentDTO: { id: null}
   }
   warehouses;
   partners;
@@ -81,6 +81,8 @@ export class DocumentItemComponent implements OnInit {
   statusNovProizvod;
   primka = true;
   otpremnica;
+  interWarehouse = [];
+  newProductBtn = false;
 
   @ViewChild("selectType") selectType = {
     nativeElement: { value: null }
@@ -136,6 +138,15 @@ export class DocumentItemComponent implements OnInit {
           }
           if (res.status == "Proknjizen") {
             this.status = "Storniraj";
+          }
+          if (res.type == "Medjumagacinski"){
+            this.medjumagacinski = true;
+            this.documentService.getInterItems(this.route.snapshot.url[1].path).subscribe(res =>{
+                console.log(res);
+                this.interWarehouse = res;
+                this.interDocument = res;
+                console.log(this.interDocument);
+            });
           }
         });
       this.itemService
@@ -247,6 +258,7 @@ export class DocumentItemComponent implements OnInit {
             this.produt.measurementUnitDTO.id = this.selectUnit.nativeElement.value
             this.productService.add(this.produt).subscribe(producut =>{
                   this.produt.id = producut.id;
+                  console.log("nova roba id " + this.produt.id);
             });
             
         });
@@ -285,65 +297,69 @@ export class DocumentItemComponent implements OnInit {
       this.dokument.warehouse = this.warehouses.filter(
         w => w.name === this.selectWarehouse.nativeElement.value
       )[0];
-     
-      this.dokument.businessPartner = this.partners.filter(
-        b => b.name === this.selectBusinessPartner.nativeElement.value
-      )[0];
+      // this.dokument.businessPartner = this.partners.filter(
+      //   b => b.name === this.selectBusinessPartner.nativeElement.value
+      // )[0]; 
       this.dokument.type = this.selectType.nativeElement.value;
       this.dokument.status = "Formiranje";
 
       
       console.log(this.dokument);
-      this.privremenaListaRobe.map(r => {
-          this.interDocument.quantity = r.quantity;
-          this.interDocument.productDTO.id = r.id;
-      });
-      if (this.medjumagacinski == true){
-        this.interDocument.originDTO = this.warehouses.filter(
-          w => w.name === this.selectWarehouse.nativeElement.value
-        )[0];
-        if(this.selectDestinationWarehouse.nativeElement.value != 0){
-          this.interDocument.destinationDTO = this.warehouses.filter(
-            w => w.name === this.selectDestinationWarehouse.nativeElement.value
-          )[0];
-        }
-        
-       this.documentService.addInterDocument(this.interDocument).subscribe(res => {
-           this.dokument.interWarehouseDTO.id = res.id;
-           console.log(res.id);
-           this.documentService.addDokument(this.dokument).subscribe(res => {
-              console.log(res);
-              this.router.navigateByUrl("/document");
-           });
-        });
-      }
-      else{
-        console.log("ulaziiiiiiiiiiiiii?");
+      
+
       this.documentService.addDokument(this.dokument).subscribe(res => {
         console.log(res);
         this.dokument.id = res.id;
-        this.privremenaListaRobe.map(r => {
-          r.value = r.quantity * r.price;
-          r.trafficDocument = this.dokument;
-          this.item.price = r.price;
-          this.item.quantity = r.quantity;
-          this.item.document = this.dokument;
-          this.item.product.id = r.id;
-          this.item.value = r.value;
-          console.log(this.item);
 
-          this.itemService.saveItem(this.item).subscribe(res => {
-            this.router.navigateByUrl("/document");
-           });        
+        if (this.medjumagacinski == true){
+        
+          this.privremenaListaRobe.map(r => {
+            this.interDocument.quantity = r.quantity;
+            this.interDocument.productDTO.id = r.id;
         });
+
+          this.interDocument.originDTO = this.warehouses.filter(
+            w => w.name === this.selectWarehouse.nativeElement.value
+          )[0];
+          
+          this.interDocument.destinationDTO = this.warehouses.filter(
+            w => w.name === this.selectDestinationWarehouse.nativeElement.value
+          )[0];
+        
+         this.interDocument.trafficDocumentDTO.id = res.id;
+         this.documentService.addInterDocument(this.interDocument).subscribe(res => {
+             console.log(res.id);
+             this.router.navigateByUrl("/document");
+          });
+        }
+
+        if (this.primka == true || this.otpremnica == true){
+         
+          this.privremenaListaRobe.map(r => {
+            r.value = r.quantity * r.price;
+            r.trafficDocument = this.dokument;
+            this.item.price = r.price;
+            this.item.quantity = r.quantity;
+            this.item.document = this.dokument;
+            if(this.newProductBtn == true){
+              console.log("ulaziii?" + this.produt.id);
+              this.item.product.id = this.produt.id;
+            }
+            else{
+              this.item.product.id = r.id;
+              this.item.value = r.value;
+            }
+            console.log(this.item);
+            this.itemService.saveItem(this.item).subscribe(res => {
+              this.router.navigateByUrl("/document");
+            });        
+          });
+        }
       });
-    }
+      
     }
   }
 
-  sacuvajDokumentNovProizvod(){
-
-  }
 
   changeStatus() {
     if (this.status == "Proknjizi") {
@@ -378,5 +394,10 @@ export class DocumentItemComponent implements OnInit {
       this.otpremnica = false;
       console.log("medjumagacinski");
     }
+  }
+
+  clickNewProductBtn(){
+    console.log("kliknuto");
+    this.newProductBtn = true;
   }
 }

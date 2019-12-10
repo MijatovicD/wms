@@ -29,8 +29,9 @@ public class InterWarehouseTraffic implements Serializable {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "interWarehouseTraffic")
-    private List<TrafficDocument> documents = new ArrayList<>();
+   @ManyToOne
+   @JoinColumn(name = "document_id", referencedColumnName = "id")
+   private TrafficDocument trafficDocument;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "documentItem")
     private List<AnalyticsWarehouseCard> cards = new ArrayList<>();
@@ -47,12 +48,12 @@ public class InterWarehouseTraffic implements Serializable {
         this.quantity = quantity;
     }
 
-    public InterWarehouseTraffic(Warehouse originWarehouse, Warehouse destinationWarehouse, Product product, Integer quantity, List<TrafficDocument> documents, List<AnalyticsWarehouseCard> cards) {
+    public InterWarehouseTraffic(Warehouse originWarehouse, Warehouse destinationWarehouse, Product product, Integer quantity, TrafficDocument trafficDocument, List<AnalyticsWarehouseCard> cards) {
         this.originWarehouse = originWarehouse;
         this.destinationWarehouse = destinationWarehouse;
         this.product = product;
         this.quantity = quantity;
-        this.documents = documents;
+        this.trafficDocument = trafficDocument;
         this.cards = cards;
     }
 
@@ -96,12 +97,12 @@ public class InterWarehouseTraffic implements Serializable {
         this.quantity = quantity;
     }
 
-    public List<TrafficDocument> getDocuments() {
-        return documents;
+    public TrafficDocument getTrafficDocument() {
+        return trafficDocument;
     }
 
-    public void setDocuments(List<TrafficDocument> documents) {
-        this.documents = documents;
+    public void setTrafficDocument(TrafficDocument trafficDocument) {
+        this.trafficDocument = trafficDocument;
     }
 
     public List<AnalyticsWarehouseCard> getCards() {

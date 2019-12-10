@@ -47,9 +47,8 @@ public class TrafficDocument implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "trafficDocument")
     private List<DocumentItem> items = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "interWarehouse", referencedColumnName = "id")
-    private InterWarehouseTraffic interWarehouseTraffic;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "trafficDocument")
+    private List<InterWarehouseTraffic> interWarehouseTraffics;
 
     public TrafficDocument(){
 
@@ -75,7 +74,7 @@ public class TrafficDocument implements Serializable {
         this.status = status;
     }
 
-    public TrafficDocument(String typeOfDocument, Integer number, Date formatDate, Date datumKnjizenja, String status, BussinessPartner bussinessPartner, BusinessYear year, Warehouse warehouse, List<DocumentItem> items, InterWarehouseTraffic interWarehouseTraffic) {
+    public TrafficDocument(String typeOfDocument, Integer number, Date formatDate, Date datumKnjizenja, String status, BussinessPartner bussinessPartner, BusinessYear year, Warehouse warehouse, List<DocumentItem> items, List<InterWarehouseTraffic> interWarehouseTraffics) {
         this.typeOfDocument = typeOfDocument;
         this.number = number;
         this.formatDate = formatDate;
@@ -85,7 +84,7 @@ public class TrafficDocument implements Serializable {
         this.year = year;
         this.warehouse = warehouse;
         this.items = items;
-        this.interWarehouseTraffic = interWarehouseTraffic;
+        this.interWarehouseTraffics = interWarehouseTraffics;
     }
 
     public TrafficDocument(TrafficDocumentDTO documentDTO){
@@ -180,12 +179,12 @@ public class TrafficDocument implements Serializable {
         this.items = items;
     }
 
-    public InterWarehouseTraffic getInterWarehouseTraffic() {
-        return interWarehouseTraffic;
+    public List<InterWarehouseTraffic> getInterWarehouseTraffics() {
+        return interWarehouseTraffics;
     }
 
-    public void setInterWarehouseTraffic(InterWarehouseTraffic interWarehouseTraffic) {
-        this.interWarehouseTraffic = interWarehouseTraffic;
+    public void setInterWarehouseTraffics(List<InterWarehouseTraffic> interWarehouseTraffics) {
+        this.interWarehouseTraffics = interWarehouseTraffics;
     }
 
     @Override
@@ -201,7 +200,7 @@ public class TrafficDocument implements Serializable {
                 ", year=" + year +
                 ", warehouse=" + warehouse +
                 ", items=" + items +
-                ", interWarehouseTraffic=" + interWarehouseTraffic +
+                ", interWarehouseTraffics=" + interWarehouseTraffics +
                 '}';
     }
 }

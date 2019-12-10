@@ -48,13 +48,27 @@
 
     <div class="form-group">
       <label>Warehouse</label>
-      <select *ngIf="dodavanje || primka || otpremnica" #selectWarehouse class="form-control">
+      <select *ngIf="dodavanje" #selectWarehouse class="form-control">
         <option [ngValue]="null">Select a warehouse</option>
         <option *ngFor="let w of warehouses" [ngValue]="w">{{
           w.name
         }}</option>
       </select>
-      <label *ngIf="medjumagacinski">Destination warehouse</label>
+        <input
+        *ngIf="dodavanje == false && dokument.type == 'Primka' || dokument.type == 'Otpremnica'"
+        name="warehouse"
+        [(ngModel)]="dokument.warehouse.name"
+        type="text"
+        class="form-control"
+      />
+      <input
+      *ngIf="dodavanje == false && dokument.type == 'Medjumagacinski'"
+      name="warehouse"
+      [(ngModel)]="interWarehouse.originDTO.name"
+      type="text"
+      class="form-control"
+    />
+      <label *ngIf="medjumagacinski ">Destination warehouse</label>
       <select *ngIf="medjumagacinski" #selectDestinationWarehouse class="form-control">
           <option [ngValue]="null">Select a warehouse</option>
           <option *ngFor="let w of warehouses" [ngValue]="w">{{
@@ -62,21 +76,22 @@
           }}</option>
         </select>
       <input
-        *ngIf="dodavanje == false"
+        
         name="warehouse"
-        [(ngModel)]="dokument.warehouse.name"
         type="text"
         class="form-control"
       />
+
+     
     </div>
     <div class="form-group">
-      <label *ngIf="dodavanje || primka || otpremnica">Bussiness partner</label>
-      <select *ngIf="dodavanje || primka || otpremnica" #selectBusinessPartner class="form-control">
+      <label *ngIf="!medjumagacinski || dokument.type != 'Medjumagacinski'">Bussiness partner</label>
+      <select *ngIf="!medjumagacinski" #selectBusinessPartner class="form-control">
         <option [ngValue]="null">Select a bussiness partner</option>
         <option *ngFor="let p of partners" [ngValue]="p">{{ p.name }}</option>
       </select>
       <input
-        *ngIf="dodavanje == false"
+        *ngIf="dodavanje == false && !medjumagacinski"
         name="businessPartner"
         [(ngModel)]="dokument.businessPartner.name"
         type="text"
@@ -111,7 +126,7 @@
       data-toggle="modal"
       data-target="#productModal"
       #newProductBtn
-      
+      (click)="clickNewProductBtn()"
     >
       Add new product
     </button>
@@ -124,7 +139,7 @@
           <th scope="col">Name</th>
           <th scope="col">Quantity</th>
           <th scope="col">Price</th>
-          <th scope="col" *ngIf="primka || otpremnica">Value</th>
+          <th scope="col">Value</th>
         </tr>
       </thead>
       <tbody *ngFor="let r of privremenaListaRobe">
@@ -134,6 +149,13 @@
           <td>{{ r.quantity }}</td>
           <td>{{ r.price }}</td>
           <td *ngIf="primka || otpremnica">{{ r.quantity * r.price }}</td>
+        </tr>
+      </tbody>
+      <tbody *ngFor="let r of interWarehouse">
+        <tr *ngIf="!dodavanje && medjumagacinski">
+          <th scope="row">{{ r.id }}</th>
+          <td>{{ r.productDTO.name }}</td>
+          <td>{{ r.quantity }}</td>
         </tr>
       </tbody>
     </table>

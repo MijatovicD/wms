@@ -80,9 +80,6 @@ public class DocumentController {
             trafficDocument.setYear(yearServise.findOne(trafficDocumentDTO.getBusinessYear().getId()));
             trafficDocument.setBussinessPartner(partnerService.findOne(1));
             trafficDocument.setWarehouse(warehouseService.findOne(1));
-            trafficDocument.setInterWarehouseTraffic(trafficService.getOne(trafficDocumentDTO.getInterWarehouseDTO().getId()));
-
-
 
             trafficDocument = documentService.save(trafficDocument);
 
@@ -98,13 +95,13 @@ public class DocumentController {
             trafficDocument.setBussinessPartner(partnerService.findOne(trafficDocumentDTO.getBusinessPartner().getId()));
             trafficDocument.setYear(yearServise.findOne(trafficDocumentDTO.getBusinessYear().getId()));
             trafficDocument.setWarehouse(warehouseService.findOne(trafficDocumentDTO.getWarehouse().getId()));
-            trafficDocument.setInterWarehouseTraffic(trafficService.getOne(1));
 
             trafficDocument = documentService.save(trafficDocument);
 
             return new ResponseEntity<>(new TrafficDocumentDTO(trafficDocument), HttpStatus.CREATED);
         }
     }
+
 
     @PostMapping(value = "/interWarehouse")
     public ResponseEntity<InterWarehouseDTO> addInterWarehouse(@RequestBody InterWarehouseDTO interWarehouseDTO){
@@ -114,6 +111,7 @@ public class DocumentController {
         warehouseTraffic.setDestinationWarehouse(warehouseService.findOne(interWarehouseDTO.getDestinationDTO().getId()));
         warehouseTraffic.setProduct(productService.getOne(interWarehouseDTO.getProductDTO().getId()));
         warehouseTraffic.setQuantity(interWarehouseDTO.getQuantity());
+        warehouseTraffic.setTrafficDocument(documentService.getDocument(interWarehouseDTO.getTrafficDocumentDTO().getId()));
 
         warehouseTraffic = trafficService.save(warehouseTraffic);
 
