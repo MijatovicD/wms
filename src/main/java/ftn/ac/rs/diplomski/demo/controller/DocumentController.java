@@ -128,6 +128,16 @@ public class DocumentController {
         }
     }
 
+    @PostMapping(value = "/proknjiziMedjumagacinski")
+    public ResponseEntity proknjiziMedjumagacinski(@RequestBody TrafficDocumentDTO trafficDocumentDTO){
+        System.out.println("dfsfs " + trafficDocumentDTO.toString());
+        if(documentService.proknjiziMedjumagacinski(trafficDocumentDTO)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PostMapping(value = "/storniraj")
     public ResponseEntity<TrafficDocumentDTO> storniraj(@RequestBody TrafficDocumentDTO trafficDocumentDTO){
         if(documentService.storniraj(trafficDocumentDTO)){

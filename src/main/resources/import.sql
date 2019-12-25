@@ -63,8 +63,8 @@ INSERT INTO partner(name, pib, address, company_id, place_id) VALUES ('Instagram
 INSERT INTO partner(name, pib, address, company_id, place_id) VALUES ('Samsung', '987654321547', 'Bulevar Oslobodjenja 56', 2, 3);
 INSERT INTO partner(name, pib, address, company_id, place_id) VALUES ('Amazon', '852369014892', 'Sutjeska 8', 3, 1);
 
-INSERT INTO traffic_document(type_of_document, number, format_date, datum_knjizenja, status, bussiness_partner_id, year_id, warehouse_id) VALUES ('Primka', 100, '2018-05-08', '2018-05-09', 'Format', 1, 1, 1);
-INSERT INTO traffic_document(type_of_document, number, format_date, datum_knjizenja, status, bussiness_partner_id, year_id, warehouse_id) VALUES ('Primka', 150, '2019-01-02', '2019-01-03', 'Format', 2,2,2);
+INSERT INTO traffic_document(type_of_document, number, format_date, datum_knjizenja, status, bussiness_partner_id, year_id, warehouse_id) VALUES ('Primka', 100, '2018-05-08', '2018-05-09', 'Formiranje', 1, 1, 1);
+INSERT INTO traffic_document(type_of_document, number, format_date, datum_knjizenja, status, bussiness_partner_id, year_id, warehouse_id) VALUES ('Primka', 150, '2019-01-02', '2019-01-03', 'Formiranje', 2,2,2);
 
 INSERT INTO document_item(quantity, price, value, document_id, product_id) VALUES (850, 150, 10, 1,1);
 INSERT INTO document_item(quantity, price, value, document_id, product_id) VALUES (100, 50, 150, 2,2);

@@ -96,21 +96,22 @@ public class InventoryDocumentService {
                 }
             }
 
-//           if(productCard.getYear().isClose() == true && productCard.getTotalAmount() > 0){
-               productCard.setInitStateOfQuantity((int) productCard.getTotalAmount());
-               productCard.setInitStateOfValue(productCard.getTotalValue());
-               productCard.setPrice(productCard.getPrice());
-               productCard.setTrafficEntryQuantity(0);
-               productCard.setTrafficEntryValue(0);
-               productCard.setTrafficExitQuantity(0);
-               productCard.setTrafficExitValue(0);
-               cardRepository.save(productCard);
+           if(productCard.getYear().isClose() == true && productCard.getTotalAmount() > 0){
+               ProductCard card = new ProductCard();
+               card.setInitStateOfQuantity((int) productCard.getTotalAmount());
+               card.setInitStateOfValue(productCard.getTotalValue());
+               card.setPrice(productCard.getPrice());
+               card.setTrafficEntryQuantity(0);
+               card.setTrafficEntryValue(0);
+               card.setTrafficExitQuantity(0);
+               card.setTrafficExitValue(0);
+               cardRepository.save(card);
 
                inventoryDocumentDTO.setStatus("Proknjizen");
                Date date = new Date();
                inventoryDocumentDTO.setBookingDate(date);
                documentRepository.save(new InventoryDocument(inventoryDocumentDTO));
-//           }
+           }
         }
 
         return false;

@@ -26,10 +26,7 @@ export class InventoryItemService {
   }
 
   saveItem(item): any {
-    return this.http.post(
-      this.baseUrl,
-      item
-    );
+    return this.http.post(this.baseUrl,item);
   }
 
   getItems(id): Observable<any>{

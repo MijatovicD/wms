@@ -1,13 +1,14 @@
 package ftn.ac.rs.diplomski.demo.dto;
 
 import ftn.ac.rs.diplomski.demo.entity.InterWarehouseTraffic;
+import ftn.ac.rs.diplomski.demo.entity.Product;
 
 public class InterWarehouseDTO {
 
     private Integer id;
     private WarehouseDTO originDTO;
     private WarehouseDTO destinationDTO;
-    private ProductDTO productDTO;
+    private Product productDTO;
     private Integer quantity;
     private TrafficDocumentDTO trafficDocumentDTO;
 
@@ -15,7 +16,7 @@ public class InterWarehouseDTO {
 
     }
 
-    public InterWarehouseDTO(Integer id, WarehouseDTO originDTO, WarehouseDTO destinationDTO, ProductDTO productDTO, Integer quantity, TrafficDocumentDTO trafficDocumentDTO) {
+    public InterWarehouseDTO(Integer id, WarehouseDTO originDTO, WarehouseDTO destinationDTO, Product productDTO, Integer quantity, TrafficDocumentDTO trafficDocumentDTO) {
         this.id = id;
         this.originDTO = originDTO;
         this.destinationDTO = destinationDTO;
@@ -25,7 +26,7 @@ public class InterWarehouseDTO {
     }
 
     public InterWarehouseDTO(InterWarehouseTraffic traffic){
-        this(traffic.getId(), new WarehouseDTO(traffic.getOriginWarehouse()), new WarehouseDTO(traffic.getDestinationWarehouse()), new ProductDTO(traffic.getProduct()), traffic.getQuantity(), new TrafficDocumentDTO(traffic.getTrafficDocument()));
+        this(traffic.getId(), new WarehouseDTO(traffic.getOriginWarehouse()), new WarehouseDTO(traffic.getDestinationWarehouse()), traffic.getProduct(), traffic.getQuantity(), new TrafficDocumentDTO(traffic.getTrafficDocument()));
     }
 
     public Integer getId() {
@@ -52,11 +53,11 @@ public class InterWarehouseDTO {
         this.destinationDTO = destinationDTO;
     }
 
-    public ProductDTO getProductDTO() {
+    public Product getProductDTO() {
         return productDTO;
     }
 
-    public void setProductDTO(ProductDTO productDTO) {
+    public void setProductDTO(Product productDTO) {
         this.productDTO = productDTO;
     }
 

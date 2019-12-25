@@ -61,27 +61,30 @@
         type="text"
         class="form-control"
       />
-      <input
-      *ngIf="dodavanje == false && dokument.type == 'Medjumagacinski'"
-      name="warehouse"
-      [(ngModel)]="interWarehouse.originDTO.name"
-      type="text"
-      class="form-control"
-    />
-      <label *ngIf="medjumagacinski ">Destination warehouse</label>
-      <select *ngIf="medjumagacinski" #selectDestinationWarehouse class="form-control">
+      <div *ngFor="let w of interDocument">
+        <input
+        *ngIf="dodavanje == false && dokument.type == 'Medjumagacinski'"
+        name="warehouse"
+        [(ngModel)]="w.originDTO.name"
+        type="text"
+        class="form-control"/>
+    </div>
+      <label *ngIf="dodavanje && medjumagacinski">Destination warehouse</label>
+      <select *ngIf="dodavanje && medjumagacinski" #selectDestinationWarehouse class="form-control">
           <option [ngValue]="null">Select a warehouse</option>
           <option *ngFor="let w of warehouses" [ngValue]="w">{{
             w.name
           }}</option>
         </select>
+        <label *ngIf="!dodavanje && dokument.type=='Medjumagacinski'">Destination warehouse</label>
+        <div *ngFor="let w of interDocument">
       <input
-        
+        *ngIf="!dodavanje"
         name="warehouse"
+        value="{{w.destinationDTO.name}}"
         type="text"
-        class="form-control"
-      />
-
+        class="form-control"/>
+    </div>
      
     </div>
     <div class="form-group">

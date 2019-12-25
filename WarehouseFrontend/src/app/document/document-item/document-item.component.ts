@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { UnitService } from './../../service/unit.service';
 import { ProductGroupService } from './../../service/productGroup.service';
 import { DocumentItemService } from './../../service/documentItemService.service';
@@ -141,11 +142,10 @@ export class DocumentItemComponent implements OnInit {
           }
           if (res.type == "Medjumagacinski"){
             this.medjumagacinski = true;
-            this.documentService.getInterItems(this.route.snapshot.url[1].path).subscribe(res =>{
-                console.log(res);
-                this.interWarehouse = res;
+            this.documentService.getInterItems(this.dokument.id).subscribe(res =>{
                 this.interDocument = res;
                 console.log(this.interDocument);
+                this.interWarehouse = res;
             });
           }
         });
@@ -297,9 +297,11 @@ export class DocumentItemComponent implements OnInit {
       this.dokument.warehouse = this.warehouses.filter(
         w => w.name === this.selectWarehouse.nativeElement.value
       )[0];
-      // this.dokument.businessPartner = this.partners.filter(
-      //   b => b.name === this.selectBusinessPartner.nativeElement.value
-      // )[0]; 
+      if(this.primka == true || this.otpremnica == true){
+      this.dokument.businessPartner = this.partners.filter(
+        b => b.name === this.selectBusinessPartner.nativeElement.value
+      )[0]; 
+      }
       this.dokument.type = this.selectType.nativeElement.value;
       this.dokument.status = "Formiranje";
 
@@ -312,12 +314,7 @@ export class DocumentItemComponent implements OnInit {
         this.dokument.id = res.id;
 
         if (this.medjumagacinski == true){
-        
-          this.privremenaListaRobe.map(r => {
-            this.interDocument.quantity = r.quantity;
-            this.interDocument.productDTO.id = r.id;
-        });
-
+          
           this.interDocument.originDTO = this.warehouses.filter(
             w => w.name === this.selectWarehouse.nativeElement.value
           )[0];
@@ -326,6 +323,12 @@ export class DocumentItemComponent implements OnInit {
             w => w.name === this.selectDestinationWarehouse.nativeElement.value
           )[0];
         
+          this.privremenaListaRobe.map(r => {
+            this.interDocument.quantity = r.quantity;
+            this.interDocument.productDTO.id = r.id;
+        });
+
+         
          this.interDocument.trafficDocumentDTO.id = res.id;
          this.documentService.addInterDocument(this.interDocument).subscribe(res => {
              console.log(res.id);
@@ -363,10 +366,19 @@ export class DocumentItemComponent implements OnInit {
 
   changeStatus() {
     if (this.status == "Proknjizi") {
+      if(this.dokument.type == "Medjumagacinski"){
+        console.log("ulazi?");
+        console.log(this.dokument + "   " + this.interDocument);
+        this.documentService.proknjiziMedjumagacinski(this.dokument).subscribe(res => {
+          console.log("knjizenjeee ");
+          this.router.navigateByUrl("/document");
+        });
+      }else{
       this.documentService.proknjizi(this.dokument).subscribe(res => {
         console.log("knjizenjeee ");
         this.router.navigateByUrl("/document");
       });
+    }
     } else {
       this.documentService.storniraj(this.dokument).subscribe(res => {
         this.router.navigateByUrl("/document");

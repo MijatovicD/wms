@@ -87,27 +87,30 @@ export class InventoryItemComponent implements OnInit {
         if (res.status == "Proknjizen"){
             this.status = "Storniraj";
         }
-      });
-      this.inventoryItemSerice
-          .getItems(this.route.snapshot.url[1].path)
+        this.inventoryItemSerice
+          .getItems(this.dokument.id)
           .subscribe(res => {
+            console.log(res);
             this.privremenaListaRobe = res.map(r => {
-              console.log(res);
               r.name = r.productDTO.name;
               r.quantity = r.quantity;
               return r;
             });
           });
-      this.inventoryItemSerice.
-        getCommission(this.route.snapshot.url[1].path).
-        subscribe(res =>{
-          console.log(res);
-            this.privremenaListaKomisije = res.map(c =>{
-              c.name = c.inventoryCommissionDTO.name;
-              c.president = c.inventoryCommissionDTO.president;
-              return c;
-            });
-        });
+
+          this.inventoryItemSerice.
+          getCommission(this.dokument.id).
+          subscribe(res =>{
+            console.log(res);
+              this.privremenaListaKomisije = res.map(c =>{
+                c.name = c.inventoryCommissionDTO.name;
+                c.president = c.inventoryCommissionDTO.president;
+                return c;
+              });
+          });
+      });
+      
+     
     }
     this.warehosueService.getAll().subscribe(res => {
       this.warehouses = res;

@@ -42,6 +42,7 @@ public class Product implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     private List<InventoryItem> inventoryItems = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
     private List<InterWarehouseTraffic> interWarehouseProduct = new ArrayList<>();
 
@@ -101,6 +102,22 @@ public class Product implements Serializable {
 
     public void setItems(List<DocumentItem> items) {
         this.items = items;
+    }
+
+    public List<InventoryItem> getInventoryItems() {
+        return inventoryItems;
+    }
+
+    public void setInventoryItems(List<InventoryItem> inventoryItems) {
+        this.inventoryItems = inventoryItems;
+    }
+
+    public List<InterWarehouseTraffic> getInterWarehouseProduct() {
+        return interWarehouseProduct;
+    }
+
+    public void setInterWarehouseProduct(List<InterWarehouseTraffic> interWarehouseProduct) {
+        this.interWarehouseProduct = interWarehouseProduct;
     }
 
     @Override

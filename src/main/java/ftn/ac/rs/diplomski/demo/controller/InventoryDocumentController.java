@@ -49,6 +49,7 @@ public class InventoryDocumentController {
     @GetMapping(value ="/{id}/item")
     public ResponseEntity<List<InventoryItemDTO>> getItems(@PathVariable("id") Integer id){
         List<InventoryItemDTO> items = documentService.getItems(id);
+        System.out.println("IT " + items.toString());
 
         return new ResponseEntity<>(items, HttpStatus.OK);
     }

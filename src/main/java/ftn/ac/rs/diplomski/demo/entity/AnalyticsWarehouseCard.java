@@ -146,6 +146,14 @@ public class AnalyticsWarehouseCard implements Serializable {
         this.documentItem = documentItem;
     }
 
+    public InterWarehouseTraffic getInterWarehouseTraffic() {
+        return interWarehouseTraffic;
+    }
+
+    public void setInterWarehouseTraffic(InterWarehouseTraffic interWarehouseTraffic) {
+        this.interWarehouseTraffic = interWarehouseTraffic;
+    }
+
     @Override
     public String toString() {
         return "AnalyticsWarehouseCard{" +

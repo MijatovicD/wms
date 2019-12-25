@@ -59,6 +59,10 @@ export class DocumentService {
       );
   }
 
+  proknjiziMedjumagacinski(dokument):any{
+    return this.http.post(this.baseUrl + "/proknjiziMedjumagacinski", dokument);
+  }
+
   storniraj(dokument): any {
     return this.http.post(
       "http://localhost:8080/api/document/storniraj",

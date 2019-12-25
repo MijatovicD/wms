@@ -1,5 +1,7 @@
 package ftn.ac.rs.diplomski.demo.entity;
 
+import ftn.ac.rs.diplomski.demo.dto.InterWarehouseDTO;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -57,6 +59,15 @@ public class InterWarehouseTraffic implements Serializable {
         this.cards = cards;
     }
 
+    public InterWarehouseTraffic(InterWarehouseDTO interWarehouseDTO){
+        this.id = interWarehouseDTO.getId();
+        this.originWarehouse = null;
+        this.destinationWarehouse = null;
+        this.product = null;
+        this.quantity = interWarehouseDTO.getQuantity();
+        this.trafficDocument = new TrafficDocument(interWarehouseDTO.getTrafficDocumentDTO());
+        this.cards = null;
+    }
     public Integer getId() {
         return id;
     }
