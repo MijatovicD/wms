@@ -103,7 +103,7 @@
       <br />
     </div>
 
-    <div class="col-lg-4" style="margin: auto">
+    <div class="col-lg-4" #doc style="margin: auto">
       <h6>Product</h6>
       <button
         *ngIf="
@@ -135,7 +135,9 @@
     </button>
       <br />
     </div>
-    <table class="table" style="margin: 10px" >
+  </form>
+
+    <table class="table" style="margin: 10px 20em; margin-top: -24em;" >
       <thead>
         <tr>
           <th scope="col">Code</th>
@@ -172,16 +174,16 @@
       </button>
     </div>
     <p style="color:red; text-align: center">{{ errorMsg }}</p>
-    <div class="col-lg-4" style="margin: 10px auto">
+    <div class="col-lg-4" style="margin: 10px auto;">
       <button
         *ngIf="dodavanje"
         (click)="sacuvajDokument()"
         class="btn btn-success"
+        style="margin-left: 22em;"
       >
         Save
       </button>
     </div>
-  </form>
   <br />
   <br />
 </div>
