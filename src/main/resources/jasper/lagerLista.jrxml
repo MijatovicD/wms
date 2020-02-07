@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="lagerLista" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27acd721-4f40-4bef-9acd-7ff486178730">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[YmVjaGVsb3Iud2FyZWhvdXNlICwyNSwyNzIsY2NiMDdmMzUtMjQzMi00M2JmLTk4MTQtY2FkODQw
+YmZhYmZjO2JlY2hlbG9yLnVuaXRzICw0OTQsMjg1LDRmNjFlY2U5LTdhYjktNGZlNy1iMjEzLTNl
+MDBmZTFiZmZjODtiZWNoZWxvci5wcm9kdWN0X2NhcmQgLDMxNiwxNDIsNzllZjE0MWUtNGNlMC00
+OWM3LTlkN2ItMzFjMDVkMWQ1NTU2O2JlY2hlbG9yLnByb2R1Y3QgLDE1NiwyNTksNDAyNjk0MjIt
+MThhOS00OWJiLTk3MGEtNjZjMGUwNjYwODkxOw==]]>
+	</property>
+	<parameter name="warehouseId" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Id Product card]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT bechelor.product.id,
+	bechelor.product.name AS Name,
+	bechelor.warehouse.name AS warehouse,
+	bechelor.units.name AS units,
+	bechelor.product_card.price,
+	bechelor.product_card.total_amount
+FROM bechelor.warehouse,
+	bechelor.product,
+	bechelor.product_card,
+	bechelor.units
+WHERE 
+	bechelor.warehouse.id = bechelor.product_card.warehouse_id AND bechelor.warehouse.id = $P{warehouseId} AND bechelor.product.unit_id = bechelor.units.id AND bechelor.product.id = bechelor.product_card.product_id]]>
+	</queryString>
+	<field name="Name" class="java.lang.String"/>
+	<field name="units" class="java.lang.String"/>
+	<field name="warehouse" class="java.lang.String"/>
+	<field name="price" class="java.lang.String"/>
+	<field name="total_amount" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="48" splitType="Stretch">
+			<staticText>
+				<reportElement x="220" y="0" width="100" height="30" uuid="f58333f7-7600-46a6-8ebd-1d223e6ce960"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Lager lista]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="2" width="40" height="30" uuid="0071e525-afe7-4a9d-949a-8116af9a0356"/>
+				<text><![CDATA[Date:]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="30" y="2" width="90" height="30" uuid="aa8afc51-16c1-46f2-8eb2-41e3773720f1"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="18" width="90" height="30" uuid="0c47dcd0-8403-4786-9b91-ff594ccfeee3"/>
+				<textFieldExpression><![CDATA[$F{warehouse}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="30" width="80" height="30" uuid="1ff31cd0-b776-46e9-8a36-1e61233ed720"/>
+				<text><![CDATA[Measurment unit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="30" width="180" height="30" uuid="d38ee6ea-64e6-4991-8bd6-70c50031a2ab"/>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="30" width="100" height="30" uuid="3c35853d-b469-4128-898d-ee7fb3bdff23"/>
+				<text><![CDATA[Quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="30" width="100" height="30" uuid="d7ab4ea6-1920-4e89-b119-ff1fbca5183e"/>
+				<text><![CDATA[Price]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="67" splitType="Stretch">
+			<textField>
+				<reportElement x="100" y="0" width="100" height="30" uuid="41ce8d90-42e4-4317-aead-8225b1444a4d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0afbe38e-eb17-44da-a775-d3bd657a885e"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="80" height="30" uuid="eb70c5e8-21b3-4af3-bf6e-7ee49bff5d42">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="69b2e5de-0504-4f3d-be35-8fba0db0c43b"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{units}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="0" width="60" height="30" uuid="db57d90e-fc3a-4f86-a246-cba5d0c867f1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="33c5ccd5-cdc8-471d-90d3-3a2edecb1f05"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="70" height="30" uuid="37807721-3987-4e83-8158-58f0b547dc5d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4acce855-dd1a-4868-9f1b-a9b0d724dc40"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{total_amount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="67" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="30" width="80" height="30" uuid="85d27ef2-e50a-42bc-97a0-e1809d382cc6"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="380" y="30" width="70" height="30" uuid="2c0a8d9c-9dff-4812-a64b-b3a0bd1410e7"/>
+				<text><![CDATA[Total value:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

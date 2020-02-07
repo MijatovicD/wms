@@ -1,6 +1,8 @@
+import { ReportService } from './../service/report.service';
 import { ItemPage } from './../model/item.page.model';
 import { WarehouseSerice } from './../service/warehouse.service';
 import { Component, OnInit } from '@angular/core';
+import { ProductCardService } from '../service/productCard.service';
 
 @Component({
   selector: 'app-warehouse',
@@ -15,7 +17,7 @@ export class WarehouseComponent implements OnInit {
   itemPage: ItemPage;
   name:string;
 
-  constructor(private warehouseService: WarehouseSerice) { }
+  constructor(private warehouseService: WarehouseSerice, private productCardService: ProductCardService, private reporstService: ReportService) { }
 
   ngOnInit() {
     this.getWarehousePage(0,3);
@@ -42,4 +44,9 @@ export class WarehouseComponent implements OnInit {
     this.getWarehousePage(this.currentPage - 1, this.itemsPerPage);
   }
 
+  lager(id){
+    this.productCardService.getCardsByWarehouse(id).subscribe(res =>{
+        this.reporstService.downloadLager(id);
+    });
+  }
 }

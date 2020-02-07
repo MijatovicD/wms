@@ -40,6 +40,19 @@ export class ReportService {
       .subscribe(response => this.saveToFileSystem(response));
   }
 
+  downloadLager(warehouseId:number){
+    const headers = new HttpHeaders({
+      'Accept': 'application/pdf'
+    });
+
+    let queryString = '?';
+
+    queryString += 'warehouseId=' + warehouseId;
+
+    this.http.get(this.baseUrl + "/lagerLista"+ queryString,
+      {observe: 'response', headers: headers, responseType: 'blob'})
+      .subscribe(response => this.saveToFileSystem(response));
+  }
 
   private saveToFileSystem(response) {
     console.log(response);

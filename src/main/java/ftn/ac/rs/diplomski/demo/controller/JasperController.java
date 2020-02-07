@@ -79,18 +79,17 @@ public class JasperController {
     }
 
 
-    @GetMapping(value = "/{reportName}", params = {"username"})
-    public ResponseEntity getByShoppingCartId(@PathVariable("reportName") String reportName, @RequestParam("username") String username) throws JRException {
+    @GetMapping(value = "/{reportName}", params = {"warehouseId"})
+    public ResponseEntity getByShoppingCartId(@PathVariable("reportName") String reportName, @RequestParam("warehouseId") Integer warehouseId) throws JRException {
 
 
 
         Map<String, Object> parameters = new HashMap<>();
-        User u = usersService.findByUsername(username);
-        parameters.put("userId", u.getId());
+        parameters.put("warehouseId", warehouseId);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition",
-                "attachment; filename=\""+ reportName + "-" + username.toString() + ".pdf\"");
+                "attachment; filename=\""+ reportName + "-" + warehouseId.toString() + ".pdf\"");
 
 
         byte[] report = reportService.exportToPdfCartParameterized(reportName, parameters);
@@ -99,7 +98,7 @@ public class JasperController {
 
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_PDF)
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+ reportName + "-" + username.toString() + ".pdf\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+ reportName + "-" + warehouseId.toString() + ".pdf\"")
                 .header(HttpHeaders.CONTENT_TYPE, "application/pdf; charset=utf-8")
                 .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Content-Disposition")
                 .contentLength(report.length)

@@ -32,6 +32,7 @@
       <th>Id</th>
       <th>Name</th>
       <th>Edit</th>
+      <th>Lager</th>
       <th>Remove</th>
     </tr>
   </thead>
@@ -47,6 +48,13 @@
       </td>
       <td class="h5">
         <a
+          class="badge badge-primary"
+          (click)="lager(warehouse.id)"
+          > Lager</a
+        >
+      </td>
+      <td class="h5">
+        <a
           class="badge badge-danger text-white"
           (click)="delete(year.id)"
           style="cursor: pointer"
@@ -54,6 +62,7 @@
           <i class="fa fa-trash"></i>Remove</a
         >
       </td>
+      
     </tr>
   </tbody>
 </table>
